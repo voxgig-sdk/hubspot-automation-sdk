@@ -1,0 +1,1525 @@
+{
+  "existing": {
+    "actions_v4_collection_response_public_action_revision_forward": {
+      "ACTIONS_V4_COLLECTION_RESPONSE_PUBLIC_ACTION_REVISION_FORWARD00": {
+        "createdAt": "s28",
+        "definition": {},
+        "id": "ACTIONS_V4_COLLECTION_RESPONSE_PUBLIC_ACTION_REVISION_FORWARD00",
+        "revisionId": "s2b",
+        "app_id": "APP01",
+        "definition_id": "DEFINITION01"
+      },
+      "ACTIONS_V4_COLLECTION_RESPONSE_PUBLIC_ACTION_REVISION_FORWARD01": {
+        "createdAt": "s50",
+        "definition": {},
+        "id": "ACTIONS_V4_COLLECTION_RESPONSE_PUBLIC_ACTION_REVISION_FORWARD01",
+        "revisionId": "s53",
+        "app_id": "APP01",
+        "definition_id": "DEFINITION01"
+      },
+      "ACTIONS_V4_COLLECTION_RESPONSE_PUBLIC_ACTION_REVISION_FORWARD02": {
+        "createdAt": "s78",
+        "definition": {},
+        "id": "ACTIONS_V4_COLLECTION_RESPONSE_PUBLIC_ACTION_REVISION_FORWARD02",
+        "revisionId": "s7b",
+        "app_id": "APP01",
+        "definition_id": "DEFINITION01"
+      }
+    }
+  },
+  "new": {
+    "actions_v4_collection_response_public_action_revision_forward": {
+      "actions_v4_collection_response_public_action_revision_forward_ref01": {
+        "createdAt": "sa0",
+        "definition": {},
+        "revisionId": "sa3"
+      }
+    }
+  },
+  "requests": {
+    "GET /automation/actions/2026-09/{appId}/{definitionId}/revisions": {
+      "provenance": "operation-contract",
+      "contract": {
+        "operationId": "get-/automation/actions/2026-09/{appId}/{definitionId}/revisions_getPage",
+        "parameters": [
+          {
+            "description": "The unique identifier of the app associated with the action definition.",
+            "explode": false,
+            "in": "path",
+            "name": "appId",
+            "required": true,
+            "schema": {
+              "example": null,
+              "format": "int32",
+              "type": "integer"
+            },
+            "style": "simple"
+          },
+          {
+            "description": "The unique identifier of the action definition for which revisions are being retrieved.",
+            "explode": false,
+            "in": "path",
+            "name": "definitionId",
+            "required": true,
+            "schema": {
+              "example": null,
+              "type": "string"
+            },
+            "style": "simple"
+          },
+          {
+            "description": "The paging cursor token of the last successfully read resource will be returned as the `paging.next.after` JSON property of a paged response containing more results.",
+            "explode": true,
+            "in": "query",
+            "name": "after",
+            "required": false,
+            "schema": {
+              "example": null,
+              "type": "string"
+            },
+            "style": "form"
+          },
+          {
+            "description": "The maximum number of results to display per page.",
+            "explode": true,
+            "in": "query",
+            "name": "limit",
+            "required": false,
+            "schema": {
+              "example": null,
+              "format": "int32",
+              "type": "integer"
+            },
+            "style": "form"
+          }
+        ],
+        "protocol": "http",
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "example": null,
+                "schema": {
+                  "example": null,
+                  "properties": {
+                    "paging": {
+                      "description": "Paging information for forward-only pagination. Contains the next page reference when more results are available; omitted or empty on the last page.",
+                      "example": null,
+                      "properties": {
+                        "next": {
+                          "description": "Specifies the paging information needed to retrieve the next set of results in a paginated API response",
+                          "example": null,
+                          "properties": {
+                            "after": {
+                              "description": "A string token that indicates the position after the last item on the current page. This token is used to fetch the next page of results.",
+                              "example": null,
+                              "type": "string"
+                            },
+                            "link": {
+                              "description": "A string URL that provides a direct link to the next page of results.",
+                              "example": null,
+                              "type": "string"
+                            }
+                          },
+                          "required": [
+                            "after"
+                          ],
+                          "type": "object"
+                        }
+                      },
+                      "type": "object"
+                    },
+                    "results": {
+                      "description": "An array of PublicActionRevision objects, each representing a specific revision of a public action definition.",
+                      "example": null,
+                      "items": {
+                        "example": null,
+                        "properties": {
+                          "createdAt": {
+                            "description": "The date and time when the action revision was created.",
+                            "example": null,
+                            "format": "date-time",
+                            "type": "string"
+                          },
+                          "definition": {
+                            "example": null,
+                            "properties": {
+                              "actionUrl": {
+                                "description": "The URL endpoint where the action is executed. It is a string.",
+                                "example": null,
+                                "type": "string"
+                              },
+                              "archivedAt": {
+                                "description": "A Unix timestamp in milliseconds representing when the action was archived. It is an integer.",
+                                "example": null,
+                                "format": "int64",
+                                "type": "integer"
+                              },
+                              "executionRules": {
+                                "description": "An array of execution translation rules for the action, where each item is a PublicExecutionTranslationRule.",
+                                "example": null,
+                                "items": {
+                                  "example": null,
+                                  "properties": {
+                                    "conditions": {
+                                      "additionalProperties": {
+                                        "example": null,
+                                        "properties": {},
+                                        "type": "object"
+                                      },
+                                      "description": "Defines the conditions that must be met for the execution rule to apply.",
+                                      "example": null,
+                                      "type": "object"
+                                    },
+                                    "labelName": {
+                                      "description": "Specifies the name of the label associated with the execution rule.",
+                                      "example": null,
+                                      "type": "string"
+                                    }
+                                  },
+                                  "required": [
+                                    "conditions",
+                                    "labelName"
+                                  ],
+                                  "type": "object"
+                                },
+                                "type": "array"
+                              },
+                              "functions": {
+                                "description": "An array of function identifiers associated with the action, where each item is a PublicActionFunctionIdentifier.",
+                                "example": null,
+                                "items": {
+                                  "example": null,
+                                  "properties": {
+                                    "functionType": {
+                                      "description": "The type of function, with accepted values: POST_ACTION_EXECUTION, POST_FETCH_OPTIONS, PRE_ACTION_EXECUTION, PRE_FETCH_OPTIONS.",
+                                      "enum": [
+                                        "POST_ACTION_EXECUTION",
+                                        "POST_FETCH_OPTIONS",
+                                        "PRE_ACTION_EXECUTION",
+                                        "PRE_FETCH_OPTIONS"
+                                      ],
+                                      "example": null,
+                                      "type": "string"
+                                    },
+                                    "id": {
+                                      "description": "The unique identifier for the function.",
+                                      "example": null,
+                                      "type": "string"
+                                    }
+                                  },
+                                  "required": [
+                                    "functionType"
+                                  ],
+                                  "type": "object"
+                                },
+                                "type": "array"
+                              },
+                              "id": {
+                                "description": "The unique identifier for the action definition. It is a string.",
+                                "example": null,
+                                "type": "string"
+                              },
+                              "inputFieldDependencies": {
+                                "description": "An array of dependencies between input fields, where each item can be a PublicSingleFieldDependency or PublicConditionalSingleFieldDependency.",
+                                "example": null,
+                                "items": {
+                                  "example": null,
+                                  "oneOf": [
+                                    {
+                                      "example": null,
+                                      "properties": {
+                                        "controllingFieldName": {
+                                          "description": "The name of the field that controls the dependency.",
+                                          "example": null,
+                                          "type": "string"
+                                        },
+                                        "dependencyType": {
+                                          "default": "SINGLE_FIELD",
+                                          "description": "The type of dependency, with the default value being 'SINGLE_FIELD'.",
+                                          "enum": [
+                                            "SINGLE_FIELD"
+                                          ],
+                                          "example": null,
+                                          "type": "string"
+                                        },
+                                        "dependentFieldNames": {
+                                          "description": "An array of strings representing the names of fields that are dependent on the controlling field.",
+                                          "example": null,
+                                          "items": {
+                                            "example": null,
+                                            "type": "string"
+                                          },
+                                          "type": "array"
+                                        }
+                                      },
+                                      "required": [
+                                        "controllingFieldName",
+                                        "dependencyType",
+                                        "dependentFieldNames"
+                                      ],
+                                      "title": "SINGLE_FIELD",
+                                      "type": "object"
+                                    },
+                                    {
+                                      "example": null,
+                                      "properties": {
+                                        "controllingFieldName": {
+                                          "description": "The name of the field that determines the dependency.",
+                                          "example": null,
+                                          "type": "string"
+                                        },
+                                        "controllingFieldValue": {
+                                          "description": "The value of the controlling field that triggers the dependency.",
+                                          "example": null,
+                                          "type": "string"
+                                        },
+                                        "dependencyType": {
+                                          "default": "CONDITIONAL_SINGLE_FIELD",
+                                          "description": "The type of dependency, with the default value being CONDITIONAL_SINGLE_FIELD.",
+                                          "enum": [
+                                            "CONDITIONAL_SINGLE_FIELD"
+                                          ],
+                                          "example": null,
+                                          "type": "string"
+                                        },
+                                        "dependentFieldNames": {
+                                          "description": "An array of strings representing the names of fields that are dependent on the controlling field.",
+                                          "example": null,
+                                          "items": {
+                                            "example": null,
+                                            "type": "string"
+                                          },
+                                          "type": "array"
+                                        }
+                                      },
+                                      "required": [
+                                        "controllingFieldName",
+                                        "controllingFieldValue",
+                                        "dependencyType",
+                                        "dependentFieldNames"
+                                      ],
+                                      "title": "CONDITIONAL_SINGLE_FIELD",
+                                      "type": "object"
+                                    }
+                                  ]
+                                },
+                                "type": "array"
+                              },
+                              "inputFields": {
+                                "description": "An array of input field definitions required for the action. Each item is a PublicInputFieldDefinition object.",
+                                "example": null,
+                                "items": {
+                                  "example": null,
+                                  "properties": {
+                                    "isRequired": {
+                                      "description": "Indicates whether the input field is mandatory.",
+                                      "example": null,
+                                      "type": "boolean"
+                                    },
+                                    "supportedValueTypes": {
+                                      "description": "An array indicating the types of values that the input field can support. Valid values include 'STATIC_VALUE' and 'OBJECT_PROPERTY'.",
+                                      "example": null,
+                                      "items": {
+                                        "enum": [
+                                          "STATIC_VALUE",
+                                          "OBJECT_PROPERTY"
+                                        ],
+                                        "example": null,
+                                        "type": "string"
+                                      },
+                                      "type": "array"
+                                    },
+                                    "typeDefinition": {
+                                      "example": null,
+                                      "properties": {
+                                        "description": {
+                                          "description": "A detailed explanation of the field's purpose.",
+                                          "example": null,
+                                          "type": "string"
+                                        },
+                                        "fieldType": {
+                                          "description": "The type of field, with accepted values including booleancheckbox, calculation_equation, checkbox, date, file, html, number, phonenumber, radio, select, text, and textarea.",
+                                          "enum": [
+                                            "booleancheckbox",
+                                            "calculation_equation",
+                                            "checkbox",
+                                            "date",
+                                            "file",
+                                            "html",
+                                            "number",
+                                            "phonenumber",
+                                            "radio",
+                                            "select",
+                                            "text",
+                                            "textarea"
+                                          ],
+                                          "example": null,
+                                          "type": "string"
+                                        },
+                                        "helpText": {
+                                          "description": "Additional information or guidance about the field.",
+                                          "example": null,
+                                          "type": "string"
+                                        },
+                                        "label": {
+                                          "description": "A user-friendly name for the field.",
+                                          "example": null,
+                                          "type": "string"
+                                        },
+                                        "name": {
+                                          "description": "The internal name used to identify the field.",
+                                          "example": null,
+                                          "type": "string"
+                                        },
+                                        "options": {
+                                          "description": "An array of options available for the field, each defined by the PublicOption schema.",
+                                          "example": null,
+                                          "items": {
+                                            "example": null,
+                                            "properties": {
+                                              "description": {
+                                                "description": "A description of the option.",
+                                                "example": null,
+                                                "type": "string"
+                                              },
+                                              "displayOrder": {
+                                                "description": "The position of the option relative to others in the list.",
+                                                "example": null,
+                                                "format": "int32",
+                                                "type": "integer"
+                                              },
+                                              "label": {
+                                                "description": "A user-friendly label that identifies the option.",
+                                                "example": null,
+                                                "type": "string"
+                                              },
+                                              "value": {
+                                                "description": "The actual value of the option.",
+                                                "example": null,
+                                                "type": "string"
+                                              }
+                                            },
+                                            "required": [
+                                              "label",
+                                              "value"
+                                            ],
+                                            "type": "object"
+                                          },
+                                          "type": "array"
+                                        },
+                                        "optionsUrl": {
+                                          "description": "A URL that provides options for the field.",
+                                          "example": null,
+                                          "type": "string"
+                                        },
+                                        "referencedObjectType": {
+                                          "description": "The type of object that the field references, with accepted values including OWNER.",
+                                          "enum": [
+                                            "OWNER"
+                                          ],
+                                          "example": null,
+                                          "type": "string"
+                                        },
+                                        "type": {
+                                          "description": "The data type of the field, with accepted values including bool, date, datetime, enumeration, json, number, object_coordinates, phone_number, and string.",
+                                          "enum": [
+                                            "bool",
+                                            "date",
+                                            "datetime",
+                                            "enumeration",
+                                            "json",
+                                            "number",
+                                            "object_coordinates",
+                                            "phone_number",
+                                            "string"
+                                          ],
+                                          "example": null,
+                                          "type": "string"
+                                        }
+                                      },
+                                      "required": [
+                                        "name",
+                                        "options",
+                                        "type"
+                                      ],
+                                      "type": "object"
+                                    }
+                                  },
+                                  "required": [
+                                    "isRequired",
+                                    "typeDefinition"
+                                  ],
+                                  "type": "object"
+                                },
+                                "type": "array"
+                              },
+                              "labels": {
+                                "additionalProperties": {
+                                  "example": null,
+                                  "properties": {
+                                    "actionCardContent": {
+                                      "description": "Content displayed on the action card.",
+                                      "example": null,
+                                      "type": "string"
+                                    },
+                                    "actionDescription": {
+                                      "description": "A description of what the action does.",
+                                      "example": null,
+                                      "type": "string"
+                                    },
+                                    "actionName": {
+                                      "description": "The name of the action.",
+                                      "example": null,
+                                      "type": "string"
+                                    },
+                                    "appDisplayName": {
+                                      "description": "The display name of the application associated with the action.",
+                                      "example": null,
+                                      "type": "string"
+                                    },
+                                    "executionRules": {
+                                      "additionalProperties": {
+                                        "example": null,
+                                        "type": "string"
+                                      },
+                                      "description": "Rules that govern the execution of the action.",
+                                      "example": null,
+                                      "type": "object"
+                                    },
+                                    "inputFieldDescriptions": {
+                                      "additionalProperties": {
+                                        "example": null,
+                                        "type": "string"
+                                      },
+                                      "description": "Descriptions for each input field.",
+                                      "example": null,
+                                      "type": "object"
+                                    },
+                                    "inputFieldLabels": {
+                                      "additionalProperties": {
+                                        "example": null,
+                                        "type": "string"
+                                      },
+                                      "description": "Labels for the input fields.",
+                                      "example": null,
+                                      "type": "object"
+                                    },
+                                    "inputFieldOptionLabels": {
+                                      "additionalProperties": {
+                                        "additionalProperties": {
+                                          "example": null,
+                                          "type": "string"
+                                        },
+                                        "example": null,
+                                        "type": "object"
+                                      },
+                                      "description": "Labels for the options available in input fields.",
+                                      "example": null,
+                                      "type": "object"
+                                    },
+                                    "outputFieldLabels": {
+                                      "additionalProperties": {
+                                        "example": null,
+                                        "type": "string"
+                                      },
+                                      "description": "Labels for the output fields.",
+                                      "example": null,
+                                      "type": "object"
+                                    }
+                                  },
+                                  "required": [
+                                    "actionName"
+                                  ],
+                                  "type": "object"
+                                },
+                                "description": "An object containing labels for the action, with each property being a PublicActionLabels object.",
+                                "example": null,
+                                "type": "object"
+                              },
+                              "objectRequestOptions": {
+                                "example": null,
+                                "properties": {
+                                  "properties": {
+                                    "description": "An array of strings representing the names of the properties to be requested. Each string in the array specifies a property of the object that should be included in the response.",
+                                    "example": null,
+                                    "items": {
+                                      "example": null,
+                                      "type": "string"
+                                    },
+                                    "type": "array"
+                                  }
+                                },
+                                "required": [
+                                  "properties"
+                                ],
+                                "type": "object"
+                              },
+                              "objectTypes": {
+                                "description": "An array of strings representing the types of objects associated with the action.",
+                                "example": null,
+                                "items": {
+                                  "example": null,
+                                  "type": "string"
+                                },
+                                "type": "array"
+                              },
+                              "outputFields": {
+                                "description": "An array of output field definitions produced by the action. Each item is an OutputFieldDefinition object.",
+                                "example": null,
+                                "items": {
+                                  "example": null,
+                                  "properties": {
+                                    "typeDefinition": {
+                                      "example": null,
+                                      "properties": {
+                                        "description": {
+                                          "description": "A detailed explanation of the field's purpose and usage.",
+                                          "example": null,
+                                          "type": "string"
+                                        },
+                                        "externalOptions": {
+                                          "description": "Indicates whether the field's options are sourced externally.",
+                                          "example": null,
+                                          "type": "boolean"
+                                        },
+                                        "externalOptionsReferenceType": {
+                                          "description": "Specifies the type of external reference for options.",
+                                          "example": null,
+                                          "type": "string"
+                                        },
+                                        "fieldType": {
+                                          "description": "Describes the field's type in the UI, with accepted values like booleancheckbox, calculation_equation, checkbox, date, file, html, number, phonenumber, radio, select, text, textarea, unknown.",
+                                          "enum": [
+                                            "booleancheckbox",
+                                            "calculation_equation",
+                                            "calculation_read_time",
+                                            "calculation_rollup",
+                                            "calculation_score",
+                                            "checkbox",
+                                            "date",
+                                            "file",
+                                            "html",
+                                            "number",
+                                            "phonenumber",
+                                            "radio",
+                                            "select",
+                                            "text",
+                                            "textarea",
+                                            "unknown"
+                                          ],
+                                          "example": null,
+                                          "type": "string"
+                                        },
+                                        "helpText": {
+                                          "description": "Additional information or guidance about the field.",
+                                          "example": null,
+                                          "type": "string"
+                                        },
+                                        "label": {
+                                          "description": "The user-friendly label for the field.",
+                                          "example": null,
+                                          "type": "string"
+                                        },
+                                        "name": {
+                                          "description": "The unique identifier for the field.",
+                                          "example": null,
+                                          "type": "string"
+                                        },
+                                        "options": {
+                                          "description": "An array of options available for the field, each represented by an Option object.",
+                                          "example": null,
+                                          "items": {
+                                            "description": "A HubSpot property option",
+                                            "example": null,
+                                            "properties": {
+                                              "description": {
+                                                "description": "A string providing additional details about the option.",
+                                                "example": null,
+                                                "type": "string"
+                                              },
+                                              "displayOrder": {
+                                                "description": "An integer indicating the order in which the option should be displayed relative to other options.",
+                                                "example": null,
+                                                "format": "int32",
+                                                "type": "integer"
+                                              },
+                                              "doubleData": {
+                                                "description": "A numerical value associated with the option.",
+                                                "example": null,
+                                                "type": "number"
+                                              },
+                                              "hidden": {
+                                                "description": "A boolean indicating whether the option is hidden from the user interface.",
+                                                "example": null,
+                                                "type": "boolean"
+                                              },
+                                              "label": {
+                                                "description": "The display name of the option, shown to users. It is a string.",
+                                                "example": null,
+                                                "type": "string"
+                                              },
+                                              "readOnly": {
+                                                "description": "A boolean indicating whether the option is read-only and cannot be modified.",
+                                                "example": null,
+                                                "type": "boolean"
+                                              },
+                                              "value": {
+                                                "description": "The internal value of the option, used in data processing. It is a string.",
+                                                "example": null,
+                                                "type": "string"
+                                              }
+                                            },
+                                            "required": [
+                                              "description",
+                                              "displayOrder",
+                                              "doubleData",
+                                              "hidden",
+                                              "label",
+                                              "readOnly",
+                                              "value"
+                                            ],
+                                            "type": "object"
+                                          },
+                                          "type": "array"
+                                        },
+                                        "optionsUrl": {
+                                          "description": "A URL that provides options for the field.",
+                                          "example": null,
+                                          "type": "string"
+                                        },
+                                        "referencedObjectType": {
+                                          "description": "Indicates the type of object that the field references, with accepted values like OWNER.",
+                                          "enum": [
+                                            "ABANDONED_CART",
+                                            "ACCEPTANCE_TEST",
+                                            "AD",
+                                            "AD_ACCOUNT",
+                                            "AD_CAMPAIGN",
+                                            "AD_GROUP",
+                                            "AI_FORECAST",
+                                            "ALL_PAGES",
+                                            "APPROVAL",
+                                            "APPROVAL_STEP",
+                                            "ATTRIBUTION",
+                                            "AUDIENCE",
+                                            "AUTOMATION_JOURNEY",
+                                            "AUTOMATION_PLATFORM_FLOW",
+                                            "AUTOMATION_PLATFORM_FLOW_ACTION",
+                                            "BET_ALERT",
+                                            "BET_DELIVERABLE_SERVICE",
+                                            "BLOG_LISTING_PAGE",
+                                            "BLOG_POST",
+                                            "CALL",
+                                            "CAMPAIGN",
+                                            "CAMPAIGN_BUDGET_ITEM",
+                                            "CAMPAIGN_SPEND_ITEM",
+                                            "CAMPAIGN_STEP",
+                                            "CAMPAIGN_TEMPLATE",
+                                            "CAMPAIGN_TEMPLATE_STEP",
+                                            "CART",
+                                            "CASE_STUDY",
+                                            "CHATFLOW",
+                                            "CLIP",
+                                            "CMS_URL",
+                                            "COMBO_EVENT_CONFIGURATION",
+                                            "COMMERCE_PAYMENT",
+                                            "COMMUNICATION",
+                                            "COMPANY",
+                                            "CONTACT",
+                                            "CONTACT_CREATE_ATTRIBUTION",
+                                            "CONTENT",
+                                            "CONTENT_AUDIT",
+                                            "CONTENT_AUDIT_PAGE",
+                                            "CONVERSATION",
+                                            "CONVERSATION_INBOX",
+                                            "CONVERSATION_SESSION",
+                                            "CRM_OBJECTS_DUMMY_TYPE",
+                                            "CRM_PIPELINES_DUMMY_TYPE",
+                                            "CTA",
+                                            "CTA_VARIANT",
+                                            "DATA_PRIVACY_CONSENT",
+                                            "DATA_SYNC_STATE",
+                                            "DEAL",
+                                            "DEAL_CREATE_ATTRIBUTION",
+                                            "DEAL_REGISTRATION",
+                                            "DEAL_SPLIT",
+                                            "DISCOUNT",
+                                            "DISCOUNT_CODE",
+                                            "DISCOUNT_TEMPLATE",
+                                            "EMAIL",
+                                            "ENGAGEMENT",
+                                            "EXPORT",
+                                            "EXTERNAL_WEB_URL",
+                                            "FEE",
+                                            "FEEDBACK_SUBMISSION",
+                                            "FEEDBACK_SURVEY",
+                                            "FILE_MANAGER_FILE",
+                                            "FILE_MANAGER_FOLDER",
+                                            "FOLDER",
+                                            "FORECAST",
+                                            "FORM",
+                                            "FORM_SUBMISSION_INBOUNDDB",
+                                            "GOAL_TARGET",
+                                            "GOAL_TARGET_GROUP",
+                                            "GOAL_TEMPLATE",
+                                            "GSC_PROPERTY",
+                                            "HUB",
+                                            "IMPORT",
+                                            "INVOICE",
+                                            "KEYWORD",
+                                            "KNOWLEDGE_ARTICLE",
+                                            "LANDING_PAGE",
+                                            "LEAD",
+                                            "LINE_ITEM",
+                                            "MARKETING_CALENDAR",
+                                            "MARKETING_CAMPAIGN_UTM",
+                                            "MARKETING_EMAIL",
+                                            "MARKETING_EVENT",
+                                            "MARKETING_EVENT_ATTENDANCE",
+                                            "MARKETING_SMS",
+                                            "MEDIA_BRIDGE",
+                                            "MEETING_EVENT",
+                                            "MIC",
+                                            "NOTE",
+                                            "OBJECT_LIST",
+                                            "ORDER",
+                                            "OWNER",
+                                            "PARTNER_ACCOUNT",
+                                            "PARTNER_CLIENT",
+                                            "PARTNER_CLIENT_REVENUE",
+                                            "PARTNER_SERVICE",
+                                            "PAYMENT_LINK",
+                                            "PAYMENT_SCHEDULE",
+                                            "PAYMENT_SCHEDULE_INSTALLMENT",
+                                            "PERMISSIONS_TESTING",
+                                            "PLAYBOOK",
+                                            "PLAYBOOK_QUESTION",
+                                            "PLAYBOOK_SUBMISSION",
+                                            "PLAYBOOK_SUBMISSION_ANSWER",
+                                            "PLAYLIST",
+                                            "PLAYLIST_FOLDER",
+                                            "PODCAST_EPISODE",
+                                            "PORTAL",
+                                            "PORTAL_OBJECT_SYNC_MESSAGE",
+                                            "POSTAL_MAIL",
+                                            "PRIVACY_SCANNER_COOKIE",
+                                            "PRODUCT",
+                                            "PRODUCT_OR_FOLDER",
+                                            "PROPERTY_INFO",
+                                            "PROSPECTING_AGENT_CONTACT_ASSIGNMENT",
+                                            "PUBLISHING_TASK",
+                                            "QUARANTINED_SUBMISSION",
+                                            "QUOTA",
+                                            "QUOTE",
+                                            "QUOTE_FIELD",
+                                            "QUOTE_MODULE",
+                                            "QUOTE_MODULE_FIELD",
+                                            "QUOTE_TEMPLATE",
+                                            "RESTORABLE_CRM_OBJECT",
+                                            "ROSTER",
+                                            "ROSTER_MEMBER",
+                                            "SALES_DOCUMENT",
+                                            "SALES_TASK",
+                                            "SALES_WORKLOAD",
+                                            "SALESFORCE_SYNC_ERROR",
+                                            "SCHEDULING_PAGE",
+                                            "SCHEMAS_BACKEND_TEST",
+                                            "SCORE_CONFIGURATION",
+                                            "SEQUENCE",
+                                            "SEQUENCE_ENROLLMENT",
+                                            "SEQUENCE_STEP",
+                                            "SEQUENCE_STEP_ENROLLMENT",
+                                            "SERVICE",
+                                            "SITE_PAGE",
+                                            "SNIPPET",
+                                            "SOCIAL_BROADCAST",
+                                            "SOCIAL_CHANNEL",
+                                            "SOCIAL_POST",
+                                            "SOCIAL_PROFILE",
+                                            "SOX_PROTECTED_DUMMY_TYPE",
+                                            "SOX_PROTECTED_TEST_TYPE",
+                                            "SUBMISSION_TAG",
+                                            "SUBSCRIPTION",
+                                            "TASK",
+                                            "TASK_TEMPLATE",
+                                            "TAX",
+                                            "TEMPLATE",
+                                            "TICKET",
+                                            "UNKNOWN",
+                                            "UNSUBSCRIBE",
+                                            "USER",
+                                            "VIEW",
+                                            "VIEW_BLOCK",
+                                            "WEB_INTERACTIVE"
+                                          ],
+                                          "example": null,
+                                          "type": "string"
+                                        },
+                                        "schema": {
+                                          "description": "Defines the structure and constraints of the field.",
+                                          "example": null,
+                                          "oneOf": [
+                                            {
+                                              "example": null,
+                                              "properties": {
+                                                "maximum": {
+                                                  "description": "The maximum value allowed for the integer field.",
+                                                  "example": null,
+                                                  "format": "int32",
+                                                  "type": "integer"
+                                                },
+                                                "minimum": {
+                                                  "description": "The minimum value allowed for the integer field.",
+                                                  "example": null,
+                                                  "format": "int32",
+                                                  "type": "integer"
+                                                },
+                                                "type": {
+                                                  "default": "INTEGER",
+                                                  "description": "The type of the field, which is set to INTEGER.",
+                                                  "enum": [
+                                                    "INTEGER"
+                                                  ],
+                                                  "example": null,
+                                                  "type": "string"
+                                                }
+                                              },
+                                              "required": [
+                                                "type"
+                                              ],
+                                              "title": "INTEGER",
+                                              "type": "object"
+                                            },
+                                            {
+                                              "example": null,
+                                              "properties": {
+                                                "maximum": {
+                                                  "description": "The maximum value allowed for the long field.",
+                                                  "example": null,
+                                                  "format": "int64",
+                                                  "type": "integer"
+                                                },
+                                                "minimum": {
+                                                  "description": "The minimum value allowed for the long field.",
+                                                  "example": null,
+                                                  "format": "int64",
+                                                  "type": "integer"
+                                                },
+                                                "type": {
+                                                  "default": "LONG",
+                                                  "description": "The type of the field, which is LONG by default.",
+                                                  "enum": [
+                                                    "LONG"
+                                                  ],
+                                                  "example": null,
+                                                  "type": "string"
+                                                }
+                                              },
+                                              "required": [
+                                                "type"
+                                              ],
+                                              "title": "LONG",
+                                              "type": "object"
+                                            },
+                                            {
+                                              "example": null,
+                                              "properties": {
+                                                "maximum": {
+                                                  "description": "The maximum allowable value for the double field.",
+                                                  "example": null,
+                                                  "type": "number"
+                                                },
+                                                "minimum": {
+                                                  "description": "The minimum allowable value for the double field.",
+                                                  "example": null,
+                                                  "type": "number"
+                                                },
+                                                "type": {
+                                                  "default": "DOUBLE",
+                                                  "description": "Indicates the field type as DOUBLE.",
+                                                  "enum": [
+                                                    "DOUBLE"
+                                                  ],
+                                                  "example": null,
+                                                  "type": "string"
+                                                }
+                                              },
+                                              "required": [
+                                                "type"
+                                              ],
+                                              "title": "DOUBLE",
+                                              "type": "object"
+                                            },
+                                            {
+                                              "example": null,
+                                              "properties": {
+                                                "format": {
+                                                  "description": "Specifies the format of the string, with accepted values: DATE, DATE_TIME, OBJECT_COORDINATE, TIME, URI.",
+                                                  "enum": [
+                                                    "DATE",
+                                                    "DATE_TIME",
+                                                    "MONTH_AND_DAY",
+                                                    "OBJECT_COORDINATE",
+                                                    "TIME",
+                                                    "URI"
+                                                  ],
+                                                  "example": null,
+                                                  "type": "string"
+                                                },
+                                                "type": {
+                                                  "default": "STRING",
+                                                  "description": "Indicates that the type is a string, with the default value being STRING.",
+                                                  "enum": [
+                                                    "STRING"
+                                                  ],
+                                                  "example": null,
+                                                  "type": "string"
+                                                }
+                                              },
+                                              "required": [
+                                                "type"
+                                              ],
+                                              "title": "STRING",
+                                              "type": "object"
+                                            },
+                                            {
+                                              "example": null,
+                                              "properties": {
+                                                "type": {
+                                                  "default": "BOOLEAN",
+                                                  "description": "Specifies the field type as BOOLEAN, indicating that the field can hold a true or false value.",
+                                                  "enum": [
+                                                    "BOOLEAN"
+                                                  ],
+                                                  "example": null,
+                                                  "type": "string"
+                                                }
+                                              },
+                                              "required": [
+                                                "type"
+                                              ],
+                                              "title": "BOOLEAN",
+                                              "type": "object"
+                                            },
+                                            {
+                                              "example": null,
+                                              "properties": {
+                                                "items": {
+                                                  "description": "Defines the type of elements contained within the array, which can be an integer, long, double, string, boolean, another array, or an object.",
+                                                  "example": null,
+                                                  "oneOf": [
+                                                    {
+                                                      "example": null,
+                                                      "properties": {
+                                                        "maximum": {
+                                                          "description": "The maximum value allowed for the integer field.",
+                                                          "example": null,
+                                                          "format": "int32",
+                                                          "type": "integer"
+                                                        },
+                                                        "minimum": {
+                                                          "description": "The minimum value allowed for the integer field.",
+                                                          "example": null,
+                                                          "format": "int32",
+                                                          "type": "integer"
+                                                        },
+                                                        "type": {
+                                                          "default": "INTEGER",
+                                                          "description": "The type of the field, which is set to INTEGER.",
+                                                          "enum": {
+                                                            "$ref": "#/responses/200/content/application~1json/schema/properties/results/items/properties/definition/properties/outputFields/items/properties/typeDefinition/properties/schema/oneOf/0/properties/type/enum"
+                                                          },
+                                                          "example": null,
+                                                          "type": "string"
+                                                        }
+                                                      },
+                                                      "required": [
+                                                        "type"
+                                                      ],
+                                                      "title": "INTEGER",
+                                                      "type": "object"
+                                                    },
+                                                    {
+                                                      "example": null,
+                                                      "properties": {
+                                                        "maximum": {
+                                                          "description": "The maximum value allowed for the long field.",
+                                                          "example": null,
+                                                          "format": "int64",
+                                                          "type": "integer"
+                                                        },
+                                                        "minimum": {
+                                                          "description": "The minimum value allowed for the long field.",
+                                                          "example": null,
+                                                          "format": "int64",
+                                                          "type": "integer"
+                                                        },
+                                                        "type": {
+                                                          "default": "LONG",
+                                                          "description": "The type of the field, which is LONG by default.",
+                                                          "enum": {
+                                                            "$ref": "#/responses/200/content/application~1json/schema/properties/results/items/properties/definition/properties/outputFields/items/properties/typeDefinition/properties/schema/oneOf/1/properties/type/enum"
+                                                          },
+                                                          "example": null,
+                                                          "type": "string"
+                                                        }
+                                                      },
+                                                      "required": [
+                                                        "type"
+                                                      ],
+                                                      "title": "LONG",
+                                                      "type": "object"
+                                                    },
+                                                    {
+                                                      "example": null,
+                                                      "properties": {
+                                                        "maximum": {
+                                                          "description": "The maximum allowable value for the double field.",
+                                                          "example": null,
+                                                          "type": "number"
+                                                        },
+                                                        "minimum": {
+                                                          "description": "The minimum allowable value for the double field.",
+                                                          "example": null,
+                                                          "type": "number"
+                                                        },
+                                                        "type": {
+                                                          "default": "DOUBLE",
+                                                          "description": "Indicates the field type as DOUBLE.",
+                                                          "enum": {
+                                                            "$ref": "#/responses/200/content/application~1json/schema/properties/results/items/properties/definition/properties/outputFields/items/properties/typeDefinition/properties/schema/oneOf/2/properties/type/enum"
+                                                          },
+                                                          "example": null,
+                                                          "type": "string"
+                                                        }
+                                                      },
+                                                      "required": [
+                                                        "type"
+                                                      ],
+                                                      "title": "DOUBLE",
+                                                      "type": "object"
+                                                    },
+                                                    {
+                                                      "example": null,
+                                                      "properties": {
+                                                        "format": {
+                                                          "description": "Specifies the format of the string, with accepted values: DATE, DATE_TIME, OBJECT_COORDINATE, TIME, URI.",
+                                                          "enum": {
+                                                            "$ref": "#/responses/200/content/application~1json/schema/properties/results/items/properties/definition/properties/outputFields/items/properties/typeDefinition/properties/schema/oneOf/3/properties/format/enum"
+                                                          },
+                                                          "example": null,
+                                                          "type": "string"
+                                                        },
+                                                        "type": {
+                                                          "default": "STRING",
+                                                          "description": "Indicates that the type is a string, with the default value being STRING.",
+                                                          "enum": {
+                                                            "$ref": "#/responses/200/content/application~1json/schema/properties/results/items/properties/definition/properties/outputFields/items/properties/typeDefinition/properties/schema/oneOf/3/properties/type/enum"
+                                                          },
+                                                          "example": null,
+                                                          "type": "string"
+                                                        }
+                                                      },
+                                                      "required": [
+                                                        "type"
+                                                      ],
+                                                      "title": "STRING",
+                                                      "type": "object"
+                                                    },
+                                                    {
+                                                      "example": null,
+                                                      "properties": {
+                                                        "type": {
+                                                          "default": "BOOLEAN",
+                                                          "description": "Specifies the field type as BOOLEAN, indicating that the field can hold a true or false value.",
+                                                          "enum": {
+                                                            "$ref": "#/responses/200/content/application~1json/schema/properties/results/items/properties/definition/properties/outputFields/items/properties/typeDefinition/properties/schema/oneOf/4/properties/type/enum"
+                                                          },
+                                                          "example": null,
+                                                          "type": "string"
+                                                        }
+                                                      },
+                                                      "required": [
+                                                        "type"
+                                                      ],
+                                                      "title": "BOOLEAN",
+                                                      "type": "object"
+                                                    },
+                                                    {
+                                                      "example": null,
+                                                      "properties": "[Circular *paths./automation/actions/2026-09/{appId}.get.responses.200.content.application/json.schema.properties.results.items.properties.outputFields.items.properties.typeDefinition.properties.schema.oneOf.5.properties]",
+                                                      "required": [
+                                                        "items",
+                                                        "type"
+                                                      ],
+                                                      "title": "ARRAY",
+                                                      "type": "object"
+                                                    },
+                                                    {
+                                                      "example": null,
+                                                      "properties": {
+                                                        "properties": {
+                                                          "description": "Contains the properties of the object.",
+                                                          "example": null,
+                                                          "properties": {},
+                                                          "type": "object"
+                                                        },
+                                                        "type": {
+                                                          "default": "OBJECT",
+                                                          "description": "Specifies the type of the field, which is 'OBJECT' by default.",
+                                                          "enum": [
+                                                            "OBJECT"
+                                                          ],
+                                                          "example": null,
+                                                          "type": "string"
+                                                        }
+                                                      },
+                                                      "required": [
+                                                        "properties",
+                                                        "type"
+                                                      ],
+                                                      "title": "OBJECT",
+                                                      "type": "object"
+                                                    },
+                                                    {
+                                                      "example": null,
+                                                      "properties": {
+                                                        "type": {
+                                                          "default": "UNKNOWN",
+                                                          "description": "A string that indicates the type of the field. In this schema, it is always set to 'UNKNOWN'.",
+                                                          "enum": [
+                                                            "UNKNOWN"
+                                                          ],
+                                                          "example": null,
+                                                          "type": "string"
+                                                        }
+                                                      },
+                                                      "required": [
+                                                        "type"
+                                                      ],
+                                                      "title": "UNKNOWN",
+                                                      "type": "object"
+                                                    }
+                                                  ]
+                                                },
+                                                "type": {
+                                                  "default": "ARRAY",
+                                                  "description": "Specifies that the field is of type 'ARRAY'.",
+                                                  "enum": [
+                                                    "ARRAY"
+                                                  ],
+                                                  "example": null,
+                                                  "type": "string"
+                                                }
+                                              },
+                                              "required": [
+                                                "items",
+                                                "type"
+                                              ],
+                                              "title": "ARRAY",
+                                              "type": "object"
+                                            },
+                                            {
+                                              "example": null,
+                                              "properties": {
+                                                "properties": {
+                                                  "description": "Contains the properties of the object.",
+                                                  "example": null,
+                                                  "properties": {
+                                                    "$ref": "#/responses/200/content/application~1json/schema/properties/results/items/properties/definition/properties/outputFields/items/properties/typeDefinition/properties/schema/oneOf/5/properties/items/oneOf/6/properties/properties/properties"
+                                                  },
+                                                  "type": "object"
+                                                },
+                                                "type": {
+                                                  "default": "OBJECT",
+                                                  "description": "Specifies the type of the field, which is 'OBJECT' by default.",
+                                                  "enum": {
+                                                    "$ref": "#/responses/200/content/application~1json/schema/properties/results/items/properties/definition/properties/outputFields/items/properties/typeDefinition/properties/schema/oneOf/5/properties/items/oneOf/6/properties/type/enum"
+                                                  },
+                                                  "example": null,
+                                                  "type": "string"
+                                                }
+                                              },
+                                              "required": [
+                                                "properties",
+                                                "type"
+                                              ],
+                                              "title": "OBJECT",
+                                              "type": "object"
+                                            },
+                                            {
+                                              "example": null,
+                                              "properties": {
+                                                "type": {
+                                                  "default": "UNKNOWN",
+                                                  "description": "A string that indicates the type of the field. In this schema, it is always set to 'UNKNOWN'.",
+                                                  "enum": {
+                                                    "$ref": "#/responses/200/content/application~1json/schema/properties/results/items/properties/definition/properties/outputFields/items/properties/typeDefinition/properties/schema/oneOf/5/properties/items/oneOf/7/properties/type/enum"
+                                                  },
+                                                  "example": null,
+                                                  "type": "string"
+                                                }
+                                              },
+                                              "required": [
+                                                "type"
+                                              ],
+                                              "title": "UNKNOWN",
+                                              "type": "object"
+                                            }
+                                          ]
+                                        },
+                                        "type": {
+                                          "description": "Specifies the data type of the field, with accepted values like bool, date, datetime, enumeration, json, number, object_coordinates, phone_number, string.",
+                                          "enum": [
+                                            "bool",
+                                            "currency_number",
+                                            "date",
+                                            "datetime",
+                                            "enumeration",
+                                            "json",
+                                            "number",
+                                            "object_coordinates",
+                                            "phone_number",
+                                            "string",
+                                            "time_range"
+                                          ],
+                                          "example": null,
+                                          "type": "string"
+                                        },
+                                        "useChirp": {
+                                          "description": "Specifies whether the field uses the Chirp feature.",
+                                          "example": null,
+                                          "type": "boolean"
+                                        }
+                                      },
+                                      "required": [
+                                        "externalOptions",
+                                        "name",
+                                        "options",
+                                        "schema",
+                                        "type",
+                                        "useChirp"
+                                      ],
+                                      "type": "object"
+                                    }
+                                  },
+                                  "required": [
+                                    "typeDefinition"
+                                  ],
+                                  "type": "object"
+                                },
+                                "type": "array"
+                              },
+                              "published": {
+                                "description": "A boolean indicating whether the action is published and available for use.",
+                                "example": null,
+                                "type": "boolean"
+                              },
+                              "revisionId": {
+                                "description": "The unique identifier for the current revision of the action definition. It is a string.",
+                                "example": null,
+                                "type": "string"
+                              }
+                            },
+                            "required": [
+                              "actionUrl",
+                              "functions",
+                              "id",
+                              "inputFields",
+                              "labels",
+                              "objectTypes",
+                              "published",
+                              "revisionId"
+                            ],
+                            "type": "object"
+                          },
+                          "id": {
+                            "description": "The unique identifier for the action revision.",
+                            "example": null,
+                            "type": "string"
+                          },
+                          "revisionId": {
+                            "description": "The unique identifier for the specific revision of the action.",
+                            "example": null,
+                            "type": "string"
+                          }
+                        },
+                        "required": [
+                          "createdAt",
+                          "definition",
+                          "id",
+                          "revisionId"
+                        ],
+                        "type": "object"
+                      },
+                      "type": "array"
+                    }
+                  },
+                  "required": [
+                    "results"
+                  ],
+                  "type": "object"
+                }
+              }
+            },
+            "description": "successful operation"
+          },
+          "default": {
+            "content": {
+              "*/*": {
+                "example": null,
+                "schema": {
+                  "description": "Represents an error response returned by the API when an operation fails. This component is used in various endpoints to provide detailed information about the error encountered.",
+                  "example": {
+                    "category": "VALIDATION_ERROR",
+                    "correlationId": "aeb5f871-7f07-4993-9211-075dc63e7cbf",
+                    "links": {
+                      "knowledge-base": "https://www.hubspot.com/products/service/knowledge-base"
+                    },
+                    "message": "Invalid input (details will vary based on the error)"
+                  },
+                  "properties": {
+                    "category": {
+                      "description": "The error category",
+                      "example": null,
+                      "type": "string"
+                    },
+                    "context": {
+                      "additionalProperties": {
+                        "example": null,
+                        "items": {
+                          "example": null,
+                          "type": "string"
+                        },
+                        "type": "array"
+                      },
+                      "description": "Context about the error condition",
+                      "example": "{invalidPropertyName=[propertyValue], missingScopes=[scope1, scope2]}",
+                      "type": "object"
+                    },
+                    "correlationId": {
+                      "description": "A unique identifier for the request. Include this value with any error reports or support tickets",
+                      "example": "aeb5f871-7f07-4993-9211-075dc63e7cbf",
+                      "format": "uuid",
+                      "type": "string"
+                    },
+                    "errors": {
+                      "description": "further information about the error",
+                      "example": null,
+                      "items": {
+                        "description": "Represents detailed information about an error that occurred in the API. This component is used to provide additional context and specifics about errors, typically as part of an error response.",
+                        "example": null,
+                        "properties": {
+                          "code": {
+                            "description": "The status code associated with the error detail",
+                            "example": null,
+                            "type": "string"
+                          },
+                          "context": {
+                            "additionalProperties": {
+                              "example": null,
+                              "items": {
+                                "example": null,
+                                "type": "string"
+                              },
+                              "type": "array"
+                            },
+                            "description": "Context about the error condition",
+                            "example": "{missingScopes=[scope1, scope2]}",
+                            "type": "object"
+                          },
+                          "in": {
+                            "description": "The name of the field or parameter in which the error was found.",
+                            "example": null,
+                            "type": "string"
+                          },
+                          "message": {
+                            "description": "A human readable message describing the error along with remediation steps where appropriate",
+                            "example": null,
+                            "type": "string"
+                          },
+                          "subCategory": {
+                            "description": "A specific category that contains more specific detail about the error",
+                            "example": null,
+                            "type": "string"
+                          }
+                        },
+                        "required": [
+                          "message"
+                        ],
+                        "type": "object"
+                      },
+                      "type": "array"
+                    },
+                    "links": {
+                      "additionalProperties": {
+                        "example": null,
+                        "type": "string"
+                      },
+                      "description": "A map of link names to associated URIs containing documentation about the error or recommended remediation steps",
+                      "example": null,
+                      "type": "object"
+                    },
+                    "message": {
+                      "description": "A human readable message describing the error along with remediation steps where appropriate",
+                      "example": "An error occurred",
+                      "type": "string"
+                    },
+                    "subCategory": {
+                      "description": "A specific category that contains more specific detail about the error",
+                      "example": null,
+                      "type": "string"
+                    }
+                  },
+                  "required": [
+                    "category",
+                    "correlationId",
+                    "message"
+                  ],
+                  "type": "object"
+                }
+              }
+            },
+            "description": ""
+          }
+        },
+        "security": [
+          {
+            "developer_hapikey": []
+          }
+        ],
+        "securitySchemes": {
+          "developer_hapikey": {
+            "in": "query",
+            "name": "hapikey",
+            "type": "apiKey"
+          },
+          "oauth2": {
+            "flows": {
+              "authorizationCode": {
+                "authorizationUrl": "https://app.hubspot.com/oauth/authorize",
+                "scopes": {
+                  "automation": ""
+                },
+                "tokenUrl": "https://api.hubapi.com/oauth/v1/token"
+              }
+            },
+            "type": "oauth2"
+          },
+          "private_apps": {
+            "in": "header",
+            "name": "private-app",
+            "type": "apiKey"
+          },
+          "private_apps_legacy": {
+            "in": "header",
+            "name": "private-app-legacy",
+            "type": "apiKey"
+          }
+        },
+        "securitySource": "operation"
+      }
+    }
+  }
+}

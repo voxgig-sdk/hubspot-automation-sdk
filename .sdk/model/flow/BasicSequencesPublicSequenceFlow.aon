@@ -1,0 +1,32 @@
+# BasicSequencesPublicSequenceFlow
+
+main: kit: flow: BasicSequencesPublicSequenceFlow:
+{
+  entity: "sequences_public_sequence",
+  kind: "basic",
+  name: "BasicSequencesPublicSequenceFlow",
+  step: [
+    {
+      input: {
+        ref: "sequences_public_sequence_ref01",
+        srcdatavar: "sequences_public_sequence_ref01_data",
+        suffix: "_dt0"
+      }
+
+      match: {
+        id: "sequences_public_sequence01"
+      }
+
+      op: "load",
+      valid: [
+        {
+          apply: "TextFieldMark",
+          def: {
+            mark: "Mark01-sequences_public_sequence_ref01"
+          }
+        }
+      ]
+    }
+  ],
+  "key$": "BasicSequencesPublicSequenceFlow"
+}

@@ -1,0 +1,259 @@
+# Guide
+
+guide: {
+  metrics: count: entity: 27
+  metrics: count: path: 27
+  metrics: count: method: 43
+
+  entity: actions_v4_collection_response_public_action_definition_forward: {
+    path: "/automation/actions/2026-09/{appId}": {
+      rename: param: "appId": *"app_id"
+      op: load: method: *GET
+    }
+  }
+
+  entity: actions_v4_collection_response_public_action_function_identifier_no: {
+    path: "/automation/actions/2026-09/{appId}/{definitionId}/functions": {
+      rename: param: "appId": *"app_id"
+      rename: param: "definitionId": *"definition_id"
+      op: list: method: *GET
+      op: list: transform: res: *("`body.results`")|top
+    }
+  }
+
+  entity: actions_v4_collection_response_public_action_revision_forward: {
+    path: "/automation/actions/2026-09/{appId}/{definitionId}/revisions": {
+      rename: param: "appId": *"app_id"
+      rename: param: "definitionId": *"definition_id"
+      op: list: method: *GET
+    }
+  }
+
+  entity: actions_v4_public_action_definition: {
+    path: "/automation/actions/2026-09/{appId}": {
+      rename: param: "appId": *"app_id"
+      op: create: method: *POST
+    }
+    path: "/automation/actions/2026-09/{appId}/{definitionId}": {
+      rename: param: "appId": *"app_id"
+      rename: param: "definitionId": *"definition_id"
+      op: load: method: *GET
+      op: patch: method: *PATCH
+    }
+  }
+
+  entity: actions_v4_public_action_definition_requires_object: {
+    path: "/automation/actions/2026-09/{appId}/{definitionId}/requires-object": {
+      rename: param: "appId": *"app_id"
+      rename: param: "definitionId": *"definition_id"
+      op: load: method: *GET
+    }
+  }
+
+  entity: actions_v4_public_action_function: {
+    path: "/automation/actions/2026-09/{appId}/{definitionId}/functions/{functionType}": {
+      rename: param: "appId": *"app_id"
+      rename: param: "definitionId": *"definition_id"
+      rename: param: "functionType": *"id"
+      op: load: method: *GET
+    }
+    path: "/automation/actions/2026-09/{appId}/{definitionId}/functions/{functionType}/{functionId}": {
+      rename: param: "appId": *"app_id"
+      rename: param: "definitionId": *"definition_id"
+      rename: param: "functionId": *"function_id"
+      rename: param: "functionType": *"function_type"
+      op: load: method: *GET
+    }
+  }
+
+  entity: actions_v4_public_action_function_identifier: {
+    path: "/automation/actions/2026-09/{appId}/{definitionId}/functions/{functionType}": {
+      rename: param: "appId": *"app_id"
+      rename: param: "definitionId": *"definition_id"
+      rename: param: "functionType": *"function_type"
+      op: update: method: *PUT
+    }
+    path: "/automation/actions/2026-09/{appId}/{definitionId}/functions/{functionType}/{functionId}": {
+      rename: param: "appId": *"app_id"
+      rename: param: "definitionId": *"definition_id"
+      rename: param: "functionId": *"function_id"
+      rename: param: "functionType": *"function_type"
+      op: update: method: *PUT
+    }
+  }
+
+  entity: actions_v4_public_action_revision: {
+    path: "/automation/actions/2026-09/{appId}/{definitionId}/revisions/{revisionId}": {
+      rename: param: "appId": *"app_id"
+      rename: param: "definitionId": *"definition_id"
+      rename: param: "revisionId": *"id"
+      op: load: method: *GET
+      op: load: transform: res: *("`body.definition`")|top
+    }
+  }
+
+  entity: automation_v4_api_flow: {
+    path: "/automation/v4/flows": {
+      op: create: method: *POST
+    }
+    path: "/automation/v4/flows/{flowId}": {
+      rename: param: "flowId": *"id"
+      op: load: method: *GET
+      op: update: method: *PUT
+    }
+  }
+
+  entity: automation_v4_batch_response_api_flow: {
+    path: "/automation/v4/flows/batch/read": {
+      op: create: method: *POST
+    }
+  }
+
+  entity: automation_v4_batch_response_flow_id_workflow_id_mapping: {
+    path: "/automation/v4/workflow-id-mappings/batch/read": {
+      op: create: method: *POST
+    }
+  }
+
+  entity: automation_v4_collection_response_api_flow_email_campaign: {
+    path: "/automation/v4/flows/email-campaigns": {
+      op: list: method: *GET
+    }
+  }
+
+  entity: automation_v4_collection_response_api_flow_listing_forward_paging: {
+    path: "/automation/v4/flows": {
+      op: list: method: *GET
+    }
+  }
+
+  entity: automation_v4_collection_response_api_histogram_data_point_no: {
+    path: "/automation/v4/flows/performance/{flowId}": {
+      rename: param: "flowId": *"flow_id"
+      op: load: method: *GET
+    }
+  }
+
+  entity: basic: {
+    path: "/automation/sequences/2026-09/serviceaccounts/sequences/{sequenceId}": {
+      rename: param: "sequenceId": *"sequence_id"
+      op: remove: method: *DELETE
+    }
+    path: "/automation/v4/flows/{flowId}": {
+      rename: param: "flowId": *"flow_id"
+      op: remove: method: *DELETE
+    }
+  }
+
+  entity: callback: {
+    path: "/automation/actions/callbacks/2026-09/complete": {
+      op: create: method: *POST
+    }
+    path: "/automation/actions/callbacks/2026-09/{callbackId}/complete": {
+      rename: param: "callbackId": *"callback_id"
+      op: create: method: *POST
+    }
+  }
+
+  entity: definition: {
+    path: "/automation/actions/2026-09/{appId}/{definitionId}": {
+      rename: param: "appId": *"app_id"
+      rename: param: "definitionId": *"definition_id"
+      op: remove: method: *DELETE
+    }
+    path: "/automation/actions/2026-09/{appId}/{definitionId}/requires-object": {
+      rename: param: "appId": *"app_id"
+      rename: param: "definitionId": *"definition_id"
+      op: create: method: *POST
+    }
+  }
+
+  entity: email_templates_collection_response_public_folder_forward_paging: {
+    path: "/automation/email-templates/2026-09/folders": {
+      op: list: method: *GET
+    }
+  }
+
+  entity: email_templates_collection_response_public_template_forward_paging: {
+    path: "/automation/email-templates/2026-09": {
+      op: list: method: *GET
+    }
+  }
+
+  entity: email_templates_public_template: {
+    path: "/automation/email-templates/2026-09": {
+      op: create: method: *POST
+    }
+    path: "/automation/email-templates/2026-09/{templateId}": {
+      rename: param: "templateId": *"template_id"
+      op: load: method: *GET
+      op: patch: method: *PATCH
+    }
+  }
+
+  entity: function: {
+    path: "/automation/actions/2026-09/{appId}/{definitionId}/functions/{functionType}": {
+      rename: param: "appId": *"app_id"
+      rename: param: "definitionId": *"definition_id"
+      rename: param: "functionType": *"id"
+      op: remove: method: *DELETE
+    }
+    path: "/automation/actions/2026-09/{appId}/{definitionId}/functions/{functionType}/{functionId}": {
+      rename: param: "appId": *"app_id"
+      rename: param: "definitionId": *"definition_id"
+      rename: param: "functionId": *"function_id"
+      rename: param: "functionType": *"function_type"
+      op: remove: method: *DELETE
+    }
+  }
+
+  entity: sequence: {
+    path: "/automation/sequences/2026-09/serviceaccounts/sequences": {
+      op: create: method: *POST
+      op: create: transform: res: *("`body.sequence`")|top
+      op: list: method: *GET
+    }
+    path: "/automation/sequences/2026-09/serviceaccounts/sequences/{sequenceId}": {
+      rename: param: "sequenceId": *"id"
+      op: load: method: *GET
+      op: update: method: *PUT
+    }
+  }
+
+  entity: sequences_collection_response_with_total_public_sequence_lite: {
+    path: "/automation/sequences/2026-09": {
+      op: list: method: *GET
+    }
+  }
+
+  entity: sequences_public_sequence: {
+    path: "/automation/sequences/2026-09/{sequenceId}": {
+      rename: param: "sequenceId": *"sequence_id"
+      op: load: method: *GET
+    }
+  }
+
+  entity: sequences_public_sequence_enrollment: {
+    path: "/automation/sequences/2026-09/enrollments/contact/{contactId}": {
+      rename: param: "contactId": *"contact_id"
+      op: load: method: *GET
+    }
+  }
+
+  entity: sequences_public_sequence_enrollment_lite: {
+    path: "/automation/sequences/2026-09/enrollments": {
+      op: create: method: *POST
+    }
+    path: "/automation/sequences/2026-09/serviceaccounts/enrollments": {
+      op: create: method: *POST
+    }
+  }
+
+  entity: sequences_public_sequence_performance: {
+    path: "/automation/sequences/2026-09/serviceaccounts/sequences/{sequenceId}/performance": {
+      rename: param: "sequenceId": *"sequence_id"
+      op: list: method: *GET
+    }
+  }
+
+}

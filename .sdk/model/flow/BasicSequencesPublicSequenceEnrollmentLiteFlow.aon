@@ -1,0 +1,18 @@
+# BasicSequencesPublicSequenceEnrollmentLiteFlow
+
+main: kit: flow: BasicSequencesPublicSequenceEnrollmentLiteFlow:
+{
+  entity: "sequences_public_sequence_enrollment_lite",
+  kind: "basic",
+  name: "BasicSequencesPublicSequenceEnrollmentLiteFlow",
+  step: [
+    {
+      input: {
+        ref: "sequences_public_sequence_enrollment_lite_ref01"
+      }
+
+      op: "create"
+    }
+  ],
+  "key$": "BasicSequencesPublicSequenceEnrollmentLiteFlow"
+}

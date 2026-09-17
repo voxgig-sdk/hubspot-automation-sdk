@@ -1,0 +1,556 @@
+{
+  "existing": {
+    "sequences_public_sequence_enrollment_lite": {
+      "SEQUENCES_PUBLIC_SEQUENCE_ENROLLMENT_LITE00": {
+        "contactId": "s50",
+        "enrolledAt": "s51",
+        "id": "SEQUENCES_PUBLIC_SEQUENCE_ENROLLMENT_LITE00",
+        "senderAliasAddress": "s53",
+        "senderEmail": "s54",
+        "sequenceId": "s55",
+        "toEmail": "s56",
+        "updatedAt": "s57"
+      },
+      "SEQUENCES_PUBLIC_SEQUENCE_ENROLLMENT_LITE01": {
+        "contactId": "sa0",
+        "enrolledAt": "sa1",
+        "id": "SEQUENCES_PUBLIC_SEQUENCE_ENROLLMENT_LITE01",
+        "senderAliasAddress": "sa3",
+        "senderEmail": "sa4",
+        "sequenceId": "sa5",
+        "toEmail": "sa6",
+        "updatedAt": "sa7"
+      },
+      "SEQUENCES_PUBLIC_SEQUENCE_ENROLLMENT_LITE02": {
+        "contactId": "sf0",
+        "enrolledAt": "sf1",
+        "id": "SEQUENCES_PUBLIC_SEQUENCE_ENROLLMENT_LITE02",
+        "senderAliasAddress": "sf3",
+        "senderEmail": "sf4",
+        "sequenceId": "sf5",
+        "toEmail": "sf6",
+        "updatedAt": "sf7"
+      }
+    }
+  },
+  "new": {
+    "sequences_public_sequence_enrollment_lite": {
+      "sequences_public_sequence_enrollment_lite_ref01": {
+        "contactId": "s140",
+        "enrolledAt": "s141",
+        "senderAliasAddress": "s143",
+        "senderEmail": "s144",
+        "sequenceId": "s145",
+        "toEmail": "s146",
+        "updatedAt": "s147"
+      }
+    }
+  },
+  "requests": {
+    "POST /automation/sequences/2026-09/enrollments": {
+      "provenance": "operation-contract",
+      "contract": {
+        "operationId": "post-/automation/sequences/2026-09/enrollments",
+        "parameters": [
+          {
+            "description": "The unique identifier of the user performing the enrollment. This parameter is required.",
+            "explode": true,
+            "in": "query",
+            "name": "userId",
+            "required": true,
+            "schema": {
+              "example": null,
+              "type": "string"
+            },
+            "style": "form"
+          }
+        ],
+        "protocol": "http",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "example": null,
+              "schema": {
+                "example": null,
+                "properties": {
+                  "contactId": {
+                    "description": "The unique identifier of the contact to be enrolled in the sequence. It is a string.",
+                    "example": null,
+                    "type": "string"
+                  },
+                  "senderAliasAddress": {
+                    "description": "An optional alias email address that can be used as the sender's address. It is a string.",
+                    "example": null,
+                    "type": "string"
+                  },
+                  "senderEmail": {
+                    "description": "The email address of the sender responsible for the sequence enrollment. It is a string.",
+                    "example": null,
+                    "type": "string"
+                  },
+                  "sequenceId": {
+                    "description": "The unique identifier of the sequence in which the contact is to be enrolled. It is a string.",
+                    "example": null,
+                    "type": "string"
+                  }
+                },
+                "required": [
+                  "contactId",
+                  "senderEmail",
+                  "sequenceId"
+                ],
+                "type": "object"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "example": null,
+                "schema": {
+                  "example": null,
+                  "properties": {
+                    "enrolledAt": {
+                      "description": "The date and time when the contact was enrolled in the sequence, in ISO 8601 format.",
+                      "example": null,
+                      "format": "date-time",
+                      "type": "string"
+                    },
+                    "id": {
+                      "description": "The unique identifier for the sequence enrollment.",
+                      "example": null,
+                      "type": "string"
+                    },
+                    "toEmail": {
+                      "description": "The email address of the contact who is enrolled in the sequence.",
+                      "example": null,
+                      "type": "string"
+                    },
+                    "updatedAt": {
+                      "description": "The date and time when the sequence enrollment was last updated, in ISO 8601 format.",
+                      "example": null,
+                      "format": "date-time",
+                      "type": "string"
+                    }
+                  },
+                  "required": [
+                    "enrolledAt",
+                    "id",
+                    "toEmail",
+                    "updatedAt"
+                  ],
+                  "type": "object"
+                }
+              }
+            },
+            "description": "successful operation"
+          },
+          "default": {
+            "content": {
+              "*/*": {
+                "example": null,
+                "schema": {
+                  "description": "Represents an error response returned by the API when an operation fails. This component is used in various endpoints to provide detailed information about the error encountered.",
+                  "example": {
+                    "category": "VALIDATION_ERROR",
+                    "correlationId": "aeb5f871-7f07-4993-9211-075dc63e7cbf",
+                    "links": {
+                      "knowledge-base": "https://www.hubspot.com/products/service/knowledge-base"
+                    },
+                    "message": "Invalid input (details will vary based on the error)"
+                  },
+                  "properties": {
+                    "category": {
+                      "description": "The error category, indicating the general type of error that occurred.",
+                      "example": null,
+                      "type": "string"
+                    },
+                    "context": {
+                      "additionalProperties": {
+                        "example": null,
+                        "items": {
+                          "example": null,
+                          "type": "string"
+                        },
+                        "type": "array"
+                      },
+                      "description": "Context about the error condition, represented as an object with additional properties that are arrays of strings.",
+                      "example": "{invalidPropertyName=[propertyValue], missingScopes=[scope1, scope2]}",
+                      "type": "object"
+                    },
+                    "correlationId": {
+                      "description": "A unique identifier for the request. Include this value with any error reports or support tickets. It is formatted as a UUID.",
+                      "example": "aeb5f871-7f07-4993-9211-075dc63e7cbf",
+                      "format": "uuid",
+                      "type": "string"
+                    },
+                    "errors": {
+                      "description": "Further information about the error, represented as an array of ErrorDetail objects.",
+                      "example": null,
+                      "items": {
+                        "description": "Represents detailed information about an error that occurred in the API. This component is used to provide additional context and specifics about errors, typically as part of an error response.",
+                        "example": null,
+                        "properties": {
+                          "code": {
+                            "description": "The status code associated with the error detail, indicating the type of error encountered.",
+                            "example": null,
+                            "type": "string"
+                          },
+                          "context": {
+                            "additionalProperties": {
+                              "example": null,
+                              "items": {
+                                "example": null,
+                                "type": "string"
+                              },
+                              "type": "array"
+                            },
+                            "description": "Context about the error condition, provided as an object with additional properties. This can include specific details such as missing scopes.",
+                            "example": "{missingScopes=[scope1, scope2]}",
+                            "type": "object"
+                          },
+                          "in": {
+                            "description": "The name of the field or parameter in which the error was found. This provides context about where the error occurred.",
+                            "example": null,
+                            "type": "string"
+                          },
+                          "message": {
+                            "description": "A human readable message describing the error along with remediation steps where appropriate. This is a required field.",
+                            "example": null,
+                            "type": "string"
+                          },
+                          "subCategory": {
+                            "description": "A specific category that contains more specific detail about the error, helping to further classify the error.",
+                            "example": null,
+                            "type": "string"
+                          }
+                        },
+                        "required": [
+                          "message"
+                        ],
+                        "type": "object"
+                      },
+                      "type": "array"
+                    },
+                    "links": {
+                      "additionalProperties": {
+                        "example": null,
+                        "type": "string"
+                      },
+                      "description": "A map of link names to associated URIs containing documentation about the error or recommended remediation steps.",
+                      "example": null,
+                      "type": "object"
+                    },
+                    "message": {
+                      "description": "A human readable message describing the error along with remediation steps where appropriate.",
+                      "example": "An error occurred",
+                      "type": "string"
+                    },
+                    "subCategory": {
+                      "description": "A specific category that contains more specific detail about the error.",
+                      "example": null,
+                      "type": "string"
+                    }
+                  },
+                  "required": [
+                    "category",
+                    "correlationId",
+                    "message"
+                  ],
+                  "type": "object"
+                }
+              }
+            },
+            "description": ""
+          }
+        },
+        "security": [
+          {
+            "oauth2": [
+              "automation.sequences.enrollments.write"
+            ]
+          }
+        ],
+        "securitySchemes": {
+          "developer_hapikey": {
+            "in": "query",
+            "name": "hapikey",
+            "type": "apiKey"
+          },
+          "oauth2": {
+            "flows": {
+              "authorizationCode": {
+                "authorizationUrl": "https://app.hubspot.com/oauth/authorize",
+                "scopes": {
+                  "automation": ""
+                },
+                "tokenUrl": "https://api.hubapi.com/oauth/v1/token"
+              }
+            },
+            "type": "oauth2"
+          },
+          "private_apps": {
+            "in": "header",
+            "name": "private-app",
+            "type": "apiKey"
+          },
+          "private_apps_legacy": {
+            "in": "header",
+            "name": "private-app-legacy",
+            "type": "apiKey"
+          }
+        },
+        "securitySource": "operation"
+      }
+    },
+    "POST /automation/sequences/2026-09/serviceaccounts/enrollments": {
+      "provenance": "operation-contract",
+      "contract": {
+        "operationId": "post-/automation/sequences/2026-09/serviceaccounts/enrollments",
+        "parameters": [],
+        "protocol": "http",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "example": null,
+              "schema": {
+                "example": null,
+                "properties": {
+                  "contactId": {
+                    "description": "The unique identifier of the contact to be enrolled in the sequence. It is a string.",
+                    "example": null,
+                    "type": "string"
+                  },
+                  "senderAliasAddress": {
+                    "description": "An optional alias email address that can be used as the sender's address. It is a string.",
+                    "example": null,
+                    "type": "string"
+                  },
+                  "senderEmail": {
+                    "description": "The email address of the sender responsible for the sequence enrollment. It is a string.",
+                    "example": null,
+                    "type": "string"
+                  },
+                  "sequenceId": {
+                    "description": "The unique identifier of the sequence in which the contact is to be enrolled. It is a string.",
+                    "example": null,
+                    "type": "string"
+                  }
+                },
+                "required": [
+                  "contactId",
+                  "senderEmail",
+                  "sequenceId"
+                ],
+                "type": "object"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "example": null,
+                "schema": {
+                  "example": null,
+                  "properties": {
+                    "enrolledAt": {
+                      "description": "The date and time when the contact was enrolled in the sequence, in ISO 8601 format.",
+                      "example": null,
+                      "format": "date-time",
+                      "type": "string"
+                    },
+                    "id": {
+                      "description": "The unique identifier for the sequence enrollment.",
+                      "example": null,
+                      "type": "string"
+                    },
+                    "toEmail": {
+                      "description": "The email address of the contact who is enrolled in the sequence.",
+                      "example": null,
+                      "type": "string"
+                    },
+                    "updatedAt": {
+                      "description": "The date and time when the sequence enrollment was last updated, in ISO 8601 format.",
+                      "example": null,
+                      "format": "date-time",
+                      "type": "string"
+                    }
+                  },
+                  "required": [
+                    "enrolledAt",
+                    "id",
+                    "toEmail",
+                    "updatedAt"
+                  ],
+                  "type": "object"
+                }
+              }
+            },
+            "description": "successful operation"
+          },
+          "default": {
+            "content": {
+              "*/*": {
+                "example": null,
+                "schema": {
+                  "description": "Represents an error response returned by the API when an operation fails. This component is used in various endpoints to provide detailed information about the error encountered.",
+                  "example": {
+                    "category": "VALIDATION_ERROR",
+                    "correlationId": "aeb5f871-7f07-4993-9211-075dc63e7cbf",
+                    "links": {
+                      "knowledge-base": "https://www.hubspot.com/products/service/knowledge-base"
+                    },
+                    "message": "Invalid input (details will vary based on the error)"
+                  },
+                  "properties": {
+                    "category": {
+                      "description": "The error category, indicating the general type of error that occurred.",
+                      "example": null,
+                      "type": "string"
+                    },
+                    "context": {
+                      "additionalProperties": {
+                        "example": null,
+                        "items": {
+                          "example": null,
+                          "type": "string"
+                        },
+                        "type": "array"
+                      },
+                      "description": "Context about the error condition, represented as an object with additional properties that are arrays of strings.",
+                      "example": "{invalidPropertyName=[propertyValue], missingScopes=[scope1, scope2]}",
+                      "type": "object"
+                    },
+                    "correlationId": {
+                      "description": "A unique identifier for the request. Include this value with any error reports or support tickets. It is formatted as a UUID.",
+                      "example": "aeb5f871-7f07-4993-9211-075dc63e7cbf",
+                      "format": "uuid",
+                      "type": "string"
+                    },
+                    "errors": {
+                      "description": "Further information about the error, represented as an array of ErrorDetail objects.",
+                      "example": null,
+                      "items": {
+                        "description": "Represents detailed information about an error that occurred in the API. This component is used to provide additional context and specifics about errors, typically as part of an error response.",
+                        "example": null,
+                        "properties": {
+                          "code": {
+                            "description": "The status code associated with the error detail, indicating the type of error encountered.",
+                            "example": null,
+                            "type": "string"
+                          },
+                          "context": {
+                            "additionalProperties": {
+                              "example": null,
+                              "items": {
+                                "example": null,
+                                "type": "string"
+                              },
+                              "type": "array"
+                            },
+                            "description": "Context about the error condition, provided as an object with additional properties. This can include specific details such as missing scopes.",
+                            "example": "{missingScopes=[scope1, scope2]}",
+                            "type": "object"
+                          },
+                          "in": {
+                            "description": "The name of the field or parameter in which the error was found. This provides context about where the error occurred.",
+                            "example": null,
+                            "type": "string"
+                          },
+                          "message": {
+                            "description": "A human readable message describing the error along with remediation steps where appropriate. This is a required field.",
+                            "example": null,
+                            "type": "string"
+                          },
+                          "subCategory": {
+                            "description": "A specific category that contains more specific detail about the error, helping to further classify the error.",
+                            "example": null,
+                            "type": "string"
+                          }
+                        },
+                        "required": [
+                          "message"
+                        ],
+                        "type": "object"
+                      },
+                      "type": "array"
+                    },
+                    "links": {
+                      "additionalProperties": {
+                        "example": null,
+                        "type": "string"
+                      },
+                      "description": "A map of link names to associated URIs containing documentation about the error or recommended remediation steps.",
+                      "example": null,
+                      "type": "object"
+                    },
+                    "message": {
+                      "description": "A human readable message describing the error along with remediation steps where appropriate.",
+                      "example": "An error occurred",
+                      "type": "string"
+                    },
+                    "subCategory": {
+                      "description": "A specific category that contains more specific detail about the error.",
+                      "example": null,
+                      "type": "string"
+                    }
+                  },
+                  "required": [
+                    "category",
+                    "correlationId",
+                    "message"
+                  ],
+                  "type": "object"
+                }
+              }
+            },
+            "description": ""
+          }
+        },
+        "security": [
+          {
+            "oauth2": [
+              "automation.sequences.enrollments.write"
+            ]
+          }
+        ],
+        "securitySchemes": {
+          "developer_hapikey": {
+            "in": "query",
+            "name": "hapikey",
+            "type": "apiKey"
+          },
+          "oauth2": {
+            "flows": {
+              "authorizationCode": {
+                "authorizationUrl": "https://app.hubspot.com/oauth/authorize",
+                "scopes": {
+                  "automation": ""
+                },
+                "tokenUrl": "https://api.hubapi.com/oauth/v1/token"
+              }
+            },
+            "type": "oauth2"
+          },
+          "private_apps": {
+            "in": "header",
+            "name": "private-app",
+            "type": "apiKey"
+          },
+          "private_apps_legacy": {
+            "in": "header",
+            "name": "private-app-legacy",
+            "type": "apiKey"
+          }
+        },
+        "securitySource": "operation"
+      }
+    }
+  }
+}

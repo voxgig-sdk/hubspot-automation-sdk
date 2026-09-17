@@ -1,0 +1,162 @@
+
+
+import Path from 'node:path'
+import * as Fs from 'node:fs'
+
+import { test, describe, afterEach } from 'node:test'
+import assert from 'node:assert'
+import { createLiveTransport } from '../../live-runner'
+import { runLiveEntity } from '../../live-entity'
+
+
+import { HubspotAutomationSDK, BaseFeature, stdutil } from '../../..'
+
+import {
+  envOverride,
+  liveClientOptions,
+  liveDelay,
+  loadEnvLocal,
+  makeCtrl,
+  makeMatch,
+  makeReqdata,
+  makeStepData,
+  makeValid,
+  maybeSkipControl,
+} from '../../utility'
+
+
+// AFTER the imports on purpose: TypeScript hoists `import` above any
+// statement in the emitted CommonJS, so a loader placed above them would
+// run only after every imported module had already been evaluated - and
+// anything reading process.env at module scope would miss these values.
+loadEnvLocal(__dirname + '/../../../.env.local')
+
+
+describe('SequencesPublicSequenceEntity', async () => {
+
+  // Per-test live pacing. Delay is read from sdk-test-control.json's
+  // `test.live.delayMs`; only sleeps when HUBSPOT_AUTOMATION_TEST_LIVE=TRUE.
+  afterEach(liveDelay('HUBSPOT_AUTOMATION_TEST_LIVE'))
+
+  test('instance', async () => {
+    const testsdk = HubspotAutomationSDK.test()
+    const ent = testsdk.SequencesPublicSequence()
+    assert(null != ent)
+  })
+
+
+  test('basic', async (t) => {
+
+    const live = 'TRUE' === process.env.HUBSPOT_AUTOMATION_TEST_LIVE
+    for (const op of ['load']) {
+      if (!live && maybeSkipControl(t, 'entityOp', 'sequences_public_sequence.' + op, live)) return
+    }
+
+    
+    const setup = basicSetup()
+    if (setup.live) {
+      return runLiveEntity(setup, {"active":true,"alias":{"field":{}},"fields":[{"active":true,"format":"date-time","name":"createdAt","req":true,"short":"The date and time when the sequence was created, in ISO 8601 format.","type":"`$STRING`","index$":0},{"active":true,"name":"dependencies","req":true,"short":"An array of dependencies between sequence steps, each represented by a PublicSequenceStepDependencyResponse object.","type":"`$ARRAY`","index$":1},{"active":true,"name":"folderId","req":false,"short":"The unique identifier for the folder containing the sequence.","type":"`$STRING`","index$":2},{"active":true,"name":"id","req":true,"short":"The unique identifier for the sequence.","type":"`$STRING`","index$":3},{"active":true,"name":"name","req":true,"short":"The name of the sequence.","type":"`$STRING`","index$":4},{"active":true,"name":"settings","req":true,"type":"`$OBJECT`","index$":5},{"active":true,"name":"steps","req":true,"short":"An array of steps included in the sequence, each represented by a PublicSequenceStepResponse object.","type":"`$ARRAY`","index$":6},{"active":true,"format":"date-time","name":"updatedAt","req":true,"short":"The date and time when the sequence was last updated, in ISO 8601 format.","type":"`$STRING`","index$":7},{"active":true,"name":"userId","req":true,"short":"The unique identifier of the user who owns the sequence.","type":"`$STRING`","index$":8}],"id":{"field":"id","name":"id"},"name":"sequences_public_sequence","op":{"load":{"input":"data","name":"load","points":[{"active":true,"args":{"params":[{"active":true,"example":null,"kind":"param","name":"sequence_id","orig":"sequence_id","reqd":true,"type":"`$STRING`","index$":0}],"query":[{"active":true,"example":null,"kind":"query","name":"user_id","orig":"user_id","reqd":true,"type":"`$STRING`","index$":0}]},"contract":{"id":"GET /automation/sequences/2026-09/{sequenceId}","json":"{\"operationId\":\"get-/automation/sequences/2026-09/{sequenceId}\",\"parameters\":[{\"description\":\"The unique identifier of the sequence to retrieve.\",\"explode\":false,\"in\":\"path\",\"name\":\"sequenceId\",\"required\":true,\"schema\":{\"example\":null,\"type\":\"string\"},\"style\":\"simple\"},{\"description\":\"The unique identifier of the user associated with the sequence. This parameter is required.\",\"explode\":true,\"in\":\"query\",\"name\":\"userId\",\"required\":true,\"schema\":{\"example\":null,\"type\":\"string\"},\"style\":\"form\"}],\"protocol\":\"http\",\"responses\":{\"200\":{\"content\":{\"application/json\":{\"example\":null,\"schema\":{\"example\":null,\"properties\":{\"createdAt\":{\"description\":\"The date and time when the sequence was created, in ISO 8601 format.\",\"example\":null,\"format\":\"date-time\",\"type\":\"string\"},\"dependencies\":{\"description\":\"An array of dependencies between sequence steps, each represented by a PublicSequenceStepDependencyResponse object.\",\"example\":null,\"items\":{\"example\":null,\"properties\":{\"createdAt\":{\"description\":\"The date and time when this dependency was created, in ISO 8601 format.\",\"example\":null,\"format\":\"date-time\",\"type\":\"string\"},\"dependencyType\":{\"description\":\"The type of dependency, which can be either 'TASK_COMPLETION' or 'MANUAL_PAUSE'.\",\"enum\":[\"ADAPTIVE_COMPLETION\",\"MANUAL_PAUSE\",\"TASK_COMPLETION\"],\"example\":null,\"type\":\"string\"},\"id\":{\"description\":\"The unique identifier for this dependency.\",\"example\":null,\"type\":\"string\"},\"reliesOnSequenceStepId\":{\"description\":\"The unique identifier of the sequence step that this dependency relies on.\",\"example\":null,\"type\":\"string\"},\"reliesOnStepOrder\":{\"description\":\"The order number of the step that this dependency relies on.\",\"example\":null,\"format\":\"int32\",\"type\":\"integer\"},\"requiredBySequenceStepId\":{\"description\":\"The unique identifier of the sequence step that requires this dependency.\",\"example\":null,\"type\":\"string\"},\"requiredByStepOrder\":{\"description\":\"The order number of the step that requires this dependency.\",\"example\":null,\"format\":\"int32\",\"type\":\"integer\"},\"updatedAt\":{\"description\":\"The date and time when this dependency was last updated, in ISO 8601 format.\",\"example\":null,\"format\":\"date-time\",\"type\":\"string\"}},\"required\":[\"createdAt\",\"dependencyType\",\"id\",\"reliesOnSequenceStepId\",\"reliesOnStepOrder\",\"requiredBySequenceStepId\",\"requiredByStepOrder\",\"updatedAt\"],\"type\":\"object\"},\"type\":\"array\"},\"folderId\":{\"description\":\"The unique identifier for the folder containing the sequence.\",\"example\":null,\"type\":\"string\"},\"id\":{\"description\":\"The unique identifier for the sequence.\",\"example\":null,\"type\":\"string\"},\"name\":{\"description\":\"The name of the sequence.\",\"example\":null,\"type\":\"string\"},\"settings\":{\"example\":null,\"properties\":{\"createdAt\":{\"description\":\"The date and time when the sequence settings were created, in ISO 8601 format.\",\"example\":null,\"format\":\"date-time\",\"type\":\"string\"},\"eligibleFollowUpDays\":{\"description\":\"Specifies the days eligible for follow-ups. Valid values include 'EVERYDAY', 'BUSINESS_DAYS', and 'WEEKDAYS_ONLY'.\",\"enum\":[\"BUSINESS_DAYS\",\"EVERYDAY\",\"WEEKDAYS_ONLY\"],\"example\":null,\"type\":\"string\"},\"id\":{\"description\":\"The unique identifier for the sequence settings.\",\"example\":null,\"type\":\"string\"},\"individualTaskRemindersEnabled\":{\"description\":\"A boolean indicating whether individual task reminders are enabled.\",\"example\":null,\"type\":\"boolean\"},\"sellingStrategy\":{\"description\":\"The strategy used for selling, which can be either 'LEAD_BASED' or 'ACCOUNT_BASED'.\",\"enum\":[\"ACCOUNT_BASED\",\"LEAD_BASED\"],\"example\":null,\"type\":\"string\"},\"sendWindowEndMinute\":{\"description\":\"The ending minute of the window during which emails can be sent, represented as an integer.\",\"example\":null,\"format\":\"int32\",\"type\":\"integer\"},\"sendWindowStartMinute\":{\"description\":\"The starting minute of the window during which emails can be sent, represented as an integer.\",\"example\":null,\"format\":\"int32\",\"type\":\"integer\"},\"taskReminderMinute\":{\"description\":\"The minute at which task reminders are sent, represented as an integer.\",\"example\":null,\"format\":\"int32\",\"type\":\"integer\"},\"updatedAt\":{\"description\":\"The date and time when the sequence settings were last updated, in ISO 8601 format.\",\"example\":null,\"format\":\"date-time\",\"type\":\"string\"}},\"required\":[\"createdAt\",\"eligibleFollowUpDays\",\"id\",\"individualTaskRemindersEnabled\",\"sellingStrategy\",\"sendWindowEndMinute\",\"sendWindowStartMinute\",\"taskReminderMinute\",\"updatedAt\"],\"type\":\"object\"},\"steps\":{\"description\":\"An array of steps included in the sequence, each represented by a PublicSequenceStepResponse object.\",\"example\":null,\"items\":{\"example\":null,\"properties\":{\"actionType\":{\"description\":\"The type of action to be performed in this step. Valid values include 'EMAIL', 'TASK', and 'FINISH_ENROLLMENT'.\",\"enum\":[\"ADAPTIVE_CONTAINER\",\"EMAIL\",\"FINISH_ENROLLMENT\",\"TASK\"],\"example\":null,\"type\":\"string\"},\"createdAt\":{\"description\":\"The date and time when this step was created, in ISO 8601 format.\",\"example\":null,\"format\":\"date-time\",\"type\":\"string\"},\"delayMillis\":{\"description\":\"The delay before executing this step, specified in milliseconds as a 64-bit integer.\",\"example\":null,\"format\":\"int64\",\"type\":\"integer\"},\"emailPattern\":{\"example\":null,\"properties\":{\"createdAt\":{\"description\":\"The date and time when this email pattern was created, in ISO 8601 format.\",\"example\":null,\"format\":\"date-time\",\"type\":\"string\"},\"id\":{\"description\":\"The unique identifier for this email pattern. It is a string.\",\"example\":null,\"type\":\"string\"},\"templateId\":{\"description\":\"The identifier of the email template associated with this pattern. It is a string.\",\"example\":null,\"type\":\"string\"},\"threadEmailToStepOrder\":{\"description\":\"An integer representing the order of the step to which this email pattern is threaded.\",\"example\":null,\"format\":\"int32\",\"type\":\"integer\"},\"updatedAt\":{\"description\":\"The date and time when this email pattern was last updated, in ISO 8601 format.\",\"example\":null,\"format\":\"date-time\",\"type\":\"string\"}},\"required\":[\"createdAt\",\"id\",\"templateId\",\"updatedAt\"],\"type\":\"object\"},\"id\":{\"description\":\"The unique identifier for this sequence step, represented as a string.\",\"example\":null,\"type\":\"string\"},\"stepOrder\":{\"description\":\"An integer indicating the order of this step within the sequence.\",\"example\":null,\"format\":\"int32\",\"type\":\"integer\"},\"taskPattern\":{\"example\":null,\"properties\":{\"createdAt\":{\"description\":\"The date and time when this task pattern was created, in ISO 8601 format.\",\"example\":null,\"format\":\"date-time\",\"type\":\"string\"},\"id\":{\"description\":\"The unique identifier for this task pattern.\",\"example\":null,\"type\":\"string\"},\"notes\":{\"description\":\"Additional notes related to the task, represented as a string.\",\"example\":null,\"type\":\"string\"},\"queueId\":{\"description\":\"An integer representing the ID of the queue to which this task belongs.\",\"example\":null,\"format\":\"int32\",\"type\":\"integer\"},\"subject\":{\"description\":\"The subject of the task, represented as a string.\",\"example\":null,\"type\":\"string\"},\"taskPriority\":{\"description\":\"The priority level of the task, with valid values including 'NONE', 'HIGH', 'MEDIUM', and 'LOW'.\",\"enum\":[\"HIGH\",\"LOW\",\"MEDIUM\",\"NONE\"],\"example\":null,\"type\":\"string\"},\"taskType\":{\"description\":\"The type of task, with valid values including 'CALL', 'MEETING', 'EMAIL', 'TODO', 'LINKED_IN_CONNECT', and 'LINKED_IN_MESSAGE'.\",\"enum\":[\"CALL\",\"EMAIL\",\"LINKED_IN_CONNECT\",\"LINKED_IN_MESSAGE\",\"MEETING\",\"TODO\"],\"example\":null,\"type\":\"string\"},\"templateId\":{\"description\":\"An integer representing the ID of the template associated with this task.\",\"example\":null,\"format\":\"int64\",\"type\":\"integer\"},\"threadEmailToStepOrder\":{\"description\":\"An integer indicating the step order to which this email task is threaded.\",\"example\":null,\"format\":\"int32\",\"type\":\"integer\"},\"updatedAt\":{\"description\":\"The date and time when this task pattern was last updated, in ISO 8601 format.\",\"example\":null,\"format\":\"date-time\",\"type\":\"string\"}},\"required\":[\"createdAt\",\"id\",\"taskPriority\",\"taskType\",\"updatedAt\"],\"type\":\"object\"},\"updatedAt\":{\"description\":\"The date and time when this step was last updated, in ISO 8601 format.\",\"example\":null,\"format\":\"date-time\",\"type\":\"string\"}},\"required\":[\"actionType\",\"createdAt\",\"delayMillis\",\"id\",\"stepOrder\",\"updatedAt\"],\"type\":\"object\"},\"type\":\"array\"},\"updatedAt\":{\"description\":\"The date and time when the sequence was last updated, in ISO 8601 format.\",\"example\":null,\"format\":\"date-time\",\"type\":\"string\"},\"userId\":{\"description\":\"The unique identifier of the user who owns the sequence.\",\"example\":null,\"type\":\"string\"}},\"required\":[\"createdAt\",\"dependencies\",\"id\",\"name\",\"steps\",\"updatedAt\",\"userId\"],\"type\":\"object\"}}},\"description\":\"successful operation\"},\"default\":{\"content\":{\"*/*\":{\"example\":null,\"schema\":{\"description\":\"Represents an error response returned by the API when an operation fails. This component is used in various endpoints to provide detailed information about the error encountered.\",\"example\":{\"category\":\"VALIDATION_ERROR\",\"correlationId\":\"aeb5f871-7f07-4993-9211-075dc63e7cbf\",\"links\":{\"knowledge-base\":\"https://www.hubspot.com/products/service/knowledge-base\"},\"message\":\"Invalid input (details will vary based on the error)\"},\"properties\":{\"category\":{\"description\":\"The error category, indicating the general type of error that occurred.\",\"example\":null,\"type\":\"string\"},\"context\":{\"additionalProperties\":{\"example\":null,\"items\":{\"example\":null,\"type\":\"string\"},\"type\":\"array\"},\"description\":\"Context about the error condition, represented as an object with additional properties that are arrays of strings.\",\"example\":\"{invalidPropertyName=[propertyValue], missingScopes=[scope1, scope2]}\",\"type\":\"object\"},\"correlationId\":{\"description\":\"A unique identifier for the request. Include this value with any error reports or support tickets. It is formatted as a UUID.\",\"example\":\"aeb5f871-7f07-4993-9211-075dc63e7cbf\",\"format\":\"uuid\",\"type\":\"string\"},\"errors\":{\"description\":\"Further information about the error, represented as an array of ErrorDetail objects.\",\"example\":null,\"items\":{\"description\":\"Represents detailed information about an error that occurred in the API. This component is used to provide additional context and specifics about errors, typically as part of an error response.\",\"example\":null,\"properties\":{\"code\":{\"description\":\"The status code associated with the error detail, indicating the type of error encountered.\",\"example\":null,\"type\":\"string\"},\"context\":{\"additionalProperties\":{\"example\":null,\"items\":{\"example\":null,\"type\":\"string\"},\"type\":\"array\"},\"description\":\"Context about the error condition, provided as an object with additional properties. This can include specific details such as missing scopes.\",\"example\":\"{missingScopes=[scope1, scope2]}\",\"type\":\"object\"},\"in\":{\"description\":\"The name of the field or parameter in which the error was found. This provides context about where the error occurred.\",\"example\":null,\"type\":\"string\"},\"message\":{\"description\":\"A human readable message describing the error along with remediation steps where appropriate. This is a required field.\",\"example\":null,\"type\":\"string\"},\"subCategory\":{\"description\":\"A specific category that contains more specific detail about the error, helping to further classify the error.\",\"example\":null,\"type\":\"string\"}},\"required\":[\"message\"],\"type\":\"object\"},\"type\":\"array\"},\"links\":{\"additionalProperties\":{\"example\":null,\"type\":\"string\"},\"description\":\"A map of link names to associated URIs containing documentation about the error or recommended remediation steps.\",\"example\":null,\"type\":\"object\"},\"message\":{\"description\":\"A human readable message describing the error along with remediation steps where appropriate.\",\"example\":\"An error occurred\",\"type\":\"string\"},\"subCategory\":{\"description\":\"A specific category that contains more specific detail about the error.\",\"example\":null,\"type\":\"string\"}},\"required\":[\"category\",\"correlationId\",\"message\"],\"type\":\"object\"}}},\"description\":\"\"}},\"security\":[{\"oauth2\":[\"automation.sequences.read\"]}],\"securitySchemes\":{\"developer_hapikey\":{\"in\":\"query\",\"name\":\"hapikey\",\"type\":\"apiKey\"},\"oauth2\":{\"flows\":{\"authorizationCode\":{\"authorizationUrl\":\"https://app.hubspot.com/oauth/authorize\",\"scopes\":{\"automation\":\"\"},\"tokenUrl\":\"https://api.hubapi.com/oauth/v1/token\"}},\"type\":\"oauth2\"},\"private_apps\":{\"in\":\"header\",\"name\":\"private-app\",\"type\":\"apiKey\"},\"private_apps_legacy\":{\"in\":\"header\",\"name\":\"private-app-legacy\",\"type\":\"apiKey\"}},\"securitySource\":\"operation\"}","source":"openapi3","version":1},"kind":"http","method":"GET","orig":"/automation/sequences/2026-09/{sequenceId}","rename":{"param":{"sequenceId":"sequence_id"}},"segments":[{"lit":"automation"},{"lit":"sequences"},{"lit":"2026-09"},{"var":"sequence_id"}],"select":{"exist":["sequence_id","user_id"]},"transform":{"req":"`reqdata`","res":"`body`"},"index$":0}],"key$":"load"}},"relations":{"ancestors":[["2026_09"]]},"key$":"sequences_public_sequence","name__orig":"sequences_public_sequence","Name":"SequencesPublicSequence","name_":"sequences_public_sequence","name-":"sequences-public-sequence","NAME":"SEQUENCES_PUBLIC_SEQUENCE","index$":23}, {"active":true,"entity":"sequences_public_sequence","key$":"BasicSequencesPublicSequenceFlow","kind":"basic","name":"BasicSequencesPublicSequenceFlow","param":{},"step":[{"active":true,"data":{},"input":{"ref":"sequences_public_sequence_ref01","srcdatavar":"sequences_public_sequence_ref01_data","suffix":"_dt0"},"match":{"id":"sequences_public_sequence01"},"op":"load","spec":[],"valid":[{"apply":"TextFieldMark","def":{"mark":"Mark01-sequences_public_sequence_ref01"}}],"index$":0}]}, 'SequencesPublicSequence')
+    }
+    const client = setup.client
+    const struct = setup.struct
+
+    const isempty = struct.isempty
+    const select = struct.select
+
+    let sequences_public_sequence_ref01_data = Object.values(setup.data.existing.sequences_public_sequence)[0] as any
+
+    // LOAD
+    const sequences_public_sequence_ref01_ent = client.SequencesPublicSequence()
+    const sequences_public_sequence_ref01_match_dt0: any = {}
+    sequences_public_sequence_ref01_match_dt0.id = sequences_public_sequence_ref01_data.id
+    const sequences_public_sequence_ref01_data_dt0 = (await sequences_public_sequence_ref01_ent.load(sequences_public_sequence_ref01_match_dt0)).data()
+    assert(sequences_public_sequence_ref01_data_dt0.id === sequences_public_sequence_ref01_data.id)
+
+
+  })
+})
+
+
+
+function basicSetup(extra?: any) {
+  // TODO: fix test def options
+  const options: any = {} // null
+
+  // TODO: needs test utility to resolve path
+  const entityDataFile =
+    Path.resolve(__dirname, 
+      '../../../../.sdk/test/entity/sequences_public_sequence/SequencesPublicSequenceTestData.json')
+
+  // TODO: file ready util needed?
+  const entityDataSource = Fs.readFileSync(entityDataFile).toString('utf8')
+
+  // TODO: need a xlang JSON parse utility in voxgig/struct with better error msgs
+  const entityData = JSON.parse(entityDataSource)
+
+  options.entity = entityData.existing
+
+  let client = HubspotAutomationSDK.test(options, extra)
+  const struct = client.utility().struct
+  const merge = struct.merge
+  const transform = struct.transform
+
+  let idmap = transform(
+    ['sequences_public_sequence01','sequences_public_sequence02','sequences_public_sequence03','2026_0901','2026_0902','2026_0903'],
+    {
+      '`$PACK`': ['', {
+        '`$KEY`': '`$COPY`',
+        '`$VAL`': ['`$FORMAT`', 'upper', '`$COPY`']
+      }]
+    })
+
+  const env = envOverride({
+    'HUBSPOT_AUTOMATION_TEST_SEQUENCES_PUBLIC_SEQUENCE_ENTID': idmap,
+    'HUBSPOT_AUTOMATION_TEST_LIVE': 'FALSE',
+    'HUBSPOT_AUTOMATION_TEST_EXPLAIN': 'FALSE',
+    'HUBSPOT_AUTOMATION_APIKEY': '',
+  })
+
+  idmap = env['HUBSPOT_AUTOMATION_TEST_SEQUENCES_PUBLIC_SEQUENCE_ENTID']
+
+  const live = 'TRUE' === env.HUBSPOT_AUTOMATION_TEST_LIVE
+
+  const transport = createLiveTransport()
+  if (live) {
+    const rawIds = process.env['HUBSPOT_AUTOMATION_TEST_SEQUENCES_PUBLIC_SEQUENCE_ENTID']
+    idmap = rawIds && rawIds.trim() ? JSON.parse(rawIds) : {}
+    if (!idmap || Array.isArray(idmap) || typeof idmap !== 'object') {
+      throw new Error('Live ENTID must be a JSON object')
+    }
+    client = new HubspotAutomationSDK(merge([
+      // FIRST, so the generated fields below win: sdk-test-control.json's
+      // test.client.options adds to the live client, it does not redirect it.
+      liveClientOptions(),
+      {
+        apikey: env.HUBSPOT_AUTOMATION_APIKEY,
+      },
+      // 'extra || {}', not a bare 'extra': struct.merge returns UNDEFINED when the
+      // last entry is undefined, and basicSetup is normally called with no
+      // argument at all - so a bare 'extra' silently discarded the apikey
+      // and server values above and handed the SDK undefined. Harmless
+      // while there was nothing in that object; not harmless now.
+      extra || {},
+      { system: { fetch: transport.fetch } }
+    ]))
+  }
+
+  const setup = {
+    idmap,
+    env,
+    options,
+    client,
+    struct,
+    data: entityData,
+    explain: 'TRUE' === env.HUBSPOT_AUTOMATION_TEST_EXPLAIN,
+    live,
+    transport,
+    now: Date.now(),
+  }
+
+  return setup
+}
+  

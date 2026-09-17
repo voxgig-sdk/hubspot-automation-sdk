@@ -1,0 +1,70 @@
+<?php
+declare(strict_types=1);
+
+// HubspotAutomation SDK utility registration
+
+require_once __DIR__ . '/../core/UtilityType.php';
+require_once __DIR__ . '/Clean.php';
+require_once __DIR__ . '/Done.php';
+require_once __DIR__ . '/MakeError.php';
+require_once __DIR__ . '/FeatureAdd.php';
+require_once __DIR__ . '/FeatureHook.php';
+require_once __DIR__ . '/FeatureInit.php';
+require_once __DIR__ . '/Fetcher.php';
+require_once __DIR__ . '/MakeFetchDef.php';
+require_once __DIR__ . '/MakeContext.php';
+require_once __DIR__ . '/MakeOptions.php';
+require_once __DIR__ . '/MakeRequest.php';
+require_once __DIR__ . '/MakeResponse.php';
+require_once __DIR__ . '/MakeResult.php';
+require_once __DIR__ . '/MakePoint.php';
+require_once __DIR__ . '/MakeSpec.php';
+require_once __DIR__ . '/MakeUrl.php';
+require_once __DIR__ . '/Param.php';
+require_once __DIR__ . '/PrepareAuth.php';
+require_once __DIR__ . '/PrepareBody.php';
+require_once __DIR__ . '/Graphql.php';
+require_once __DIR__ . '/PrepareHeaders.php';
+require_once __DIR__ . '/PrepareMethod.php';
+require_once __DIR__ . '/PrepareParams.php';
+require_once __DIR__ . '/PreparePath.php';
+require_once __DIR__ . '/PrepareQuery.php';
+require_once __DIR__ . '/ResultBasic.php';
+require_once __DIR__ . '/ResultBody.php';
+require_once __DIR__ . '/ResultHeaders.php';
+require_once __DIR__ . '/TransformRequest.php';
+require_once __DIR__ . '/TransformResponse.php';
+
+HubspotAutomationUtility::setRegistrar(function (HubspotAutomationUtility $u): void {
+    $u->clean = [HubspotAutomationClean::class, 'call'];
+    $u->done = [HubspotAutomationDone::class, 'call'];
+    $u->make_error = [HubspotAutomationMakeError::class, 'call'];
+    $u->feature_add = [HubspotAutomationFeatureAdd::class, 'call'];
+    $u->feature_hook = [HubspotAutomationFeatureHook::class, 'call'];
+    $u->feature_init = [HubspotAutomationFeatureInit::class, 'call'];
+    $u->fetcher = [HubspotAutomationFetcher::class, 'call'];
+    $u->make_fetch_def = [HubspotAutomationMakeFetchDef::class, 'call'];
+    $u->make_context = [HubspotAutomationMakeContext::class, 'call'];
+    $u->make_options = [HubspotAutomationMakeOptions::class, 'call'];
+    $u->make_request = [HubspotAutomationMakeRequest::class, 'call'];
+    $u->make_response = [HubspotAutomationMakeResponse::class, 'call'];
+    $u->make_result = [HubspotAutomationMakeResult::class, 'call'];
+    $u->make_point = [HubspotAutomationMakePoint::class, 'call'];
+    $u->make_spec = [HubspotAutomationMakeSpec::class, 'call'];
+    $u->make_url = [HubspotAutomationMakeUrl::class, 'call'];
+    $u->param = [HubspotAutomationParam::class, 'call'];
+    $u->prepare_auth = [HubspotAutomationPrepareAuth::class, 'call'];
+    $u->prepare_body = [HubspotAutomationPrepareBody::class, 'call'];
+    $u->prepare_headers = [HubspotAutomationPrepareHeaders::class, 'call'];
+    $u->prepare_method = [HubspotAutomationPrepareMethod::class, 'call'];
+    $u->prepare_params = [HubspotAutomationPrepareParams::class, 'call'];
+    $u->prepare_path = [HubspotAutomationPreparePath::class, 'call'];
+    $u->prepare_query = [HubspotAutomationPrepareQuery::class, 'call'];
+    $u->graphql_body = [HubspotAutomationGraphql::class, 'body'];
+    $u->graphql_errors = [HubspotAutomationGraphql::class, 'errors'];
+    $u->result_basic = [HubspotAutomationResultBasic::class, 'call'];
+    $u->result_body = [HubspotAutomationResultBody::class, 'call'];
+    $u->result_headers = [HubspotAutomationResultHeaders::class, 'call'];
+    $u->transform_request = [HubspotAutomationTransformRequest::class, 'call'];
+    $u->transform_response = [HubspotAutomationTransformResponse::class, 'call'];
+});

@@ -1,0 +1,156 @@
+# Entity: callback
+
+main: kit: entity: callback: {
+
+  alias: field: {}
+
+  fields: [
+    {
+      name: "failureReasonType"
+      req: false
+      short: "Indicates the reason for the failure of a callback completion."
+      type: "`$STRING`"
+    }
+    {
+      name: "inputs"
+      req: true
+      short: "An array of CallbackCompletionBatchRequest objects, each representing a single callback completion request."
+      type: "`$ARRAY`"
+      union: {
+        branches: 5
+        count: 1
+        depth: 3
+      }
+    }
+    {
+      name: "outputFields"
+      req: true
+      short: "Contains the output fields associated with the callback, with each field represented as a key-value pair."
+      type: "`$OBJECT`"
+    }
+    {
+      name: "requestContext"
+      req: false
+      short: "Specifies the context in which the request is made, which can be one of several predefined contexts."
+      type: "`$ANY`"
+      union: {
+        branches: 5
+        count: 1
+        depth: 0
+      }
+    }
+    {
+      name: "typedOutputs"
+      req: true
+      short: "Holds the typed outputs related to the callback, structured as an object."
+      type: "`$OBJECT`"
+    }
+  ]
+
+  name: "callback"
+  op: {
+    create: {
+      name: "create"
+      points: [
+        {
+          args: {
+            params: [
+              {
+                example: null
+                kind: "param"
+                name: "callback_id"
+                orig: "callback_id"
+                reqd: true
+                type: "`$STRING`"
+              }
+            ]
+          }
+          contract: {
+            id: "POST /automation/actions/callbacks/2026-09/{callbackId}/complete"
+            json: "{\"operationId\":\"post-/automation/actions/callbacks/2026-09/{callbackId}/complete_complete\",\"parameters\":[{\"description\":\"The unique identifier of the callback to complete.\",\"explode\":false,\"in\":\"path\",\"name\":\"callbackId\",\"required\":true,\"schema\":{\"example\":null,\"type\":\"string\"},\"style\":\"simple\"}],\"protocol\":\"http\",\"requestBody\":{\"content\":{\"application/json\":{\"example\":null,\"schema\":{\"example\":null,\"properties\":{\"failureReasonType\":{\"description\":\"Indicates the reason for the failure of a callback completion.\",\"example\":null,\"type\":\"string\"},\"outputFields\":{\"additionalProperties\":{\"example\":null,\"type\":\"string\"},\"description\":\"Contains the output fields associated with the callback, with each field represented as a key-value pair.\",\"example\":null,\"type\":\"object\"},\"requestContext\":{\"description\":\"Specifies the context in which the request is made, which can be one of several predefined contexts.\",\"example\":null,\"oneOf\":[{\"example\":null,\"properties\":{\"actionExecutionIndexIdentifier\":{\"example\":null,\"properties\":{\"actionExecutionIndex\":{\"description\":\"The index number representing the execution order of the action.\",\"example\":null,\"format\":\"int32\",\"type\":\"integer\"},\"enrollmentId\":{\"description\":\"The ID associated with the enrollment process.\",\"example\":null,\"format\":\"int64\",\"type\":\"integer\"}},\"required\":[\"actionExecutionIndex\",\"enrollmentId\"],\"type\":\"object\"},\"actionId\":{\"description\":\"The ID of the action within the workflow context.\",\"example\":null,\"format\":\"int64\",\"type\":\"integer\"},\"source\":{\"default\":\"WORKFLOWS\",\"description\":\"Indicates the source of the request, with the default value being WORKFLOWS.\",\"enum\":[\"WORKFLOWS\"],\"example\":null,\"type\":\"string\"},\"workflowId\":{\"description\":\"The ID of the workflow associated with the request context.\",\"example\":null,\"format\":\"int64\",\"type\":\"integer\"}},\"required\":[\"source\",\"workflowId\"],\"title\":\"WORKFLOWS\",\"type\":\"object\"},{\"example\":null,\"properties\":{\"agentId\":{\"description\":\"The unique identifier for the agent making the request.\",\"example\":null,\"format\":\"int64\",\"type\":\"integer\"},\"chirpAiContextObject\":{\"example\":null,\"properties\":{\"applicationGroup\":{\"description\":\"The group to which the application belongs.\",\"example\":null,\"type\":\"string\"},\"applicationId\":{\"description\":\"The identifier for the application associated with the context.\",\"example\":null,\"type\":\"string\"},\"complianceIds\":{\"example\":null,\"properties\":{\"contactIds\":{\"description\":\"An array of ContactId objects representing the IDs of the contacts involved.\",\"example\":null,\"items\":{\"example\":null,\"properties\":{\"email\":{\"description\":\"The email address of the contact.\",\"example\":null,\"type\":\"string\"},\"portalId\":{\"description\":\"The ID of the portal associated with the contact.\",\"example\":null,\"format\":\"int32\",\"type\":\"integer\"},\"vid\":{\"description\":\"The unique identifier for the contact.\",\"example\":null,\"format\":\"int64\",\"type\":\"integer\"}},\"required\":[\"portalId\"],\"type\":\"object\"},\"type\":\"array\"},\"noContactIdReason\":{\"description\":\"The reason why no contact ID is available.\",\"example\":null,\"type\":\"string\"},\"noPortalIdReason\":{\"description\":\"The reason why no portal ID is available.\",\"example\":null,\"type\":\"string\"},\"noUserIdReason\":{\"description\":\"The reason why no user ID is available.\",\"example\":null,\"type\":\"string\"},\"portalIds\":{\"description\":\"An array of integers representing the IDs of the portals involved.\",\"example\":null,\"items\":{\"example\":null,\"format\":\"int32\",\"type\":\"integer\"},\"type\":\"array\"},\"userIds\":{\"description\":\"An array of integers representing the IDs of the users involved.\",\"example\":null,\"items\":{\"example\":null,\"format\":\"int32\",\"type\":\"integer\"},\"type\":\"array\"}},\"required\":[\"contactIds\",\"portalIds\",\"userIds\"],\"type\":\"object\"},\"conversationId\":{\"description\":\"A string identifier for the conversation associated with the context.\",\"example\":null,\"type\":\"string\"},\"featureId\":{\"description\":\"The identifier for the feature associated with the context.\",\"example\":null,\"type\":\"string\"},\"inferenceId\":{\"description\":\"The identifier for the inference associated with the context.\",\"example\":null,\"type\":\"string\"},\"isPrivate\":{\"description\":\"A boolean indicating whether the context is private.\",\"example\":null,\"type\":\"boolean\"},\"metadata\":{\"additionalProperties\":{\"example\":null,\"type\":\"string\"},\"description\":\"Additional metadata related to the context, represented as key-value pairs.\",\"example\":null,\"type\":\"object\"},\"otelContextHolder\":{\"additionalProperties\":{\"example\":null,\"type\":\"string\"},\"description\":\"Holds OpenTelemetry context information as key-value pairs.\",\"example\":null,\"type\":\"object\"},\"sensitivity\":{\"enum\":[\"HIPAA\",\"NOT_SENSITIVE\",\"SENSITIVE\"],\"example\":null,\"type\":\"string\"},\"trajectoryId\":{\"description\":\"The identifier for the trajectory, formatted as a UUID.\",\"example\":null,\"format\":\"uuid\",\"type\":\"string\"},\"unstructuredSources\":{\"description\":\"An array of strings indicating the sources of unstructured data. Valid values include 'NONE', 'USER_INPUT', 'LOGGED_EMAIL', 'VIDEO_CALL', 'AUDIO_CALL', 'CALL_TRANSCRIPT', 'MEETING_TRANSCRIPT', 'FORMS', 'FEEDBACK_SURVEY', 'PDF', 'QUOTE', 'INVOICE', 'OTHER_ATTACHMENT_DOC', 'WHATSAPP', 'SMS', 'CHAT', 'FACEBOOK_MESSENGER', 'CUSTOM_CHANNEL_OR_API', 'MANY', 'NOTE', and 'DERIVED'.\",\"example\":null,\"items\":{\"enum\":[\"NONE\",\"USER_INPUT\",\"LOGGED_EMAIL\",\"VIDEO_CALL\",\"AUDIO_CALL\",\"CALL_TRANSCRIPT\",\"MEETING_TRANSCRIPT\",\"FORMS\",\"FEEDBACK_SURVEY\",\"PDF\",\"QUOTE\",\"INVOICE\",\"OTHER_ATTACHMENT_DOC\",\"WHATSAPP\",\"SMS\",\"CHAT\",\"FACEBOOK_MESSENGER\",\"CUSTOM_CHANNEL_OR_API\",\"MANY\",\"NOTE\",\"DERIVED\"],\"example\":null,\"type\":\"string\"},\"type\":\"array\"}},\"required\":[\"applicationGroup\",\"applicationId\",\"isPrivate\",\"metadata\",\"otelContextHolder\",\"unstructuredSources\"],\"type\":\"object\"},\"source\":{\"default\":\"AGENTS\",\"description\":\"Indicates the source of the request, with the default value being 'AGENTS'.\",\"enum\":[\"AGENTS\"],\"example\":null,\"type\":\"string\"},\"trajectoryId\":{\"description\":\"The unique identifier for the trajectory associated with the agent request.\",\"example\":null,\"type\":\"string\"}},\"required\":[\"agentId\",\"chirpAiContextObject\",\"source\"],\"title\":\"AGENTS\",\"type\":\"object\"},{\"example\":null,\"properties\":{\"source\":{\"default\":\"COPILOT\",\"description\":\"Indicates the source of the request, with the default value being 'COPILOT'.\",\"enum\":[\"COPILOT\"],\"example\":null,\"type\":\"string\"},\"trajectoryId\":{\"description\":\"The unique identifier for the trajectory.\",\"example\":null,\"type\":\"string\"}},\"required\":[\"source\"],\"title\":\"COPILOT\",\"type\":\"object\"},{\"example\":null,\"properties\":{\"chirpAiContextObject\":{\"example\":null,\"properties\":{\"$ref\":\"#/requestBody/content/application~1json/schema/properties/requestContext/oneOf/1/properties/chirpAiContextObject/properties\"},\"required\":{\"$ref\":\"#/requestBody/content/application~1json/schema/properties/requestContext/oneOf/1/properties/chirpAiContextObject/required\"},\"type\":\"object\"},\"source\":{\"default\":\"STANDALONE\",\"description\":\"Indicates the source of the request, with the default value being 'STANDALONE'.\",\"enum\":[\"STANDALONE\"],\"example\":null,\"type\":\"string\"},\"trajectoryId\":{\"description\":\"A unique identifier for tracking the trajectory of the request.\",\"example\":null,\"type\":\"string\"}},\"required\":[\"chirpAiContextObject\",\"source\"],\"title\":\"STANDALONE\",\"type\":\"object\"},{\"example\":null,\"properties\":{\"source\":{\"default\":\"TEST\",\"description\":\"Indicates the source of the test request, with the only accepted value being 'TEST'.\",\"enum\":[\"TEST\"],\"example\":null,\"type\":\"string\"}},\"required\":[\"source\"],\"title\":\"TEST\",\"type\":\"object\"}]},\"typedOutputs\":{\"description\":\"Holds the typed outputs related to the callback, structured as an object.\",\"example\":null,\"properties\":{},\"type\":\"object\"}},\"required\":[\"outputFields\",\"typedOutputs\"],\"type\":\"object\"}}},\"required\":true},\"responses\":{\"204\":{\"content\":{},\"description\":\"No content\"},\"default\":{\"content\":{\"*/*\":{\"example\":null,\"schema\":{\"description\":\"Represents an error response returned by the API when an operation fails. This component is used in various endpoints to provide detailed information about the error encountered.\",\"example\":{\"category\":\"VALIDATION_ERROR\",\"correlationId\":\"aeb5f871-7f07-4993-9211-075dc63e7cbf\",\"links\":{\"knowledge-base\":\"https://www.hubspot.com/products/service/knowledge-base\"},\"message\":\"Invalid input (details will vary based on the error)\"},\"properties\":{\"category\":{\"description\":\"The error category\",\"example\":null,\"type\":\"string\"},\"context\":{\"additionalProperties\":{\"example\":null,\"items\":{\"example\":null,\"type\":\"string\"},\"type\":\"array\"},\"description\":\"Context about the error condition\",\"example\":\"{invalidPropertyName=[propertyValue], missingScopes=[scope1, scope2]}\",\"type\":\"object\"},\"correlationId\":{\"description\":\"A unique identifier for the request. Include this value with any error reports or support tickets\",\"example\":\"aeb5f871-7f07-4993-9211-075dc63e7cbf\",\"format\":\"uuid\",\"type\":\"string\"},\"errors\":{\"description\":\"further information about the error\",\"example\":null,\"items\":{\"description\":\"Represents detailed information about an error that occurred in the API. This component is used to provide additional context and specifics about errors, typically as part of an error response.\",\"example\":null,\"properties\":{\"code\":{\"description\":\"The status code associated with the error detail\",\"example\":null,\"type\":\"string\"},\"context\":{\"additionalProperties\":{\"example\":null,\"items\":{\"example\":null,\"type\":\"string\"},\"type\":\"array\"},\"description\":\"Context about the error condition\",\"example\":\"{missingScopes=[scope1, scope2]}\",\"type\":\"object\"},\"in\":{\"description\":\"The name of the field or parameter in which the error was found.\",\"example\":null,\"type\":\"string\"},\"message\":{\"description\":\"A human readable message describing the error along with remediation steps where appropriate\",\"example\":null,\"type\":\"string\"},\"subCategory\":{\"description\":\"A specific category that contains more specific detail about the error\",\"example\":null,\"type\":\"string\"}},\"required\":[\"message\"],\"type\":\"object\"},\"type\":\"array\"},\"links\":{\"additionalProperties\":{\"example\":null,\"type\":\"string\"},\"description\":\"A map of link names to associated URIs containing documentation about the error or recommended remediation steps\",\"example\":null,\"type\":\"object\"},\"message\":{\"description\":\"A human readable message describing the error along with remediation steps where appropriate\",\"example\":\"An error occurred\",\"type\":\"string\"},\"subCategory\":{\"description\":\"A specific category that contains more specific detail about the error\",\"example\":null,\"type\":\"string\"}},\"required\":[\"category\",\"correlationId\",\"message\"],\"type\":\"object\"}}},\"description\":\"\"}},\"security\":[{\"oauth2\":[\"automation\"]}],\"securitySchemes\":{\"developer_hapikey\":{\"in\":\"query\",\"name\":\"hapikey\",\"type\":\"apiKey\"},\"oauth2\":{\"flows\":{\"authorizationCode\":{\"authorizationUrl\":\"https://app.hubspot.com/oauth/authorize\",\"scopes\":{\"automation\":\"\"},\"tokenUrl\":\"https://api.hubapi.com/oauth/v1/token\"}},\"type\":\"oauth2\"},\"private_apps\":{\"in\":\"header\",\"name\":\"private-app\",\"type\":\"apiKey\"},\"private_apps_legacy\":{\"in\":\"header\",\"name\":\"private-app-legacy\",\"type\":\"apiKey\"}},\"securitySource\":\"operation\"}"
+            source: "openapi3"
+            version: 1
+          }
+          method: "POST"
+          orig: "/automation/actions/callbacks/2026-09/{callbackId}/complete"
+          rename: {
+            param: {
+              callbackId: "callback_id"
+            }
+          }
+          segments: [
+            {
+              lit: "automation"
+            }
+            {
+              lit: "actions"
+            }
+            {
+              lit: "callbacks"
+            }
+            {
+              lit: "2026-09"
+            }
+            {
+              var: "callback_id"
+            }
+            {
+              lit: "complete"
+            }
+          ]
+          select: {
+            exist: [
+              "callback_id"
+            ]
+          }
+          transform: {
+            req: "`reqdata`"
+            res: "`body`"
+          }
+        }
+        {
+          contract: {
+            id: "POST /automation/actions/callbacks/2026-09/complete"
+            json: "{\"operationId\":\"post-/automation/actions/callbacks/2026-09/complete_completeBatch\",\"parameters\":[],\"protocol\":\"http\",\"requestBody\":{\"content\":{\"application/json\":{\"example\":null,\"schema\":{\"example\":null,\"properties\":{\"inputs\":{\"description\":\"An array of CallbackCompletionBatchRequest objects, each representing a single callback completion request. This property is required.\",\"example\":null,\"items\":{\"example\":null,\"properties\":{\"callbackId\":{\"description\":\"The unique identifier for the callback.\",\"example\":null,\"type\":\"string\"},\"failureReasonType\":{\"description\":\"Specifies the type of failure reason for the callback completion.\",\"example\":null,\"type\":\"string\"},\"outputFields\":{\"additionalProperties\":{\"example\":null,\"type\":\"string\"},\"description\":\"Holds the output fields for the callback completion.\",\"example\":null,\"type\":\"object\"},\"requestContext\":{\"description\":\"Defines the context of the request, which can be one of several predefined types.\",\"example\":null,\"oneOf\":[{\"example\":null,\"properties\":{\"actionExecutionIndexIdentifier\":{\"example\":null,\"properties\":{\"actionExecutionIndex\":{\"description\":\"The index number representing the execution order of the action.\",\"example\":null,\"format\":\"int32\",\"type\":\"integer\"},\"enrollmentId\":{\"description\":\"The ID associated with the enrollment process.\",\"example\":null,\"format\":\"int64\",\"type\":\"integer\"}},\"required\":[\"actionExecutionIndex\",\"enrollmentId\"],\"type\":\"object\"},\"actionId\":{\"description\":\"The ID of the action within the workflow context.\",\"example\":null,\"format\":\"int64\",\"type\":\"integer\"},\"source\":{\"default\":\"WORKFLOWS\",\"description\":\"Indicates the source of the request, with the default value being WORKFLOWS.\",\"enum\":[\"WORKFLOWS\"],\"example\":null,\"type\":\"string\"},\"workflowId\":{\"description\":\"The ID of the workflow associated with the request context.\",\"example\":null,\"format\":\"int64\",\"type\":\"integer\"}},\"required\":[\"source\",\"workflowId\"],\"title\":\"WORKFLOWS\",\"type\":\"object\"},{\"example\":null,\"properties\":{\"agentId\":{\"description\":\"The unique identifier for the agent making the request.\",\"example\":null,\"format\":\"int64\",\"type\":\"integer\"},\"chirpAiContextObject\":{\"example\":null,\"properties\":{\"applicationGroup\":{\"description\":\"The group to which the application belongs.\",\"example\":null,\"type\":\"string\"},\"applicationId\":{\"description\":\"The identifier for the application associated with the context.\",\"example\":null,\"type\":\"string\"},\"complianceIds\":{\"example\":null,\"properties\":{\"contactIds\":{\"description\":\"An array of ContactId objects representing the IDs of the contacts involved.\",\"example\":null,\"items\":{\"example\":null,\"properties\":{\"email\":{\"description\":\"The email address of the contact.\",\"example\":null,\"type\":\"string\"},\"portalId\":{\"description\":\"The ID of the portal associated with the contact.\",\"example\":null,\"format\":\"int32\",\"type\":\"integer\"},\"vid\":{\"description\":\"The unique identifier for the contact.\",\"example\":null,\"format\":\"int64\",\"type\":\"integer\"}},\"required\":[\"portalId\"],\"type\":\"object\"},\"type\":\"array\"},\"noContactIdReason\":{\"description\":\"The reason why no contact ID is available.\",\"example\":null,\"type\":\"string\"},\"noPortalIdReason\":{\"description\":\"The reason why no portal ID is available.\",\"example\":null,\"type\":\"string\"},\"noUserIdReason\":{\"description\":\"The reason why no user ID is available.\",\"example\":null,\"type\":\"string\"},\"portalIds\":{\"description\":\"An array of integers representing the IDs of the portals involved.\",\"example\":null,\"items\":{\"example\":null,\"format\":\"int32\",\"type\":\"integer\"},\"type\":\"array\"},\"userIds\":{\"description\":\"An array of integers representing the IDs of the users involved.\",\"example\":null,\"items\":{\"example\":null,\"format\":\"int32\",\"type\":\"integer\"},\"type\":\"array\"}},\"required\":[\"contactIds\",\"portalIds\",\"userIds\"],\"type\":\"object\"},\"conversationId\":{\"description\":\"A string identifier for the conversation associated with the context.\",\"example\":null,\"type\":\"string\"},\"featureId\":{\"description\":\"The identifier for the feature associated with the context.\",\"example\":null,\"type\":\"string\"},\"inferenceId\":{\"description\":\"The identifier for the inference associated with the context.\",\"example\":null,\"type\":\"string\"},\"isPrivate\":{\"description\":\"A boolean indicating whether the context is private.\",\"example\":null,\"type\":\"boolean\"},\"metadata\":{\"additionalProperties\":{\"example\":null,\"type\":\"string\"},\"description\":\"Additional metadata related to the context, represented as key-value pairs.\",\"example\":null,\"type\":\"object\"},\"otelContextHolder\":{\"additionalProperties\":{\"example\":null,\"type\":\"string\"},\"description\":\"Holds OpenTelemetry context information as key-value pairs.\",\"example\":null,\"type\":\"object\"},\"sensitivity\":{\"enum\":[\"HIPAA\",\"NOT_SENSITIVE\",\"SENSITIVE\"],\"example\":null,\"type\":\"string\"},\"trajectoryId\":{\"description\":\"The identifier for the trajectory, formatted as a UUID.\",\"example\":null,\"format\":\"uuid\",\"type\":\"string\"},\"unstructuredSources\":{\"description\":\"An array of strings indicating the sources of unstructured data. Valid values include 'NONE', 'USER_INPUT', 'LOGGED_EMAIL', 'VIDEO_CALL', 'AUDIO_CALL', 'CALL_TRANSCRIPT', 'MEETING_TRANSCRIPT', 'FORMS', 'FEEDBACK_SURVEY', 'PDF', 'QUOTE', 'INVOICE', 'OTHER_ATTACHMENT_DOC', 'WHATSAPP', 'SMS', 'CHAT', 'FACEBOOK_MESSENGER', 'CUSTOM_CHANNEL_OR_API', 'MANY', 'NOTE', and 'DERIVED'.\",\"example\":null,\"items\":{\"enum\":[\"NONE\",\"USER_INPUT\",\"LOGGED_EMAIL\",\"VIDEO_CALL\",\"AUDIO_CALL\",\"CALL_TRANSCRIPT\",\"MEETING_TRANSCRIPT\",\"FORMS\",\"FEEDBACK_SURVEY\",\"PDF\",\"QUOTE\",\"INVOICE\",\"OTHER_ATTACHMENT_DOC\",\"WHATSAPP\",\"SMS\",\"CHAT\",\"FACEBOOK_MESSENGER\",\"CUSTOM_CHANNEL_OR_API\",\"MANY\",\"NOTE\",\"DERIVED\"],\"example\":null,\"type\":\"string\"},\"type\":\"array\"}},\"required\":[\"applicationGroup\",\"applicationId\",\"isPrivate\",\"metadata\",\"otelContextHolder\",\"unstructuredSources\"],\"type\":\"object\"},\"source\":{\"default\":\"AGENTS\",\"description\":\"Indicates the source of the request, with the default value being 'AGENTS'.\",\"enum\":[\"AGENTS\"],\"example\":null,\"type\":\"string\"},\"trajectoryId\":{\"description\":\"The unique identifier for the trajectory associated with the agent request.\",\"example\":null,\"type\":\"string\"}},\"required\":[\"agentId\",\"chirpAiContextObject\",\"source\"],\"title\":\"AGENTS\",\"type\":\"object\"},{\"example\":null,\"properties\":{\"source\":{\"default\":\"COPILOT\",\"description\":\"Indicates the source of the request, with the default value being 'COPILOT'.\",\"enum\":[\"COPILOT\"],\"example\":null,\"type\":\"string\"},\"trajectoryId\":{\"description\":\"The unique identifier for the trajectory.\",\"example\":null,\"type\":\"string\"}},\"required\":[\"source\"],\"title\":\"COPILOT\",\"type\":\"object\"},{\"example\":null,\"properties\":{\"chirpAiContextObject\":{\"example\":null,\"properties\":{\"$ref\":\"#/requestBody/content/application~1json/schema/properties/inputs/items/properties/requestContext/oneOf/1/properties/chirpAiContextObject/properties\"},\"required\":{\"$ref\":\"#/requestBody/content/application~1json/schema/properties/inputs/items/properties/requestContext/oneOf/1/properties/chirpAiContextObject/required\"},\"type\":\"object\"},\"source\":{\"default\":\"STANDALONE\",\"description\":\"Indicates the source of the request, with the default value being 'STANDALONE'.\",\"enum\":[\"STANDALONE\"],\"example\":null,\"type\":\"string\"},\"trajectoryId\":{\"description\":\"A unique identifier for tracking the trajectory of the request.\",\"example\":null,\"type\":\"string\"}},\"required\":[\"chirpAiContextObject\",\"source\"],\"title\":\"STANDALONE\",\"type\":\"object\"},{\"example\":null,\"properties\":{\"source\":{\"default\":\"TEST\",\"description\":\"Indicates the source of the test request, with the only accepted value being 'TEST'.\",\"enum\":[\"TEST\"],\"example\":null,\"type\":\"string\"}},\"required\":[\"source\"],\"title\":\"TEST\",\"type\":\"object\"}]},\"typedOutputs\":{\"description\":\"Contains the typed outputs for the callback completion.\",\"example\":null,\"properties\":{},\"type\":\"object\"}},\"required\":[\"callbackId\",\"outputFields\",\"typedOutputs\"],\"type\":\"object\"},\"type\":\"array\"}},\"required\":[\"inputs\"],\"type\":\"object\"}}},\"required\":true},\"responses\":{\"204\":{\"content\":{},\"description\":\"No content\"},\"default\":{\"content\":{\"*/*\":{\"example\":null,\"schema\":{\"description\":\"Represents an error response returned by the API when an operation fails. This component is used in various endpoints to provide detailed information about the error encountered.\",\"example\":{\"category\":\"VALIDATION_ERROR\",\"correlationId\":\"aeb5f871-7f07-4993-9211-075dc63e7cbf\",\"links\":{\"knowledge-base\":\"https://www.hubspot.com/products/service/knowledge-base\"},\"message\":\"Invalid input (details will vary based on the error)\"},\"properties\":{\"category\":{\"description\":\"The error category\",\"example\":null,\"type\":\"string\"},\"context\":{\"additionalProperties\":{\"example\":null,\"items\":{\"example\":null,\"type\":\"string\"},\"type\":\"array\"},\"description\":\"Context about the error condition\",\"example\":\"{invalidPropertyName=[propertyValue], missingScopes=[scope1, scope2]}\",\"type\":\"object\"},\"correlationId\":{\"description\":\"A unique identifier for the request. Include this value with any error reports or support tickets\",\"example\":\"aeb5f871-7f07-4993-9211-075dc63e7cbf\",\"format\":\"uuid\",\"type\":\"string\"},\"errors\":{\"description\":\"further information about the error\",\"example\":null,\"items\":{\"description\":\"Represents detailed information about an error that occurred in the API. This component is used to provide additional context and specifics about errors, typically as part of an error response.\",\"example\":null,\"properties\":{\"code\":{\"description\":\"The status code associated with the error detail\",\"example\":null,\"type\":\"string\"},\"context\":{\"additionalProperties\":{\"example\":null,\"items\":{\"example\":null,\"type\":\"string\"},\"type\":\"array\"},\"description\":\"Context about the error condition\",\"example\":\"{missingScopes=[scope1, scope2]}\",\"type\":\"object\"},\"in\":{\"description\":\"The name of the field or parameter in which the error was found.\",\"example\":null,\"type\":\"string\"},\"message\":{\"description\":\"A human readable message describing the error along with remediation steps where appropriate\",\"example\":null,\"type\":\"string\"},\"subCategory\":{\"description\":\"A specific category that contains more specific detail about the error\",\"example\":null,\"type\":\"string\"}},\"required\":[\"message\"],\"type\":\"object\"},\"type\":\"array\"},\"links\":{\"additionalProperties\":{\"example\":null,\"type\":\"string\"},\"description\":\"A map of link names to associated URIs containing documentation about the error or recommended remediation steps\",\"example\":null,\"type\":\"object\"},\"message\":{\"description\":\"A human readable message describing the error along with remediation steps where appropriate\",\"example\":\"An error occurred\",\"type\":\"string\"},\"subCategory\":{\"description\":\"A specific category that contains more specific detail about the error\",\"example\":null,\"type\":\"string\"}},\"required\":[\"category\",\"correlationId\",\"message\"],\"type\":\"object\"}}},\"description\":\"\"}},\"security\":[{\"oauth2\":[\"automation\"]}],\"securitySchemes\":{\"developer_hapikey\":{\"in\":\"query\",\"name\":\"hapikey\",\"type\":\"apiKey\"},\"oauth2\":{\"flows\":{\"authorizationCode\":{\"authorizationUrl\":\"https://app.hubspot.com/oauth/authorize\",\"scopes\":{\"automation\":\"\"},\"tokenUrl\":\"https://api.hubapi.com/oauth/v1/token\"}},\"type\":\"oauth2\"},\"private_apps\":{\"in\":\"header\",\"name\":\"private-app\",\"type\":\"apiKey\"},\"private_apps_legacy\":{\"in\":\"header\",\"name\":\"private-app-legacy\",\"type\":\"apiKey\"}},\"securitySource\":\"operation\"}"
+            source: "openapi3"
+            version: 1
+          }
+          method: "POST"
+          orig: "/automation/actions/callbacks/2026-09/complete"
+          segments: [
+            {
+              lit: "automation"
+            }
+            {
+              lit: "actions"
+            }
+            {
+              lit: "callbacks"
+            }
+            {
+              lit: "2026-09"
+            }
+            {
+              lit: "complete"
+            }
+          ]
+          transform: {
+            req: "`reqdata`"
+            res: "`body`"
+          }
+        }
+      ]
+    }
+  }
+
+  relations: {
+    ancestors: [
+      [
+        "2026_09"
+      ]
+    ]
+  }
+
+
+
+}

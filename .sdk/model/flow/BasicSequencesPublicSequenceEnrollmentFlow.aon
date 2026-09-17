@@ -1,0 +1,32 @@
+# BasicSequencesPublicSequenceEnrollmentFlow
+
+main: kit: flow: BasicSequencesPublicSequenceEnrollmentFlow:
+{
+  entity: "sequences_public_sequence_enrollment",
+  kind: "basic",
+  name: "BasicSequencesPublicSequenceEnrollmentFlow",
+  step: [
+    {
+      input: {
+        ref: "sequences_public_sequence_enrollment_ref01",
+        srcdatavar: "sequences_public_sequence_enrollment_ref01_data",
+        suffix: "_dt0"
+      }
+
+      match: {
+        id: "sequences_public_sequence_enrollment01"
+      }
+
+      op: "load",
+      valid: [
+        {
+          apply: "TextFieldMark",
+          def: {
+            mark: "Mark01-sequences_public_sequence_enrollment_ref01"
+          }
+        }
+      ]
+    }
+  ],
+  "key$": "BasicSequencesPublicSequenceEnrollmentFlow"
+}

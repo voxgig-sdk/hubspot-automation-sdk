@@ -1,0 +1,9 @@
+# BasicFunctionFlow
+
+main: kit: flow: BasicFunctionFlow:
+{
+  entity: "function",
+  kind: "basic",
+  name: "BasicFunctionFlow",
+  "key$": "BasicFunctionFlow"
+}

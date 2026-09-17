@@ -1,0 +1,133 @@
+# Entity: automation_v4_collection_response_api_flow_listing_forward_paging
+
+main: kit: entity: automation_v4_collection_response_api_flow_listing_forward_paging: {
+
+  alias: field: {}
+
+  fields: [
+    {
+      format: "date-time"
+      name: "createdAt"
+      req: true
+      short: "The date and time when the automation flow was created, formatted as a date-time string."
+      type: "`$STRING`"
+    }
+    {
+      name: "flowType"
+      req: true
+      short: "Specifies the type of the automation flow (PLATFORM vs."
+      type: "`$STRING`"
+    }
+    {
+      name: "id"
+      req: true
+      short: "The unique identifier for the automation flow."
+      type: "`$STRING`"
+    }
+    {
+      name: "isEnabled"
+      req: true
+      short: "Indicates whether the automation flow is currently active."
+      type: "`$BOOLEAN`"
+    }
+    {
+      name: "name"
+      req: false
+      short: "The name assigned to the automation flow."
+      type: "`$STRING`"
+    }
+    {
+      name: "objectTypeId"
+      req: true
+      short: "Represents the ID of the object type associated with the automation flow."
+      type: "`$STRING`"
+    }
+    {
+      name: "revisionId"
+      req: true
+      short: "The identifier for the current revision of the automation flow."
+      type: "`$STRING`"
+    }
+    {
+      format: "date-time"
+      name: "updatedAt"
+      req: true
+      short: "The date and time when the automation flow was last updated, formatted as a date-time string."
+      type: "`$STRING`"
+    }
+    {
+      name: "uuid"
+      req: false
+      short: "The universally unique identifier for the automation flow."
+      type: "`$STRING`"
+    }
+  ]
+
+  id: {
+    field: "id"
+    name: "id"
+  }
+
+  name: "automation_v4_collection_response_api_flow_listing_forward_paging"
+  op: {
+    list: {
+      name: "list"
+      points: [
+        {
+          args: {
+            query: [
+              {
+                example: null
+                kind: "query"
+                name: "after"
+                orig: "after"
+                reqd: false
+                type: "`$STRING`"
+              }
+              {
+                example: null
+                kind: "query"
+                name: "limit"
+                orig: "limit"
+                reqd: false
+                type: "`$INTEGER`"
+              }
+            ]
+          }
+          contract: {
+            id: "GET /automation/v4/flows"
+            json: "{\"operationId\":\"get-/automation/v4/flows\",\"parameters\":[{\"description\":\"The paging cursor token of the last successfully read resource will be returned as the `paging.next.after` JSON property of a paged response containing more results.\",\"explode\":true,\"in\":\"query\",\"name\":\"after\",\"required\":false,\"schema\":{\"example\":null,\"type\":\"string\"},\"style\":\"form\"},{\"description\":\"The maximum number of results to display per page.\",\"explode\":true,\"in\":\"query\",\"name\":\"limit\",\"required\":false,\"schema\":{\"default\":100,\"example\":null,\"format\":\"int32\",\"type\":\"integer\"},\"style\":\"form\"}],\"protocol\":\"http\",\"responses\":{\"200\":{\"content\":{\"application/json\":{\"example\":null,\"schema\":{\"example\":null,\"properties\":{\"paging\":{\"description\":\"Paging information for forward-only pagination. Contains the next page reference when more results are available; omitted or empty on the last page.\",\"example\":null,\"properties\":{\"next\":{\"description\":\"Specifies the paging information needed to retrieve the next set of results in a paginated API response\",\"example\":null,\"properties\":{\"after\":{\"description\":\"A paging cursor token for retrieving subsequent pages.\",\"example\":null,\"type\":\"string\"},\"link\":{\"description\":\"A URL that can be used to retrieve the next page results.\",\"example\":null,\"type\":\"string\"}},\"required\":[\"after\"],\"type\":\"object\"}},\"type\":\"object\"},\"results\":{\"example\":null,\"items\":{\"example\":null,\"properties\":{\"createdAt\":{\"description\":\"The date and time when the automation flow was created, formatted as a date-time string.\",\"example\":null,\"format\":\"date-time\",\"type\":\"string\"},\"flowType\":{\"description\":\"Specifies the type of the automation flow (PLATFORM vs. CONTACT)\",\"enum\":[\"ACTION_SET\",\"UNKNOWN\",\"WORKFLOW\"],\"example\":null,\"type\":\"string\"},\"id\":{\"description\":\"The unique identifier for the automation flow.\",\"example\":null,\"type\":\"string\"},\"isEnabled\":{\"description\":\"Indicates whether the automation flow is currently active.\",\"example\":null,\"type\":\"boolean\"},\"name\":{\"description\":\"The name assigned to the automation flow.\",\"example\":null,\"type\":\"string\"},\"objectTypeId\":{\"description\":\"Represents the ID of the object type associated with the automation flow.\",\"example\":null,\"type\":\"string\"},\"revisionId\":{\"description\":\"The identifier for the current revision of the automation flow.\",\"example\":null,\"type\":\"string\"},\"updatedAt\":{\"description\":\"The date and time when the automation flow was last updated, formatted as a date-time string.\",\"example\":null,\"format\":\"date-time\",\"type\":\"string\"},\"uuid\":{\"description\":\"The universally unique identifier for the automation flow.\",\"example\":null,\"type\":\"string\"}},\"required\":[\"createdAt\",\"flowType\",\"id\",\"isEnabled\",\"objectTypeId\",\"revisionId\",\"updatedAt\"],\"type\":\"object\"},\"type\":\"array\"}},\"required\":[\"results\"],\"type\":\"object\"}}},\"description\":\"successful operation\"},\"default\":{\"content\":{\"*/*\":{\"example\":null,\"schema\":{\"description\":\"Represents an error response returned by the API when an operation fails. This component is used in various endpoints to provide detailed information about the error encountered.\",\"example\":{\"category\":\"VALIDATION_ERROR\",\"correlationId\":\"aeb5f871-7f07-4993-9211-075dc63e7cbf\",\"links\":{\"knowledge-base\":\"https://www.hubspot.com/products/service/knowledge-base\"},\"message\":\"Invalid input (details will vary based on the error)\"},\"properties\":{\"category\":{\"description\":\"The error category\",\"example\":null,\"type\":\"string\"},\"context\":{\"additionalProperties\":{\"example\":null,\"items\":{\"example\":null,\"type\":\"string\"},\"type\":\"array\"},\"description\":\"Context about the error condition\",\"example\":\"{invalidPropertyName=[propertyValue], missingScopes=[scope1, scope2]}\",\"type\":\"object\"},\"correlationId\":{\"description\":\"A unique identifier for the request. Include this value with any error reports or support tickets\",\"example\":\"aeb5f871-7f07-4993-9211-075dc63e7cbf\",\"format\":\"uuid\",\"type\":\"string\"},\"errors\":{\"description\":\"further information about the error\",\"example\":null,\"items\":{\"description\":\"Represents detailed information about an error that occurred in the API. This component is used to provide additional context and specifics about errors, typically as part of an error response.\",\"example\":null,\"properties\":{\"code\":{\"description\":\"The status code associated with the error detail\",\"example\":null,\"type\":\"string\"},\"context\":{\"additionalProperties\":{\"example\":null,\"items\":{\"example\":null,\"type\":\"string\"},\"type\":\"array\"},\"description\":\"Context about the error condition\",\"example\":\"{missingScopes=[scope1, scope2]}\",\"type\":\"object\"},\"in\":{\"description\":\"The name of the field or parameter in which the error was found.\",\"example\":null,\"type\":\"string\"},\"message\":{\"description\":\"A human readable message describing the error along with remediation steps where appropriate\",\"example\":null,\"type\":\"string\"},\"subCategory\":{\"description\":\"A specific category that contains more specific detail about the error\",\"example\":null,\"type\":\"string\"}},\"required\":[\"message\"],\"type\":\"object\"},\"type\":\"array\"},\"links\":{\"additionalProperties\":{\"example\":null,\"type\":\"string\"},\"description\":\"A map of link names to associated URIs containing documentation about the error or recommended remediation steps\",\"example\":null,\"type\":\"object\"},\"message\":{\"description\":\"A human readable message describing the error along with remediation steps where appropriate\",\"example\":\"An error occurred\",\"type\":\"string\"},\"subCategory\":{\"description\":\"A specific category that contains more specific detail about the error\",\"example\":null,\"type\":\"string\"}},\"required\":[\"category\",\"correlationId\",\"message\"],\"type\":\"object\"}}},\"description\":\"\"}},\"security\":[{\"oauth2\":[\"automation\"]}],\"securitySchemes\":{\"developer_hapikey\":{\"in\":\"query\",\"name\":\"hapikey\",\"type\":\"apiKey\"},\"oauth2\":{\"flows\":{\"authorizationCode\":{\"authorizationUrl\":\"https://app.hubspot.com/oauth/authorize\",\"scopes\":{\"automation\":\"\"},\"tokenUrl\":\"https://api.hubapi.com/oauth/v1/token\"}},\"type\":\"oauth2\"},\"private_apps\":{\"in\":\"header\",\"name\":\"private-app\",\"type\":\"apiKey\"},\"private_apps_legacy\":{\"in\":\"header\",\"name\":\"private-app-legacy\",\"type\":\"apiKey\"}},\"securitySource\":\"operation\"}"
+            source: "openapi3"
+            version: 1
+          }
+          method: "GET"
+          orig: "/automation/v4/flows"
+          segments: [
+            {
+              lit: "automation"
+            }
+            {
+              lit: "v4"
+            }
+            {
+              lit: "flows"
+            }
+          ]
+          select: {
+            exist: [
+              "after"
+              "limit"
+            ]
+          }
+          transform: {
+            req: "`reqdata`"
+            res: "`body`"
+          }
+        }
+      ]
+    }
+  }
+
+
+
+}

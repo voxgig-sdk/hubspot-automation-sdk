@@ -1,0 +1,68 @@
+# BasicActionsV4PublicActionDefinitionFlow
+
+main: kit: flow: BasicActionsV4PublicActionDefinitionFlow:
+{
+  entity: "actions_v4_public_action_definition",
+  kind: "basic",
+  name: "BasicActionsV4PublicActionDefinitionFlow",
+  step: [
+    {
+      input: {
+        ref: "actions_v4_public_action_definition_ref01"
+      }
+
+      match: {
+        app_id: "app01"
+      }
+
+      op: "create"
+    }
+
+    {
+      data: {
+        app_id: "app01"
+      }
+
+      input: {
+        ref: "actions_v4_public_action_definition_ref01",
+        srcdatavar: "actions_v4_public_action_definition_ref01_data",
+        suffix: "_up0",
+        textfield: "actionUrl"
+      }
+
+      op: "update",
+      spec: [
+        {
+          apply: "TextFieldMark",
+          def: {
+            mark: "Mark01-actions_v4_public_action_definition_ref01"
+          }
+        }
+      ]
+    }
+
+    {
+      input: {
+        ref: "actions_v4_public_action_definition_ref01",
+        srcdatavar: "actions_v4_public_action_definition_ref01_data",
+        suffix: "_dt0"
+      }
+
+      match: {
+        app_id: "app01",
+        id: "actions_v4_public_action_definition01"
+      }
+
+      op: "load",
+      valid: [
+        {
+          apply: "TextFieldMark",
+          def: {
+            mark: "Mark01-actions_v4_public_action_definition_ref01"
+          }
+        }
+      ]
+    }
+  ],
+  "key$": "BasicActionsV4PublicActionDefinitionFlow"
+}

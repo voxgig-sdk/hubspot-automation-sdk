@@ -1,0 +1,34 @@
+# BasicActionsV4PublicActionRevisionFlow
+
+main: kit: flow: BasicActionsV4PublicActionRevisionFlow:
+{
+  entity: "actions_v4_public_action_revision",
+  kind: "basic",
+  name: "BasicActionsV4PublicActionRevisionFlow",
+  step: [
+    {
+      input: {
+        ref: "actions_v4_public_action_revision_ref01",
+        srcdatavar: "actions_v4_public_action_revision_ref01_data",
+        suffix: "_dt0"
+      }
+
+      match: {
+        app_id: "app01",
+        definition_id: "definition01",
+        id: "actions_v4_public_action_revision01"
+      }
+
+      op: "load",
+      valid: [
+        {
+          apply: "TextFieldMark",
+          def: {
+            mark: "Mark01-actions_v4_public_action_revision_ref01"
+          }
+        }
+      ]
+    }
+  ],
+  "key$": "BasicActionsV4PublicActionRevisionFlow"
+}

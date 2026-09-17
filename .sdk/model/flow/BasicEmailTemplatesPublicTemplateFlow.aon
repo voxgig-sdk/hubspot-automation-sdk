@@ -1,0 +1,59 @@
+# BasicEmailTemplatesPublicTemplateFlow
+
+main: kit: flow: BasicEmailTemplatesPublicTemplateFlow:
+{
+  entity: "email_templates_public_template",
+  kind: "basic",
+  name: "BasicEmailTemplatesPublicTemplateFlow",
+  step: [
+    {
+      input: {
+        ref: "email_templates_public_template_ref01"
+      }
+
+      op: "create"
+    }
+
+    {
+      input: {
+        ref: "email_templates_public_template_ref01",
+        srcdatavar: "email_templates_public_template_ref01_data",
+        suffix: "_up0",
+        textfield: "body"
+      }
+
+      op: "update",
+      spec: [
+        {
+          apply: "TextFieldMark",
+          def: {
+            mark: "Mark01-email_templates_public_template_ref01"
+          }
+        }
+      ]
+    }
+
+    {
+      input: {
+        ref: "email_templates_public_template_ref01",
+        srcdatavar: "email_templates_public_template_ref01_data",
+        suffix: "_dt0"
+      }
+
+      match: {
+        id: "email_templates_public_template01"
+      }
+
+      op: "load",
+      valid: [
+        {
+          apply: "TextFieldMark",
+          def: {
+            mark: "Mark01-email_templates_public_template_ref01"
+          }
+        }
+      ]
+    }
+  ],
+  "key$": "BasicEmailTemplatesPublicTemplateFlow"
+}

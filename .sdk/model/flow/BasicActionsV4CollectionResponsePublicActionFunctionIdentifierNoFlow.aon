@@ -1,0 +1,27 @@
+# BasicActionsV4CollectionResponsePublicActionFunctionIdentifierNoFlow
+
+main: kit: flow: BasicActionsV4CollectionResponsePublicActionFunctionIdentifierNoFlow:
+{
+  entity: "actions_v4_collection_response_public_action_function_identifier_no",
+  kind: "basic",
+  name: "BasicActionsV4CollectionResponsePublicActionFunctionIdentifierNoFlow",
+  step: [
+    {
+      match: {
+        app_id: "app01",
+        definition_id: "definition01"
+      }
+
+      op: "list",
+      valid: [
+        {
+          apply: "ItemExists",
+          def: {
+            ref: "actions_v4_collection_response_public_action_function_identifier_no_ref01"
+          }
+        }
+      ]
+    }
+  ],
+  "key$": "BasicActionsV4CollectionResponsePublicActionFunctionIdentifierNoFlow"
+}

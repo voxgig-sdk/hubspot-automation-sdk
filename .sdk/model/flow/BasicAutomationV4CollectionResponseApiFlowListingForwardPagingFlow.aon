@@ -1,0 +1,22 @@
+# BasicAutomationV4CollectionResponseApiFlowListingForwardPagingFlow
+
+main: kit: flow: BasicAutomationV4CollectionResponseApiFlowListingForwardPagingFlow:
+{
+  entity: "automation_v4_collection_response_api_flow_listing_forward_paging",
+  kind: "basic",
+  name: "BasicAutomationV4CollectionResponseApiFlowListingForwardPagingFlow",
+  step: [
+    {
+      op: "list",
+      valid: [
+        {
+          apply: "ItemExists",
+          def: {
+            ref: "automation_v4_collection_response_api_flow_listing_forward_paging_ref01"
+          }
+        }
+      ]
+    }
+  ],
+  "key$": "BasicAutomationV4CollectionResponseApiFlowListingForwardPagingFlow"
+}

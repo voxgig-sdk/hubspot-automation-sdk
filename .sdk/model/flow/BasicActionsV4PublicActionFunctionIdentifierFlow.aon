@@ -1,0 +1,34 @@
+# BasicActionsV4PublicActionFunctionIdentifierFlow
+
+main: kit: flow: BasicActionsV4PublicActionFunctionIdentifierFlow:
+{
+  entity: "actions_v4_public_action_function_identifier",
+  kind: "basic",
+  name: "BasicActionsV4PublicActionFunctionIdentifierFlow",
+  step: [
+    {
+      data: {
+        app_id: "app01",
+        definition_id: "definition01"
+      }
+
+      input: {
+        ref: "actions_v4_public_action_function_identifier_ref01",
+        srcdatavar: "actions_v4_public_action_function_identifier_ref01_data",
+        suffix: "_up0",
+        textfield: "functionType"
+      }
+
+      op: "update",
+      spec: [
+        {
+          apply: "TextFieldMark",
+          def: {
+            mark: "Mark01-actions_v4_public_action_function_identifier_ref01"
+          }
+        }
+      ]
+    }
+  ],
+  "key$": "BasicActionsV4PublicActionFunctionIdentifierFlow"
+}

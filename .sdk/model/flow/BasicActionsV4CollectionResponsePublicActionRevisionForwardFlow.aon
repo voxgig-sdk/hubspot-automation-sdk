@@ -1,0 +1,27 @@
+# BasicActionsV4CollectionResponsePublicActionRevisionForwardFlow
+
+main: kit: flow: BasicActionsV4CollectionResponsePublicActionRevisionForwardFlow:
+{
+  entity: "actions_v4_collection_response_public_action_revision_forward",
+  kind: "basic",
+  name: "BasicActionsV4CollectionResponsePublicActionRevisionForwardFlow",
+  step: [
+    {
+      match: {
+        app_id: "app01",
+        definition_id: "definition01"
+      }
+
+      op: "list",
+      valid: [
+        {
+          apply: "ItemExists",
+          def: {
+            ref: "actions_v4_collection_response_public_action_revision_forward_ref01"
+          }
+        }
+      ]
+    }
+  ],
+  "key$": "BasicActionsV4CollectionResponsePublicActionRevisionForwardFlow"
+}

@@ -1,0 +1,630 @@
+{
+  "existing": {
+    "sequences_public_sequence": {
+      "SEQUENCES_PUBLIC_SEQUENCE00": {
+        "createdAt": "s5a",
+        "dependencies": [],
+        "folderId": "s5c",
+        "id": "SEQUENCES_PUBLIC_SEQUENCE00",
+        "name": "s5e",
+        "settings": {},
+        "steps": [],
+        "updatedAt": "s61",
+        "userId": "s62",
+        "sequence_id": "SEQUENCE01"
+      },
+      "SEQUENCES_PUBLIC_SEQUENCE01": {
+        "createdAt": "sb4",
+        "dependencies": [],
+        "folderId": "sb6",
+        "id": "SEQUENCES_PUBLIC_SEQUENCE01",
+        "name": "sb8",
+        "settings": {},
+        "steps": [],
+        "updatedAt": "sbb",
+        "userId": "sbc",
+        "sequence_id": "SEQUENCE01"
+      },
+      "SEQUENCES_PUBLIC_SEQUENCE02": {
+        "createdAt": "s10e",
+        "dependencies": [],
+        "folderId": "s110",
+        "id": "SEQUENCES_PUBLIC_SEQUENCE02",
+        "name": "s112",
+        "settings": {},
+        "steps": [],
+        "updatedAt": "s115",
+        "userId": "s116",
+        "sequence_id": "SEQUENCE01"
+      }
+    }
+  },
+  "new": {
+    "sequences_public_sequence": {
+      "sequences_public_sequence_ref01": {
+        "createdAt": "s168",
+        "dependencies": [],
+        "folderId": "s16a",
+        "name": "s16c",
+        "settings": {},
+        "steps": [],
+        "updatedAt": "s16f",
+        "userId": "s170"
+      }
+    }
+  },
+  "requests": {
+    "GET /automation/sequences/2026-09/{sequenceId}": {
+      "provenance": "operation-contract",
+      "contract": {
+        "operationId": "get-/automation/sequences/2026-09/{sequenceId}",
+        "parameters": [
+          {
+            "description": "The unique identifier of the sequence to retrieve.",
+            "explode": false,
+            "in": "path",
+            "name": "sequenceId",
+            "required": true,
+            "schema": {
+              "example": null,
+              "type": "string"
+            },
+            "style": "simple"
+          },
+          {
+            "description": "The unique identifier of the user associated with the sequence. This parameter is required.",
+            "explode": true,
+            "in": "query",
+            "name": "userId",
+            "required": true,
+            "schema": {
+              "example": null,
+              "type": "string"
+            },
+            "style": "form"
+          }
+        ],
+        "protocol": "http",
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "example": null,
+                "schema": {
+                  "example": null,
+                  "properties": {
+                    "createdAt": {
+                      "description": "The date and time when the sequence was created, in ISO 8601 format.",
+                      "example": null,
+                      "format": "date-time",
+                      "type": "string"
+                    },
+                    "dependencies": {
+                      "description": "An array of dependencies between sequence steps, each represented by a PublicSequenceStepDependencyResponse object.",
+                      "example": null,
+                      "items": {
+                        "example": null,
+                        "properties": {
+                          "createdAt": {
+                            "description": "The date and time when this dependency was created, in ISO 8601 format.",
+                            "example": null,
+                            "format": "date-time",
+                            "type": "string"
+                          },
+                          "dependencyType": {
+                            "description": "The type of dependency, which can be either 'TASK_COMPLETION' or 'MANUAL_PAUSE'.",
+                            "enum": [
+                              "ADAPTIVE_COMPLETION",
+                              "MANUAL_PAUSE",
+                              "TASK_COMPLETION"
+                            ],
+                            "example": null,
+                            "type": "string"
+                          },
+                          "id": {
+                            "description": "The unique identifier for this dependency.",
+                            "example": null,
+                            "type": "string"
+                          },
+                          "reliesOnSequenceStepId": {
+                            "description": "The unique identifier of the sequence step that this dependency relies on.",
+                            "example": null,
+                            "type": "string"
+                          },
+                          "reliesOnStepOrder": {
+                            "description": "The order number of the step that this dependency relies on.",
+                            "example": null,
+                            "format": "int32",
+                            "type": "integer"
+                          },
+                          "requiredBySequenceStepId": {
+                            "description": "The unique identifier of the sequence step that requires this dependency.",
+                            "example": null,
+                            "type": "string"
+                          },
+                          "requiredByStepOrder": {
+                            "description": "The order number of the step that requires this dependency.",
+                            "example": null,
+                            "format": "int32",
+                            "type": "integer"
+                          },
+                          "updatedAt": {
+                            "description": "The date and time when this dependency was last updated, in ISO 8601 format.",
+                            "example": null,
+                            "format": "date-time",
+                            "type": "string"
+                          }
+                        },
+                        "required": [
+                          "createdAt",
+                          "dependencyType",
+                          "id",
+                          "reliesOnSequenceStepId",
+                          "reliesOnStepOrder",
+                          "requiredBySequenceStepId",
+                          "requiredByStepOrder",
+                          "updatedAt"
+                        ],
+                        "type": "object"
+                      },
+                      "type": "array"
+                    },
+                    "folderId": {
+                      "description": "The unique identifier for the folder containing the sequence.",
+                      "example": null,
+                      "type": "string"
+                    },
+                    "id": {
+                      "description": "The unique identifier for the sequence.",
+                      "example": null,
+                      "type": "string"
+                    },
+                    "name": {
+                      "description": "The name of the sequence.",
+                      "example": null,
+                      "type": "string"
+                    },
+                    "settings": {
+                      "example": null,
+                      "properties": {
+                        "createdAt": {
+                          "description": "The date and time when the sequence settings were created, in ISO 8601 format.",
+                          "example": null,
+                          "format": "date-time",
+                          "type": "string"
+                        },
+                        "eligibleFollowUpDays": {
+                          "description": "Specifies the days eligible for follow-ups. Valid values include 'EVERYDAY', 'BUSINESS_DAYS', and 'WEEKDAYS_ONLY'.",
+                          "enum": [
+                            "BUSINESS_DAYS",
+                            "EVERYDAY",
+                            "WEEKDAYS_ONLY"
+                          ],
+                          "example": null,
+                          "type": "string"
+                        },
+                        "id": {
+                          "description": "The unique identifier for the sequence settings.",
+                          "example": null,
+                          "type": "string"
+                        },
+                        "individualTaskRemindersEnabled": {
+                          "description": "A boolean indicating whether individual task reminders are enabled.",
+                          "example": null,
+                          "type": "boolean"
+                        },
+                        "sellingStrategy": {
+                          "description": "The strategy used for selling, which can be either 'LEAD_BASED' or 'ACCOUNT_BASED'.",
+                          "enum": [
+                            "ACCOUNT_BASED",
+                            "LEAD_BASED"
+                          ],
+                          "example": null,
+                          "type": "string"
+                        },
+                        "sendWindowEndMinute": {
+                          "description": "The ending minute of the window during which emails can be sent, represented as an integer.",
+                          "example": null,
+                          "format": "int32",
+                          "type": "integer"
+                        },
+                        "sendWindowStartMinute": {
+                          "description": "The starting minute of the window during which emails can be sent, represented as an integer.",
+                          "example": null,
+                          "format": "int32",
+                          "type": "integer"
+                        },
+                        "taskReminderMinute": {
+                          "description": "The minute at which task reminders are sent, represented as an integer.",
+                          "example": null,
+                          "format": "int32",
+                          "type": "integer"
+                        },
+                        "updatedAt": {
+                          "description": "The date and time when the sequence settings were last updated, in ISO 8601 format.",
+                          "example": null,
+                          "format": "date-time",
+                          "type": "string"
+                        }
+                      },
+                      "required": [
+                        "createdAt",
+                        "eligibleFollowUpDays",
+                        "id",
+                        "individualTaskRemindersEnabled",
+                        "sellingStrategy",
+                        "sendWindowEndMinute",
+                        "sendWindowStartMinute",
+                        "taskReminderMinute",
+                        "updatedAt"
+                      ],
+                      "type": "object"
+                    },
+                    "steps": {
+                      "description": "An array of steps included in the sequence, each represented by a PublicSequenceStepResponse object.",
+                      "example": null,
+                      "items": {
+                        "example": null,
+                        "properties": {
+                          "actionType": {
+                            "description": "The type of action to be performed in this step. Valid values include 'EMAIL', 'TASK', and 'FINISH_ENROLLMENT'.",
+                            "enum": [
+                              "ADAPTIVE_CONTAINER",
+                              "EMAIL",
+                              "FINISH_ENROLLMENT",
+                              "TASK"
+                            ],
+                            "example": null,
+                            "type": "string"
+                          },
+                          "createdAt": {
+                            "description": "The date and time when this step was created, in ISO 8601 format.",
+                            "example": null,
+                            "format": "date-time",
+                            "type": "string"
+                          },
+                          "delayMillis": {
+                            "description": "The delay before executing this step, specified in milliseconds as a 64-bit integer.",
+                            "example": null,
+                            "format": "int64",
+                            "type": "integer"
+                          },
+                          "emailPattern": {
+                            "example": null,
+                            "properties": {
+                              "createdAt": {
+                                "description": "The date and time when this email pattern was created, in ISO 8601 format.",
+                                "example": null,
+                                "format": "date-time",
+                                "type": "string"
+                              },
+                              "id": {
+                                "description": "The unique identifier for this email pattern. It is a string.",
+                                "example": null,
+                                "type": "string"
+                              },
+                              "templateId": {
+                                "description": "The identifier of the email template associated with this pattern. It is a string.",
+                                "example": null,
+                                "type": "string"
+                              },
+                              "threadEmailToStepOrder": {
+                                "description": "An integer representing the order of the step to which this email pattern is threaded.",
+                                "example": null,
+                                "format": "int32",
+                                "type": "integer"
+                              },
+                              "updatedAt": {
+                                "description": "The date and time when this email pattern was last updated, in ISO 8601 format.",
+                                "example": null,
+                                "format": "date-time",
+                                "type": "string"
+                              }
+                            },
+                            "required": [
+                              "createdAt",
+                              "id",
+                              "templateId",
+                              "updatedAt"
+                            ],
+                            "type": "object"
+                          },
+                          "id": {
+                            "description": "The unique identifier for this sequence step, represented as a string.",
+                            "example": null,
+                            "type": "string"
+                          },
+                          "stepOrder": {
+                            "description": "An integer indicating the order of this step within the sequence.",
+                            "example": null,
+                            "format": "int32",
+                            "type": "integer"
+                          },
+                          "taskPattern": {
+                            "example": null,
+                            "properties": {
+                              "createdAt": {
+                                "description": "The date and time when this task pattern was created, in ISO 8601 format.",
+                                "example": null,
+                                "format": "date-time",
+                                "type": "string"
+                              },
+                              "id": {
+                                "description": "The unique identifier for this task pattern.",
+                                "example": null,
+                                "type": "string"
+                              },
+                              "notes": {
+                                "description": "Additional notes related to the task, represented as a string.",
+                                "example": null,
+                                "type": "string"
+                              },
+                              "queueId": {
+                                "description": "An integer representing the ID of the queue to which this task belongs.",
+                                "example": null,
+                                "format": "int32",
+                                "type": "integer"
+                              },
+                              "subject": {
+                                "description": "The subject of the task, represented as a string.",
+                                "example": null,
+                                "type": "string"
+                              },
+                              "taskPriority": {
+                                "description": "The priority level of the task, with valid values including 'NONE', 'HIGH', 'MEDIUM', and 'LOW'.",
+                                "enum": [
+                                  "HIGH",
+                                  "LOW",
+                                  "MEDIUM",
+                                  "NONE"
+                                ],
+                                "example": null,
+                                "type": "string"
+                              },
+                              "taskType": {
+                                "description": "The type of task, with valid values including 'CALL', 'MEETING', 'EMAIL', 'TODO', 'LINKED_IN_CONNECT', and 'LINKED_IN_MESSAGE'.",
+                                "enum": [
+                                  "CALL",
+                                  "EMAIL",
+                                  "LINKED_IN_CONNECT",
+                                  "LINKED_IN_MESSAGE",
+                                  "MEETING",
+                                  "TODO"
+                                ],
+                                "example": null,
+                                "type": "string"
+                              },
+                              "templateId": {
+                                "description": "An integer representing the ID of the template associated with this task.",
+                                "example": null,
+                                "format": "int64",
+                                "type": "integer"
+                              },
+                              "threadEmailToStepOrder": {
+                                "description": "An integer indicating the step order to which this email task is threaded.",
+                                "example": null,
+                                "format": "int32",
+                                "type": "integer"
+                              },
+                              "updatedAt": {
+                                "description": "The date and time when this task pattern was last updated, in ISO 8601 format.",
+                                "example": null,
+                                "format": "date-time",
+                                "type": "string"
+                              }
+                            },
+                            "required": [
+                              "createdAt",
+                              "id",
+                              "taskPriority",
+                              "taskType",
+                              "updatedAt"
+                            ],
+                            "type": "object"
+                          },
+                          "updatedAt": {
+                            "description": "The date and time when this step was last updated, in ISO 8601 format.",
+                            "example": null,
+                            "format": "date-time",
+                            "type": "string"
+                          }
+                        },
+                        "required": [
+                          "actionType",
+                          "createdAt",
+                          "delayMillis",
+                          "id",
+                          "stepOrder",
+                          "updatedAt"
+                        ],
+                        "type": "object"
+                      },
+                      "type": "array"
+                    },
+                    "updatedAt": {
+                      "description": "The date and time when the sequence was last updated, in ISO 8601 format.",
+                      "example": null,
+                      "format": "date-time",
+                      "type": "string"
+                    },
+                    "userId": {
+                      "description": "The unique identifier of the user who owns the sequence.",
+                      "example": null,
+                      "type": "string"
+                    }
+                  },
+                  "required": [
+                    "createdAt",
+                    "dependencies",
+                    "id",
+                    "name",
+                    "steps",
+                    "updatedAt",
+                    "userId"
+                  ],
+                  "type": "object"
+                }
+              }
+            },
+            "description": "successful operation"
+          },
+          "default": {
+            "content": {
+              "*/*": {
+                "example": null,
+                "schema": {
+                  "description": "Represents an error response returned by the API when an operation fails. This component is used in various endpoints to provide detailed information about the error encountered.",
+                  "example": {
+                    "category": "VALIDATION_ERROR",
+                    "correlationId": "aeb5f871-7f07-4993-9211-075dc63e7cbf",
+                    "links": {
+                      "knowledge-base": "https://www.hubspot.com/products/service/knowledge-base"
+                    },
+                    "message": "Invalid input (details will vary based on the error)"
+                  },
+                  "properties": {
+                    "category": {
+                      "description": "The error category, indicating the general type of error that occurred.",
+                      "example": null,
+                      "type": "string"
+                    },
+                    "context": {
+                      "additionalProperties": {
+                        "example": null,
+                        "items": {
+                          "example": null,
+                          "type": "string"
+                        },
+                        "type": "array"
+                      },
+                      "description": "Context about the error condition, represented as an object with additional properties that are arrays of strings.",
+                      "example": "{invalidPropertyName=[propertyValue], missingScopes=[scope1, scope2]}",
+                      "type": "object"
+                    },
+                    "correlationId": {
+                      "description": "A unique identifier for the request. Include this value with any error reports or support tickets. It is formatted as a UUID.",
+                      "example": "aeb5f871-7f07-4993-9211-075dc63e7cbf",
+                      "format": "uuid",
+                      "type": "string"
+                    },
+                    "errors": {
+                      "description": "Further information about the error, represented as an array of ErrorDetail objects.",
+                      "example": null,
+                      "items": {
+                        "description": "Represents detailed information about an error that occurred in the API. This component is used to provide additional context and specifics about errors, typically as part of an error response.",
+                        "example": null,
+                        "properties": {
+                          "code": {
+                            "description": "The status code associated with the error detail, indicating the type of error encountered.",
+                            "example": null,
+                            "type": "string"
+                          },
+                          "context": {
+                            "additionalProperties": {
+                              "example": null,
+                              "items": {
+                                "example": null,
+                                "type": "string"
+                              },
+                              "type": "array"
+                            },
+                            "description": "Context about the error condition, provided as an object with additional properties. This can include specific details such as missing scopes.",
+                            "example": "{missingScopes=[scope1, scope2]}",
+                            "type": "object"
+                          },
+                          "in": {
+                            "description": "The name of the field or parameter in which the error was found. This provides context about where the error occurred.",
+                            "example": null,
+                            "type": "string"
+                          },
+                          "message": {
+                            "description": "A human readable message describing the error along with remediation steps where appropriate. This is a required field.",
+                            "example": null,
+                            "type": "string"
+                          },
+                          "subCategory": {
+                            "description": "A specific category that contains more specific detail about the error, helping to further classify the error.",
+                            "example": null,
+                            "type": "string"
+                          }
+                        },
+                        "required": [
+                          "message"
+                        ],
+                        "type": "object"
+                      },
+                      "type": "array"
+                    },
+                    "links": {
+                      "additionalProperties": {
+                        "example": null,
+                        "type": "string"
+                      },
+                      "description": "A map of link names to associated URIs containing documentation about the error or recommended remediation steps.",
+                      "example": null,
+                      "type": "object"
+                    },
+                    "message": {
+                      "description": "A human readable message describing the error along with remediation steps where appropriate.",
+                      "example": "An error occurred",
+                      "type": "string"
+                    },
+                    "subCategory": {
+                      "description": "A specific category that contains more specific detail about the error.",
+                      "example": null,
+                      "type": "string"
+                    }
+                  },
+                  "required": [
+                    "category",
+                    "correlationId",
+                    "message"
+                  ],
+                  "type": "object"
+                }
+              }
+            },
+            "description": ""
+          }
+        },
+        "security": [
+          {
+            "oauth2": [
+              "automation.sequences.read"
+            ]
+          }
+        ],
+        "securitySchemes": {
+          "developer_hapikey": {
+            "in": "query",
+            "name": "hapikey",
+            "type": "apiKey"
+          },
+          "oauth2": {
+            "flows": {
+              "authorizationCode": {
+                "authorizationUrl": "https://app.hubspot.com/oauth/authorize",
+                "scopes": {
+                  "automation": ""
+                },
+                "tokenUrl": "https://api.hubapi.com/oauth/v1/token"
+              }
+            },
+            "type": "oauth2"
+          },
+          "private_apps": {
+            "in": "header",
+            "name": "private-app",
+            "type": "apiKey"
+          },
+          "private_apps_legacy": {
+            "in": "header",
+            "name": "private-app-legacy",
+            "type": "apiKey"
+          }
+        },
+        "securitySource": "operation"
+      }
+    }
+  }
+}

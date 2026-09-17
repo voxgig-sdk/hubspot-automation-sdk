@@ -1,0 +1,269 @@
+{
+  "existing": {
+    "actions_v4_collection_response_public_action_function_identifier_no": {
+      "ACTIONS_V4_COLLECTION_RESPONSE_PUBLIC_ACTION_FUNCTION_IDENTIFIER_NO00": {
+        "functionType": "s14",
+        "id": "ACTIONS_V4_COLLECTION_RESPONSE_PUBLIC_ACTION_FUNCTION_IDENTIFIER_NO00",
+        "app_id": "APP01",
+        "definition_id": "DEFINITION01"
+      },
+      "ACTIONS_V4_COLLECTION_RESPONSE_PUBLIC_ACTION_FUNCTION_IDENTIFIER_NO01": {
+        "functionType": "s28",
+        "id": "ACTIONS_V4_COLLECTION_RESPONSE_PUBLIC_ACTION_FUNCTION_IDENTIFIER_NO01",
+        "app_id": "APP01",
+        "definition_id": "DEFINITION01"
+      },
+      "ACTIONS_V4_COLLECTION_RESPONSE_PUBLIC_ACTION_FUNCTION_IDENTIFIER_NO02": {
+        "functionType": "s3c",
+        "id": "ACTIONS_V4_COLLECTION_RESPONSE_PUBLIC_ACTION_FUNCTION_IDENTIFIER_NO02",
+        "app_id": "APP01",
+        "definition_id": "DEFINITION01"
+      }
+    }
+  },
+  "new": {
+    "actions_v4_collection_response_public_action_function_identifier_no": {
+      "actions_v4_collection_response_public_action_function_identifier_no_ref01": {
+        "functionType": "s50"
+      }
+    }
+  },
+  "requests": {
+    "GET /automation/actions/2026-09/{appId}/{definitionId}/functions": {
+      "provenance": "operation-contract",
+      "contract": {
+        "operationId": "get-/automation/actions/2026-09/{appId}/{definitionId}/functions_getPage",
+        "parameters": [
+          {
+            "description": "The unique identifier of the app associated with the action definition.",
+            "explode": false,
+            "in": "path",
+            "name": "appId",
+            "required": true,
+            "schema": {
+              "example": null,
+              "format": "int32",
+              "type": "integer"
+            },
+            "style": "simple"
+          },
+          {
+            "description": "The unique identifier of the action definition for which functions are being retrieved.",
+            "explode": false,
+            "in": "path",
+            "name": "definitionId",
+            "required": true,
+            "schema": {
+              "example": null,
+              "type": "string"
+            },
+            "style": "simple"
+          }
+        ],
+        "protocol": "http",
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "example": null,
+                "schema": {
+                  "example": null,
+                  "properties": {
+                    "results": {
+                      "description": "An array of PublicActionFunctionIdentifier objects, each representing a specific function associated with an automation action definition.",
+                      "example": null,
+                      "items": {
+                        "example": null,
+                        "properties": {
+                          "functionType": {
+                            "description": "The type of function, with accepted values: POST_ACTION_EXECUTION, POST_FETCH_OPTIONS, PRE_ACTION_EXECUTION, PRE_FETCH_OPTIONS.",
+                            "enum": [
+                              "POST_ACTION_EXECUTION",
+                              "POST_FETCH_OPTIONS",
+                              "PRE_ACTION_EXECUTION",
+                              "PRE_FETCH_OPTIONS"
+                            ],
+                            "example": null,
+                            "type": "string"
+                          },
+                          "id": {
+                            "description": "The unique identifier for the function.",
+                            "example": null,
+                            "type": "string"
+                          }
+                        },
+                        "required": [
+                          "functionType"
+                        ],
+                        "type": "object"
+                      },
+                      "type": "array"
+                    }
+                  },
+                  "required": [
+                    "results"
+                  ],
+                  "type": "object"
+                }
+              }
+            },
+            "description": "successful operation"
+          },
+          "default": {
+            "content": {
+              "*/*": {
+                "example": null,
+                "schema": {
+                  "description": "Represents an error response returned by the API when an operation fails. This component is used in various endpoints to provide detailed information about the error encountered.",
+                  "example": {
+                    "category": "VALIDATION_ERROR",
+                    "correlationId": "aeb5f871-7f07-4993-9211-075dc63e7cbf",
+                    "links": {
+                      "knowledge-base": "https://www.hubspot.com/products/service/knowledge-base"
+                    },
+                    "message": "Invalid input (details will vary based on the error)"
+                  },
+                  "properties": {
+                    "category": {
+                      "description": "The error category",
+                      "example": null,
+                      "type": "string"
+                    },
+                    "context": {
+                      "additionalProperties": {
+                        "example": null,
+                        "items": {
+                          "example": null,
+                          "type": "string"
+                        },
+                        "type": "array"
+                      },
+                      "description": "Context about the error condition",
+                      "example": "{invalidPropertyName=[propertyValue], missingScopes=[scope1, scope2]}",
+                      "type": "object"
+                    },
+                    "correlationId": {
+                      "description": "A unique identifier for the request. Include this value with any error reports or support tickets",
+                      "example": "aeb5f871-7f07-4993-9211-075dc63e7cbf",
+                      "format": "uuid",
+                      "type": "string"
+                    },
+                    "errors": {
+                      "description": "further information about the error",
+                      "example": null,
+                      "items": {
+                        "description": "Represents detailed information about an error that occurred in the API. This component is used to provide additional context and specifics about errors, typically as part of an error response.",
+                        "example": null,
+                        "properties": {
+                          "code": {
+                            "description": "The status code associated with the error detail",
+                            "example": null,
+                            "type": "string"
+                          },
+                          "context": {
+                            "additionalProperties": {
+                              "example": null,
+                              "items": {
+                                "example": null,
+                                "type": "string"
+                              },
+                              "type": "array"
+                            },
+                            "description": "Context about the error condition",
+                            "example": "{missingScopes=[scope1, scope2]}",
+                            "type": "object"
+                          },
+                          "in": {
+                            "description": "The name of the field or parameter in which the error was found.",
+                            "example": null,
+                            "type": "string"
+                          },
+                          "message": {
+                            "description": "A human readable message describing the error along with remediation steps where appropriate",
+                            "example": null,
+                            "type": "string"
+                          },
+                          "subCategory": {
+                            "description": "A specific category that contains more specific detail about the error",
+                            "example": null,
+                            "type": "string"
+                          }
+                        },
+                        "required": [
+                          "message"
+                        ],
+                        "type": "object"
+                      },
+                      "type": "array"
+                    },
+                    "links": {
+                      "additionalProperties": {
+                        "example": null,
+                        "type": "string"
+                      },
+                      "description": "A map of link names to associated URIs containing documentation about the error or recommended remediation steps",
+                      "example": null,
+                      "type": "object"
+                    },
+                    "message": {
+                      "description": "A human readable message describing the error along with remediation steps where appropriate",
+                      "example": "An error occurred",
+                      "type": "string"
+                    },
+                    "subCategory": {
+                      "description": "A specific category that contains more specific detail about the error",
+                      "example": null,
+                      "type": "string"
+                    }
+                  },
+                  "required": [
+                    "category",
+                    "correlationId",
+                    "message"
+                  ],
+                  "type": "object"
+                }
+              }
+            },
+            "description": ""
+          }
+        },
+        "security": [
+          {
+            "developer_hapikey": []
+          }
+        ],
+        "securitySchemes": {
+          "developer_hapikey": {
+            "in": "query",
+            "name": "hapikey",
+            "type": "apiKey"
+          },
+          "oauth2": {
+            "flows": {
+              "authorizationCode": {
+                "authorizationUrl": "https://app.hubspot.com/oauth/authorize",
+                "scopes": {
+                  "automation": ""
+                },
+                "tokenUrl": "https://api.hubapi.com/oauth/v1/token"
+              }
+            },
+            "type": "oauth2"
+          },
+          "private_apps": {
+            "in": "header",
+            "name": "private-app",
+            "type": "apiKey"
+          },
+          "private_apps_legacy": {
+            "in": "header",
+            "name": "private-app-legacy",
+            "type": "apiKey"
+          }
+        },
+        "securitySource": "operation"
+      }
+    }
+  }
+}

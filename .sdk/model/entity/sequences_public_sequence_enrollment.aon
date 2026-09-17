@@ -1,0 +1,140 @@
+# Entity: sequences_public_sequence_enrollment
+
+main: kit: entity: sequences_public_sequence_enrollment: {
+
+  alias: field: {}
+
+  fields: [
+    {
+      format: "date-time"
+      name: "enrolledAt"
+      req: true
+      short: "The date and time when the contact was enrolled in the sequence, in ISO 8601 format."
+      type: "`$STRING`"
+    }
+    {
+      name: "enrolledBy"
+      req: true
+      short: "The unique identifier of the user who enrolled the contact in the sequence."
+      type: "`$STRING`"
+    }
+    {
+      name: "enrolledByEmail"
+      req: true
+      short: "The email address of the user who enrolled the contact in the sequence."
+      type: "`$STRING`"
+    }
+    {
+      name: "id"
+      req: true
+      short: "The unique identifier for the sequence enrollment."
+      type: "`$STRING`"
+    }
+    {
+      name: "sequenceId"
+      req: true
+      short: "The unique identifier of the sequence in which the contact is enrolled."
+      type: "`$STRING`"
+    }
+    {
+      name: "sequenceName"
+      req: true
+      short: "The name of the sequence in which the contact is enrolled."
+      type: "`$STRING`"
+    }
+    {
+      name: "toEmail"
+      req: true
+      short: "The email address of the contact enrolled in the sequence."
+      type: "`$STRING`"
+    }
+    {
+      format: "date-time"
+      name: "updatedAt"
+      req: true
+      short: "The date and time when the sequence enrollment was last updated, in ISO 8601 format."
+      type: "`$STRING`"
+    }
+  ]
+
+  id: {
+    field: "id"
+    name: "id"
+  }
+
+  name: "sequences_public_sequence_enrollment"
+  op: {
+    load: {
+      name: "load"
+      points: [
+        {
+          args: {
+            params: [
+              {
+                example: null
+                kind: "param"
+                name: "contact_id"
+                orig: "contact_id"
+                reqd: true
+                type: "`$STRING`"
+              }
+            ]
+          }
+          contract: {
+            id: "GET /automation/sequences/2026-09/enrollments/contact/{contactId}"
+            json: "{\"operationId\":\"get-/automation/sequences/2026-09/enrollments/contact/{contactId}\",\"parameters\":[{\"description\":\"The unique identifier of the contact whose sequence enrollment details are being retrieved.\",\"explode\":false,\"in\":\"path\",\"name\":\"contactId\",\"required\":true,\"schema\":{\"example\":null,\"type\":\"string\"},\"style\":\"simple\"}],\"protocol\":\"http\",\"responses\":{\"200\":{\"content\":{\"application/json\":{\"example\":null,\"schema\":{\"example\":null,\"properties\":{\"enrolledAt\":{\"description\":\"The date and time when the contact was enrolled in the sequence, in ISO 8601 format.\",\"example\":null,\"format\":\"date-time\",\"type\":\"string\"},\"enrolledBy\":{\"description\":\"The unique identifier of the user who enrolled the contact in the sequence.\",\"example\":null,\"type\":\"string\"},\"enrolledByEmail\":{\"description\":\"The email address of the user who enrolled the contact in the sequence.\",\"example\":null,\"type\":\"string\"},\"id\":{\"description\":\"The unique identifier for the sequence enrollment.\",\"example\":null,\"type\":\"string\"},\"sequenceId\":{\"description\":\"The unique identifier of the sequence in which the contact is enrolled.\",\"example\":null,\"type\":\"string\"},\"sequenceName\":{\"description\":\"The name of the sequence in which the contact is enrolled.\",\"example\":null,\"type\":\"string\"},\"toEmail\":{\"description\":\"The email address of the contact enrolled in the sequence.\",\"example\":null,\"type\":\"string\"},\"updatedAt\":{\"description\":\"The date and time when the sequence enrollment was last updated, in ISO 8601 format.\",\"example\":null,\"format\":\"date-time\",\"type\":\"string\"}},\"required\":[\"enrolledAt\",\"enrolledBy\",\"enrolledByEmail\",\"id\",\"sequenceId\",\"sequenceName\",\"toEmail\",\"updatedAt\"],\"type\":\"object\"}}},\"description\":\"successful operation\"},\"default\":{\"content\":{\"*/*\":{\"example\":null,\"schema\":{\"description\":\"Represents an error response returned by the API when an operation fails. This component is used in various endpoints to provide detailed information about the error encountered.\",\"example\":{\"category\":\"VALIDATION_ERROR\",\"correlationId\":\"aeb5f871-7f07-4993-9211-075dc63e7cbf\",\"links\":{\"knowledge-base\":\"https://www.hubspot.com/products/service/knowledge-base\"},\"message\":\"Invalid input (details will vary based on the error)\"},\"properties\":{\"category\":{\"description\":\"The error category, indicating the general type of error that occurred.\",\"example\":null,\"type\":\"string\"},\"context\":{\"additionalProperties\":{\"example\":null,\"items\":{\"example\":null,\"type\":\"string\"},\"type\":\"array\"},\"description\":\"Context about the error condition, represented as an object with additional properties that are arrays of strings.\",\"example\":\"{invalidPropertyName=[propertyValue], missingScopes=[scope1, scope2]}\",\"type\":\"object\"},\"correlationId\":{\"description\":\"A unique identifier for the request. Include this value with any error reports or support tickets. It is formatted as a UUID.\",\"example\":\"aeb5f871-7f07-4993-9211-075dc63e7cbf\",\"format\":\"uuid\",\"type\":\"string\"},\"errors\":{\"description\":\"Further information about the error, represented as an array of ErrorDetail objects.\",\"example\":null,\"items\":{\"description\":\"Represents detailed information about an error that occurred in the API. This component is used to provide additional context and specifics about errors, typically as part of an error response.\",\"example\":null,\"properties\":{\"code\":{\"description\":\"The status code associated with the error detail, indicating the type of error encountered.\",\"example\":null,\"type\":\"string\"},\"context\":{\"additionalProperties\":{\"example\":null,\"items\":{\"example\":null,\"type\":\"string\"},\"type\":\"array\"},\"description\":\"Context about the error condition, provided as an object with additional properties. This can include specific details such as missing scopes.\",\"example\":\"{missingScopes=[scope1, scope2]}\",\"type\":\"object\"},\"in\":{\"description\":\"The name of the field or parameter in which the error was found. This provides context about where the error occurred.\",\"example\":null,\"type\":\"string\"},\"message\":{\"description\":\"A human readable message describing the error along with remediation steps where appropriate. This is a required field.\",\"example\":null,\"type\":\"string\"},\"subCategory\":{\"description\":\"A specific category that contains more specific detail about the error, helping to further classify the error.\",\"example\":null,\"type\":\"string\"}},\"required\":[\"message\"],\"type\":\"object\"},\"type\":\"array\"},\"links\":{\"additionalProperties\":{\"example\":null,\"type\":\"string\"},\"description\":\"A map of link names to associated URIs containing documentation about the error or recommended remediation steps.\",\"example\":null,\"type\":\"object\"},\"message\":{\"description\":\"A human readable message describing the error along with remediation steps where appropriate.\",\"example\":\"An error occurred\",\"type\":\"string\"},\"subCategory\":{\"description\":\"A specific category that contains more specific detail about the error.\",\"example\":null,\"type\":\"string\"}},\"required\":[\"category\",\"correlationId\",\"message\"],\"type\":\"object\"}}},\"description\":\"\"}},\"security\":[{\"oauth2\":[\"automation.sequences.read\"]}],\"securitySchemes\":{\"developer_hapikey\":{\"in\":\"query\",\"name\":\"hapikey\",\"type\":\"apiKey\"},\"oauth2\":{\"flows\":{\"authorizationCode\":{\"authorizationUrl\":\"https://app.hubspot.com/oauth/authorize\",\"scopes\":{\"automation\":\"\"},\"tokenUrl\":\"https://api.hubapi.com/oauth/v1/token\"}},\"type\":\"oauth2\"},\"private_apps\":{\"in\":\"header\",\"name\":\"private-app\",\"type\":\"apiKey\"},\"private_apps_legacy\":{\"in\":\"header\",\"name\":\"private-app-legacy\",\"type\":\"apiKey\"}},\"securitySource\":\"operation\"}"
+            source: "openapi3"
+            version: 1
+          }
+          method: "GET"
+          orig: "/automation/sequences/2026-09/enrollments/contact/{contactId}"
+          rename: {
+            param: {
+              contactId: "contact_id"
+            }
+          }
+          segments: [
+            {
+              lit: "automation"
+            }
+            {
+              lit: "sequences"
+            }
+            {
+              lit: "2026-09"
+            }
+            {
+              lit: "enrollments"
+            }
+            {
+              lit: "contact"
+            }
+            {
+              var: "contact_id"
+            }
+          ]
+          select: {
+            exist: [
+              "contact_id"
+            ]
+          }
+          transform: {
+            req: "`reqdata`"
+            res: "`body`"
+          }
+        }
+      ]
+    }
+  }
+
+  relations: {
+    ancestors: [
+      [
+        "contact"
+      ]
+    ]
+  }
+
+
+
+}

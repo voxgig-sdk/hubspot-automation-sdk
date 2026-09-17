@@ -1,0 +1,18 @@
+# BasicAutomationV4BatchResponseFlowIdWorkflowIdMappingFlow
+
+main: kit: flow: BasicAutomationV4BatchResponseFlowIdWorkflowIdMappingFlow:
+{
+  entity: "automation_v4_batch_response_flow_id_workflow_id_mapping",
+  kind: "basic",
+  name: "BasicAutomationV4BatchResponseFlowIdWorkflowIdMappingFlow",
+  step: [
+    {
+      input: {
+        ref: "automation_v4_batch_response_flow_id_workflow_id_mapping_ref01"
+      }
+
+      op: "create"
+    }
+  ],
+  "key$": "BasicAutomationV4BatchResponseFlowIdWorkflowIdMappingFlow"
+}

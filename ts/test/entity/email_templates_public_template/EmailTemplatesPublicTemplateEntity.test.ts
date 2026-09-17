@@ -1,0 +1,181 @@
+
+
+import Path from 'node:path'
+import * as Fs from 'node:fs'
+
+import { test, describe, afterEach } from 'node:test'
+import assert from 'node:assert'
+import { createLiveTransport } from '../../live-runner'
+import { runLiveEntity } from '../../live-entity'
+
+
+import { HubspotAutomationSDK, BaseFeature, stdutil } from '../../..'
+
+import {
+  envOverride,
+  liveClientOptions,
+  liveDelay,
+  loadEnvLocal,
+  makeCtrl,
+  makeMatch,
+  makeReqdata,
+  makeStepData,
+  makeValid,
+  maybeSkipControl,
+} from '../../utility'
+
+
+// AFTER the imports on purpose: TypeScript hoists `import` above any
+// statement in the emitted CommonJS, so a loader placed above them would
+// run only after every imported module had already been evaluated - and
+// anything reading process.env at module scope would miss these values.
+loadEnvLocal(__dirname + '/../../../.env.local')
+
+
+describe('EmailTemplatesPublicTemplateEntity', async () => {
+
+  // Per-test live pacing. Delay is read from sdk-test-control.json's
+  // `test.live.delayMs`; only sleeps when HUBSPOT_AUTOMATION_TEST_LIVE=TRUE.
+  afterEach(liveDelay('HUBSPOT_AUTOMATION_TEST_LIVE'))
+
+  test('instance', async () => {
+    const testsdk = HubspotAutomationSDK.test()
+    const ent = testsdk.EmailTemplatesPublicTemplate()
+    assert(null != ent)
+  })
+
+
+  test('basic', async (t) => {
+
+    const live = 'TRUE' === process.env.HUBSPOT_AUTOMATION_TEST_LIVE
+    for (const op of ['create', 'update', 'load']) {
+      if (!live && maybeSkipControl(t, 'entityOp', 'email_templates_public_template.' + op, live)) return
+    }
+
+    
+    const setup = basicSetup()
+    if (setup.live) {
+      return runLiveEntity(setup, {"active":true,"alias":{"field":{}},"fields":[{"active":true,"name":"body","op":{"create":{"req":true,"type":"`$STRING`"},"update":{"req":true,"type":"`$OBJECT`"}},"req":false,"short":"The content of the email template, represented as a string.","type":"`$STRING`","index$":0},{"active":true,"format":"int64","name":"createdAt","req":false,"short":"The timestamp indicating when the email template was created, represented as an integer in int64 format.","type":"`$INTEGER`","index$":1},{"active":true,"name":"folderId","op":{"update":{"req":true,"type":"`$OBJECT`"}},"req":false,"short":"The identifier of the folder where the email template is stored, represented as a string.","type":"`$STRING`","index$":2},{"active":true,"name":"id","req":true,"short":"The unique identifier for the email template, represented as a string.","type":"`$STRING`","index$":3},{"active":true,"name":"name","op":{"create":{"req":true,"type":"`$STRING`"},"update":{"req":true,"type":"`$OBJECT`"}},"req":false,"short":"The name of the email template, represented as a string.","type":"`$STRING`","index$":4},{"active":true,"name":"ownerId","req":false,"short":"The identifier of the owner of the email template, represented as a string.","type":"`$STRING`","index$":5},{"active":true,"name":"subject","op":{"update":{"req":true,"type":"`$OBJECT`"}},"req":false,"short":"The subject line of the email template, represented as a string.","type":"`$STRING`","index$":6},{"active":true,"format":"int64","name":"updatedAt","req":false,"short":"The timestamp indicating when the email template was last updated, represented as an integer in int64 format.","type":"`$INTEGER`","index$":7}],"id":{"field":"id","name":"id"},"name":"email_templates_public_template","op":{"create":{"input":"data","name":"create","points":[{"active":true,"args":{},"contract":{"id":"POST /automation/email-templates/2026-09","json":"{\"operationId\":\"post-/automation/email-templates/2026-09_/automation/email-templates/2026-09-beta\",\"parameters\":[],\"protocol\":\"http\",\"requestBody\":{\"content\":{\"application/json\":{\"example\":null,\"schema\":{\"example\":null,\"properties\":{\"body\":{\"description\":\"The main content of the email template. This is a required field and must be a string.\",\"example\":null,\"type\":\"string\"},\"folderId\":{\"description\":\"The identifier of the folder in which the template is stored. This is an optional field and must be a string if provided.\",\"example\":null,\"type\":\"string\"},\"name\":{\"description\":\"The name of the email template. This is a required field and must be a string.\",\"example\":null,\"type\":\"string\"},\"subject\":{\"description\":\"The subject line of the email template. This is an optional field and must be a string if provided.\",\"example\":null,\"type\":\"string\"}},\"required\":[\"body\",\"name\"],\"type\":\"object\"}}},\"required\":true},\"responses\":{\"201\":{\"content\":{\"application/json\":{\"example\":null,\"schema\":{\"example\":null,\"properties\":{\"body\":{\"description\":\"The content of the email template, represented as a string.\",\"example\":null,\"type\":\"string\"},\"createdAt\":{\"description\":\"The timestamp indicating when the email template was created, represented as an integer in int64 format.\",\"example\":null,\"format\":\"int64\",\"type\":\"integer\"},\"folderId\":{\"description\":\"The identifier of the folder where the email template is stored, represented as a string.\",\"example\":null,\"type\":\"string\"},\"id\":{\"description\":\"The unique identifier for the email template, represented as a string.\",\"example\":null,\"type\":\"string\"},\"name\":{\"description\":\"The name of the email template, represented as a string.\",\"example\":null,\"type\":\"string\"},\"ownerId\":{\"description\":\"The identifier of the owner of the email template, represented as a string.\",\"example\":null,\"type\":\"string\"},\"subject\":{\"description\":\"The subject line of the email template, represented as a string.\",\"example\":null,\"type\":\"string\"},\"updatedAt\":{\"description\":\"The timestamp indicating when the email template was last updated, represented as an integer in int64 format.\",\"example\":null,\"format\":\"int64\",\"type\":\"integer\"}},\"required\":[\"id\"],\"type\":\"object\"}}},\"description\":\"successful operation\",\"headers\":{\"Location\":{\"description\":\"URL of the newly created resource\",\"explode\":false,\"schema\":{\"example\":null,\"type\":\"string\"},\"style\":\"simple\"}}},\"default\":{\"content\":{\"*/*\":{\"example\":null,\"schema\":{\"description\":\"Represents an error response returned by the API when an operation fails. This component is used in various endpoints to provide detailed information about the error encountered.\",\"example\":{\"category\":\"VALIDATION_ERROR\",\"correlationId\":\"aeb5f871-7f07-4993-9211-075dc63e7cbf\",\"links\":{\"knowledge-base\":\"https://www.hubspot.com/products/service/knowledge-base\"},\"message\":\"Invalid input (details will vary based on the error)\"},\"properties\":{\"category\":{\"description\":\"The error category, represented as a string.\",\"example\":null,\"type\":\"string\"},\"context\":{\"additionalProperties\":{\"example\":null,\"items\":{\"example\":null,\"type\":\"string\"},\"type\":\"array\"},\"description\":\"An object providing context about the error condition, with additional properties as arrays of strings.\",\"example\":\"{invalidPropertyName=[propertyValue], missingScopes=[scope1, scope2]}\",\"type\":\"object\"},\"correlationId\":{\"description\":\"A unique identifier for the request, formatted as a UUID. Include this value with any error reports or support tickets.\",\"example\":\"aeb5f871-7f07-4993-9211-075dc63e7cbf\",\"format\":\"uuid\",\"type\":\"string\"},\"errors\":{\"description\":\"An array providing further information about the error, with each item being an ErrorDetail object.\",\"example\":null,\"items\":{\"description\":\"Represents detailed information about an error that occurred in the API. This component is used to provide additional context and specifics about errors, typically as part of an error response.\",\"example\":null,\"properties\":{\"code\":{\"description\":\"The status code associated with the error detail.\",\"example\":null,\"type\":\"string\"},\"context\":{\"additionalProperties\":{\"example\":null,\"items\":{\"example\":null,\"type\":\"string\"},\"type\":\"array\"},\"description\":\"Context about the error condition, represented as an object where each key is a context name and the value is an array of strings providing additional details.\",\"example\":\"{missingScopes=[scope1, scope2]}\",\"type\":\"object\"},\"in\":{\"description\":\"The name of the field or parameter in which the error was found.\",\"example\":null,\"type\":\"string\"},\"message\":{\"description\":\"A human readable message describing the error along with remediation steps where appropriate. This is a required field.\",\"example\":null,\"type\":\"string\"},\"subCategory\":{\"description\":\"A specific category that contains more specific detail about the error.\",\"example\":null,\"type\":\"string\"}},\"required\":[\"message\"],\"type\":\"object\"},\"type\":\"array\"},\"links\":{\"additionalProperties\":{\"example\":null,\"type\":\"string\"},\"description\":\"A map of link names to associated URIs containing documentation about the error or recommended remediation steps, represented as an object with string properties.\",\"example\":null,\"type\":\"object\"},\"message\":{\"description\":\"A human readable message describing the error along with remediation steps where appropriate. It is a string.\",\"example\":\"An error occurred\",\"type\":\"string\"},\"subCategory\":{\"description\":\"A specific category that contains more specific detail about the error, represented as a string.\",\"example\":null,\"type\":\"string\"}},\"required\":[\"category\",\"correlationId\",\"message\"],\"type\":\"object\"}}},\"description\":\"\"}},\"security\":[{\"oauth2\":[\"sales-templates-public-write\"]}],\"securitySchemes\":{\"developer_hapikey\":{\"in\":\"query\",\"name\":\"hapikey\",\"type\":\"apiKey\"},\"oauth2\":{\"flows\":{\"authorizationCode\":{\"authorizationUrl\":\"https://app.hubspot.com/oauth/authorize\",\"scopes\":{\"automation\":\"\"},\"tokenUrl\":\"https://api.hubapi.com/oauth/v1/token\"}},\"type\":\"oauth2\"},\"private_apps\":{\"in\":\"header\",\"name\":\"private-app\",\"type\":\"apiKey\"},\"private_apps_legacy\":{\"in\":\"header\",\"name\":\"private-app-legacy\",\"type\":\"apiKey\"}},\"securitySource\":\"operation\"}","source":"openapi3","version":1},"kind":"http","method":"POST","orig":"/automation/email-templates/2026-09","segments":[{"lit":"automation"},{"lit":"email-templates"},{"lit":"2026-09"}],"select":{},"transform":{"req":"`reqdata`","res":"`body`"},"index$":0}],"key$":"create"},"load":{"input":"data","name":"load","points":[{"active":true,"args":{"params":[{"active":true,"example":null,"kind":"param","name":"template_id","orig":"template_id","reqd":true,"type":"`$INTEGER`","index$":0}]},"contract":{"id":"GET /automation/email-templates/2026-09/{templateId}","json":"{\"operationId\":\"get-/automation/email-templates/2026-09/{templateId}_/automation/email-templates/2026-09-beta/{templateId}\",\"parameters\":[{\"description\":\"The unique identifier of the email template to retrieve.\",\"explode\":false,\"in\":\"path\",\"name\":\"templateId\",\"required\":true,\"schema\":{\"example\":null,\"format\":\"int64\",\"type\":\"integer\"},\"style\":\"simple\"}],\"protocol\":\"http\",\"responses\":{\"200\":{\"content\":{\"application/json\":{\"example\":null,\"schema\":{\"example\":null,\"properties\":{\"body\":{\"description\":\"The content of the email template, represented as a string.\",\"example\":null,\"type\":\"string\"},\"createdAt\":{\"description\":\"The timestamp indicating when the email template was created, represented as an integer in int64 format.\",\"example\":null,\"format\":\"int64\",\"type\":\"integer\"},\"folderId\":{\"description\":\"The identifier of the folder where the email template is stored, represented as a string.\",\"example\":null,\"type\":\"string\"},\"id\":{\"description\":\"The unique identifier for the email template, represented as a string.\",\"example\":null,\"type\":\"string\"},\"name\":{\"description\":\"The name of the email template, represented as a string.\",\"example\":null,\"type\":\"string\"},\"ownerId\":{\"description\":\"The identifier of the owner of the email template, represented as a string.\",\"example\":null,\"type\":\"string\"},\"subject\":{\"description\":\"The subject line of the email template, represented as a string.\",\"example\":null,\"type\":\"string\"},\"updatedAt\":{\"description\":\"The timestamp indicating when the email template was last updated, represented as an integer in int64 format.\",\"example\":null,\"format\":\"int64\",\"type\":\"integer\"}},\"required\":[\"id\"],\"type\":\"object\"}}},\"description\":\"successful operation\"},\"default\":{\"content\":{\"*/*\":{\"example\":null,\"schema\":{\"description\":\"Represents an error response returned by the API when an operation fails. This component is used in various endpoints to provide detailed information about the error encountered.\",\"example\":{\"category\":\"VALIDATION_ERROR\",\"correlationId\":\"aeb5f871-7f07-4993-9211-075dc63e7cbf\",\"links\":{\"knowledge-base\":\"https://www.hubspot.com/products/service/knowledge-base\"},\"message\":\"Invalid input (details will vary based on the error)\"},\"properties\":{\"category\":{\"description\":\"The error category, represented as a string.\",\"example\":null,\"type\":\"string\"},\"context\":{\"additionalProperties\":{\"example\":null,\"items\":{\"example\":null,\"type\":\"string\"},\"type\":\"array\"},\"description\":\"An object providing context about the error condition, with additional properties as arrays of strings.\",\"example\":\"{invalidPropertyName=[propertyValue], missingScopes=[scope1, scope2]}\",\"type\":\"object\"},\"correlationId\":{\"description\":\"A unique identifier for the request, formatted as a UUID. Include this value with any error reports or support tickets.\",\"example\":\"aeb5f871-7f07-4993-9211-075dc63e7cbf\",\"format\":\"uuid\",\"type\":\"string\"},\"errors\":{\"description\":\"An array providing further information about the error, with each item being an ErrorDetail object.\",\"example\":null,\"items\":{\"description\":\"Represents detailed information about an error that occurred in the API. This component is used to provide additional context and specifics about errors, typically as part of an error response.\",\"example\":null,\"properties\":{\"code\":{\"description\":\"The status code associated with the error detail.\",\"example\":null,\"type\":\"string\"},\"context\":{\"additionalProperties\":{\"example\":null,\"items\":{\"example\":null,\"type\":\"string\"},\"type\":\"array\"},\"description\":\"Context about the error condition, represented as an object where each key is a context name and the value is an array of strings providing additional details.\",\"example\":\"{missingScopes=[scope1, scope2]}\",\"type\":\"object\"},\"in\":{\"description\":\"The name of the field or parameter in which the error was found.\",\"example\":null,\"type\":\"string\"},\"message\":{\"description\":\"A human readable message describing the error along with remediation steps where appropriate. This is a required field.\",\"example\":null,\"type\":\"string\"},\"subCategory\":{\"description\":\"A specific category that contains more specific detail about the error.\",\"example\":null,\"type\":\"string\"}},\"required\":[\"message\"],\"type\":\"object\"},\"type\":\"array\"},\"links\":{\"additionalProperties\":{\"example\":null,\"type\":\"string\"},\"description\":\"A map of link names to associated URIs containing documentation about the error or recommended remediation steps, represented as an object with string properties.\",\"example\":null,\"type\":\"object\"},\"message\":{\"description\":\"A human readable message describing the error along with remediation steps where appropriate. It is a string.\",\"example\":\"An error occurred\",\"type\":\"string\"},\"subCategory\":{\"description\":\"A specific category that contains more specific detail about the error, represented as a string.\",\"example\":null,\"type\":\"string\"}},\"required\":[\"category\",\"correlationId\",\"message\"],\"type\":\"object\"}}},\"description\":\"\"}},\"security\":[{\"oauth2\":[\"sales-templates-public-read\"]}],\"securitySchemes\":{\"developer_hapikey\":{\"in\":\"query\",\"name\":\"hapikey\",\"type\":\"apiKey\"},\"oauth2\":{\"flows\":{\"authorizationCode\":{\"authorizationUrl\":\"https://app.hubspot.com/oauth/authorize\",\"scopes\":{\"automation\":\"\"},\"tokenUrl\":\"https://api.hubapi.com/oauth/v1/token\"}},\"type\":\"oauth2\"},\"private_apps\":{\"in\":\"header\",\"name\":\"private-app\",\"type\":\"apiKey\"},\"private_apps_legacy\":{\"in\":\"header\",\"name\":\"private-app-legacy\",\"type\":\"apiKey\"}},\"securitySource\":\"operation\"}","source":"openapi3","version":1},"kind":"http","method":"GET","orig":"/automation/email-templates/2026-09/{templateId}","rename":{"param":{"templateId":"template_id"}},"segments":[{"lit":"automation"},{"lit":"email-templates"},{"lit":"2026-09"},{"var":"template_id"}],"select":{"exist":["template_id"]},"transform":{"req":"`reqdata`","res":"`body`"},"index$":0}],"key$":"load"},"update":{"input":"data","name":"update","points":[{"active":true,"args":{"params":[{"active":true,"example":null,"kind":"param","name":"template_id","orig":"template_id","reqd":true,"type":"`$INTEGER`","index$":0}]},"contract":{"id":"PATCH /automation/email-templates/2026-09/{templateId}","json":"{\"operationId\":\"patch-/automation/email-templates/2026-09/{templateId}_/automation/email-templates/2026-09-beta/{templateId}\",\"parameters\":[{\"description\":\"The unique identifier of the email template to update.\",\"explode\":false,\"in\":\"path\",\"name\":\"templateId\",\"required\":true,\"schema\":{\"example\":null,\"format\":\"int64\",\"type\":\"integer\"},\"style\":\"simple\"}],\"protocol\":\"http\",\"requestBody\":{\"content\":{\"application/json\":{\"example\":null,\"schema\":{\"example\":null,\"properties\":{\"body\":{\"description\":\"An object representing the body content of the email template.\",\"example\":null,\"properties\":{},\"type\":\"object\"},\"folderId\":{\"description\":\"An object representing the identifier of the folder where the email template is stored.\",\"example\":null,\"properties\":{},\"type\":\"object\"},\"name\":{\"description\":\"An object representing the name of the email template.\",\"example\":null,\"properties\":{},\"type\":\"object\"},\"subject\":{\"description\":\"An object representing the subject line of the email template.\",\"example\":null,\"properties\":{},\"type\":\"object\"}},\"required\":[\"body\",\"folderId\",\"name\",\"subject\"],\"type\":\"object\"}}},\"required\":true},\"responses\":{\"200\":{\"content\":{\"application/json\":{\"example\":null,\"schema\":{\"example\":null,\"properties\":{\"body\":{\"description\":\"The content of the email template, represented as a string.\",\"example\":null,\"type\":\"string\"},\"createdAt\":{\"description\":\"The timestamp indicating when the email template was created, represented as an integer in int64 format.\",\"example\":null,\"format\":\"int64\",\"type\":\"integer\"},\"folderId\":{\"description\":\"The identifier of the folder where the email template is stored, represented as a string.\",\"example\":null,\"type\":\"string\"},\"id\":{\"description\":\"The unique identifier for the email template, represented as a string.\",\"example\":null,\"type\":\"string\"},\"name\":{\"description\":\"The name of the email template, represented as a string.\",\"example\":null,\"type\":\"string\"},\"ownerId\":{\"description\":\"The identifier of the owner of the email template, represented as a string.\",\"example\":null,\"type\":\"string\"},\"subject\":{\"description\":\"The subject line of the email template, represented as a string.\",\"example\":null,\"type\":\"string\"},\"updatedAt\":{\"description\":\"The timestamp indicating when the email template was last updated, represented as an integer in int64 format.\",\"example\":null,\"format\":\"int64\",\"type\":\"integer\"}},\"required\":[\"id\"],\"type\":\"object\"}}},\"description\":\"successful operation\"},\"default\":{\"content\":{\"*/*\":{\"example\":null,\"schema\":{\"description\":\"Represents an error response returned by the API when an operation fails. This component is used in various endpoints to provide detailed information about the error encountered.\",\"example\":{\"category\":\"VALIDATION_ERROR\",\"correlationId\":\"aeb5f871-7f07-4993-9211-075dc63e7cbf\",\"links\":{\"knowledge-base\":\"https://www.hubspot.com/products/service/knowledge-base\"},\"message\":\"Invalid input (details will vary based on the error)\"},\"properties\":{\"category\":{\"description\":\"The error category, represented as a string.\",\"example\":null,\"type\":\"string\"},\"context\":{\"additionalProperties\":{\"example\":null,\"items\":{\"example\":null,\"type\":\"string\"},\"type\":\"array\"},\"description\":\"An object providing context about the error condition, with additional properties as arrays of strings.\",\"example\":\"{invalidPropertyName=[propertyValue], missingScopes=[scope1, scope2]}\",\"type\":\"object\"},\"correlationId\":{\"description\":\"A unique identifier for the request, formatted as a UUID. Include this value with any error reports or support tickets.\",\"example\":\"aeb5f871-7f07-4993-9211-075dc63e7cbf\",\"format\":\"uuid\",\"type\":\"string\"},\"errors\":{\"description\":\"An array providing further information about the error, with each item being an ErrorDetail object.\",\"example\":null,\"items\":{\"description\":\"Represents detailed information about an error that occurred in the API. This component is used to provide additional context and specifics about errors, typically as part of an error response.\",\"example\":null,\"properties\":{\"code\":{\"description\":\"The status code associated with the error detail.\",\"example\":null,\"type\":\"string\"},\"context\":{\"additionalProperties\":{\"example\":null,\"items\":{\"example\":null,\"type\":\"string\"},\"type\":\"array\"},\"description\":\"Context about the error condition, represented as an object where each key is a context name and the value is an array of strings providing additional details.\",\"example\":\"{missingScopes=[scope1, scope2]}\",\"type\":\"object\"},\"in\":{\"description\":\"The name of the field or parameter in which the error was found.\",\"example\":null,\"type\":\"string\"},\"message\":{\"description\":\"A human readable message describing the error along with remediation steps where appropriate. This is a required field.\",\"example\":null,\"type\":\"string\"},\"subCategory\":{\"description\":\"A specific category that contains more specific detail about the error.\",\"example\":null,\"type\":\"string\"}},\"required\":[\"message\"],\"type\":\"object\"},\"type\":\"array\"},\"links\":{\"additionalProperties\":{\"example\":null,\"type\":\"string\"},\"description\":\"A map of link names to associated URIs containing documentation about the error or recommended remediation steps, represented as an object with string properties.\",\"example\":null,\"type\":\"object\"},\"message\":{\"description\":\"A human readable message describing the error along with remediation steps where appropriate. It is a string.\",\"example\":\"An error occurred\",\"type\":\"string\"},\"subCategory\":{\"description\":\"A specific category that contains more specific detail about the error, represented as a string.\",\"example\":null,\"type\":\"string\"}},\"required\":[\"category\",\"correlationId\",\"message\"],\"type\":\"object\"}}},\"description\":\"\"}},\"security\":[{\"oauth2\":[\"sales-templates-public-write\"]}],\"securitySchemes\":{\"developer_hapikey\":{\"in\":\"query\",\"name\":\"hapikey\",\"type\":\"apiKey\"},\"oauth2\":{\"flows\":{\"authorizationCode\":{\"authorizationUrl\":\"https://app.hubspot.com/oauth/authorize\",\"scopes\":{\"automation\":\"\"},\"tokenUrl\":\"https://api.hubapi.com/oauth/v1/token\"}},\"type\":\"oauth2\"},\"private_apps\":{\"in\":\"header\",\"name\":\"private-app\",\"type\":\"apiKey\"},\"private_apps_legacy\":{\"in\":\"header\",\"name\":\"private-app-legacy\",\"type\":\"apiKey\"}},\"securitySource\":\"operation\"}","source":"openapi3","version":1},"kind":"http","method":"PATCH","orig":"/automation/email-templates/2026-09/{templateId}","rename":{"param":{"templateId":"template_id"}},"segments":[{"lit":"automation"},{"lit":"email-templates"},{"lit":"2026-09"},{"var":"template_id"}],"select":{"exist":["template_id"]},"transform":{"req":"`reqdata`","res":"`body`"},"index$":0}],"key$":"update"}},"relations":{"ancestors":[["2026_09"]]},"key$":"email_templates_public_template","name__orig":"email_templates_public_template","Name":"EmailTemplatesPublicTemplate","name_":"email_templates_public_template","name-":"email-templates-public-template","NAME":"EMAIL_TEMPLATES_PUBLIC_TEMPLATE","index$":19}, {"active":true,"entity":"email_templates_public_template","key$":"BasicEmailTemplatesPublicTemplateFlow","kind":"basic","name":"BasicEmailTemplatesPublicTemplateFlow","param":{},"step":[{"active":true,"data":{},"input":{"ref":"email_templates_public_template_ref01"},"match":{},"op":"create","spec":[],"valid":[],"index$":0},{"active":true,"data":{},"input":{"ref":"email_templates_public_template_ref01","srcdatavar":"email_templates_public_template_ref01_data","suffix":"_up0","textfield":"body"},"match":{},"op":"update","spec":[{"apply":"TextFieldMark","def":{"mark":"Mark01-email_templates_public_template_ref01"}}],"valid":[],"index$":1},{"active":true,"data":{},"input":{"ref":"email_templates_public_template_ref01","srcdatavar":"email_templates_public_template_ref01_data","suffix":"_dt0"},"match":{"id":"email_templates_public_template01"},"op":"load","spec":[],"valid":[{"apply":"TextFieldMark","def":{"mark":"Mark01-email_templates_public_template_ref01"}}],"index$":2}]}, 'EmailTemplatesPublicTemplate')
+    }
+    const client = setup.client
+    const struct = setup.struct
+
+    const isempty = struct.isempty
+    const select = struct.select
+
+
+    // CREATE
+    const email_templates_public_template_ref01_ent = client.EmailTemplatesPublicTemplate()
+    let email_templates_public_template_ref01_data = setup.data.new.email_templates_public_template['email_templates_public_template_ref01']
+
+    email_templates_public_template_ref01_data = (await email_templates_public_template_ref01_ent.create(email_templates_public_template_ref01_data)).data()
+    assert(null != email_templates_public_template_ref01_data.id)
+
+
+    // UPDATE
+    const email_templates_public_template_ref01_data_up0: any = {}
+    email_templates_public_template_ref01_data_up0.id = email_templates_public_template_ref01_data.id
+
+    const email_templates_public_template_ref01_markdef_up0 = { name: 'body', value: 'Mark01-email_templates_public_template_ref01_' + setup.now }
+    ;(email_templates_public_template_ref01_data_up0 as any)[email_templates_public_template_ref01_markdef_up0.name] = email_templates_public_template_ref01_markdef_up0.value
+
+    const email_templates_public_template_ref01_resdata_up0 = (await email_templates_public_template_ref01_ent.update(email_templates_public_template_ref01_data_up0)).data()
+    assert(email_templates_public_template_ref01_resdata_up0.id === email_templates_public_template_ref01_data_up0.id)
+
+    assert((email_templates_public_template_ref01_resdata_up0 as any)[email_templates_public_template_ref01_markdef_up0.name] === email_templates_public_template_ref01_markdef_up0.value)
+
+
+    // LOAD
+    const email_templates_public_template_ref01_match_dt0: any = {}
+    email_templates_public_template_ref01_match_dt0.id = email_templates_public_template_ref01_data.id
+    const email_templates_public_template_ref01_data_dt0 = (await email_templates_public_template_ref01_ent.load(email_templates_public_template_ref01_match_dt0)).data()
+    assert(email_templates_public_template_ref01_data_dt0.id === email_templates_public_template_ref01_data.id)
+
+
+  })
+})
+
+
+
+function basicSetup(extra?: any) {
+  // TODO: fix test def options
+  const options: any = {} // null
+
+  // TODO: needs test utility to resolve path
+  const entityDataFile =
+    Path.resolve(__dirname, 
+      '../../../../.sdk/test/entity/email_templates_public_template/EmailTemplatesPublicTemplateTestData.json')
+
+  // TODO: file ready util needed?
+  const entityDataSource = Fs.readFileSync(entityDataFile).toString('utf8')
+
+  // TODO: need a xlang JSON parse utility in voxgig/struct with better error msgs
+  const entityData = JSON.parse(entityDataSource)
+
+  options.entity = entityData.existing
+
+  let client = HubspotAutomationSDK.test(options, extra)
+  const struct = client.utility().struct
+  const merge = struct.merge
+  const transform = struct.transform
+
+  let idmap = transform(
+    ['email_templates_public_template01','email_templates_public_template02','email_templates_public_template03','2026_0901','2026_0902','2026_0903'],
+    {
+      '`$PACK`': ['', {
+        '`$KEY`': '`$COPY`',
+        '`$VAL`': ['`$FORMAT`', 'upper', '`$COPY`']
+      }]
+    })
+
+  const env = envOverride({
+    'HUBSPOT_AUTOMATION_TEST_EMAIL_TEMPLATES_PUBLIC_TEMPLATE_ENTID': idmap,
+    'HUBSPOT_AUTOMATION_TEST_LIVE': 'FALSE',
+    'HUBSPOT_AUTOMATION_TEST_EXPLAIN': 'FALSE',
+    'HUBSPOT_AUTOMATION_APIKEY': '',
+  })
+
+  idmap = env['HUBSPOT_AUTOMATION_TEST_EMAIL_TEMPLATES_PUBLIC_TEMPLATE_ENTID']
+
+  const live = 'TRUE' === env.HUBSPOT_AUTOMATION_TEST_LIVE
+
+  const transport = createLiveTransport()
+  if (live) {
+    const rawIds = process.env['HUBSPOT_AUTOMATION_TEST_EMAIL_TEMPLATES_PUBLIC_TEMPLATE_ENTID']
+    idmap = rawIds && rawIds.trim() ? JSON.parse(rawIds) : {}
+    if (!idmap || Array.isArray(idmap) || typeof idmap !== 'object') {
+      throw new Error('Live ENTID must be a JSON object')
+    }
+    client = new HubspotAutomationSDK(merge([
+      // FIRST, so the generated fields below win: sdk-test-control.json's
+      // test.client.options adds to the live client, it does not redirect it.
+      liveClientOptions(),
+      {
+        apikey: env.HUBSPOT_AUTOMATION_APIKEY,
+      },
+      // 'extra || {}', not a bare 'extra': struct.merge returns UNDEFINED when the
+      // last entry is undefined, and basicSetup is normally called with no
+      // argument at all - so a bare 'extra' silently discarded the apikey
+      // and server values above and handed the SDK undefined. Harmless
+      // while there was nothing in that object; not harmless now.
+      extra || {},
+      { system: { fetch: transport.fetch } }
+    ]))
+  }
+
+  const setup = {
+    idmap,
+    env,
+    options,
+    client,
+    struct,
+    data: entityData,
+    explain: 'TRUE' === env.HUBSPOT_AUTOMATION_TEST_EXPLAIN,
+    live,
+    transport,
+    now: Date.now(),
+  }
+
+  return setup
+}
+  

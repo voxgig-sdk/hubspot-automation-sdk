@@ -1,0 +1,26 @@
+# BasicSequencesPublicSequencePerformanceFlow
+
+main: kit: flow: BasicSequencesPublicSequencePerformanceFlow:
+{
+  entity: "sequences_public_sequence_performance",
+  kind: "basic",
+  name: "BasicSequencesPublicSequencePerformanceFlow",
+  step: [
+    {
+      match: {
+        sequence_id: "sequence01"
+      }
+
+      op: "list",
+      valid: [
+        {
+          apply: "ItemExists",
+          def: {
+            ref: "sequences_public_sequence_performance_ref01"
+          }
+        }
+      ]
+    }
+  ],
+  "key$": "BasicSequencesPublicSequencePerformanceFlow"
+}

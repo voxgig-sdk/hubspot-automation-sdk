@@ -1,0 +1,33 @@
+# BasicActionsV4PublicActionDefinitionRequiresObjectFlow
+
+main: kit: flow: BasicActionsV4PublicActionDefinitionRequiresObjectFlow:
+{
+  entity: "actions_v4_public_action_definition_requires_object",
+  kind: "basic",
+  name: "BasicActionsV4PublicActionDefinitionRequiresObjectFlow",
+  step: [
+    {
+      input: {
+        ref: "actions_v4_public_action_definition_requires_object_ref01",
+        srcdatavar: "actions_v4_public_action_definition_requires_object_ref01_data",
+        suffix: "_dt0"
+      }
+
+      match: {
+        app_id: "app01",
+        id: "actions_v4_public_action_definition_requires_object01"
+      }
+
+      op: "load",
+      valid: [
+        {
+          apply: "TextFieldMark",
+          def: {
+            mark: "Mark01-actions_v4_public_action_definition_requires_object_ref01"
+          }
+        }
+      ]
+    }
+  ],
+  "key$": "BasicActionsV4PublicActionDefinitionRequiresObjectFlow"
+}

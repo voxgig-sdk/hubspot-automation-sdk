@@ -1,0 +1,34 @@
+# BasicActionsV4PublicActionFunctionFlow
+
+main: kit: flow: BasicActionsV4PublicActionFunctionFlow:
+{
+  entity: "actions_v4_public_action_function",
+  kind: "basic",
+  name: "BasicActionsV4PublicActionFunctionFlow",
+  step: [
+    {
+      input: {
+        ref: "actions_v4_public_action_function_ref01",
+        srcdatavar: "actions_v4_public_action_function_ref01_data",
+        suffix: "_dt0"
+      }
+
+      match: {
+        app_id: "app01",
+        definition_id: "definition01",
+        id: "actions_v4_public_action_function01"
+      }
+
+      op: "load",
+      valid: [
+        {
+          apply: "TextFieldMark",
+          def: {
+            mark: "Mark01-actions_v4_public_action_function_ref01"
+          }
+        }
+      ]
+    }
+  ],
+  "key$": "BasicActionsV4PublicActionFunctionFlow"
+}

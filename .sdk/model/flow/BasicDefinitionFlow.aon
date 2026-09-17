@@ -1,0 +1,37 @@
+# BasicDefinitionFlow
+
+main: kit: flow: BasicDefinitionFlow:
+{
+  entity: "definition",
+  kind: "basic",
+  name: "BasicDefinitionFlow",
+  step: [
+    {
+      input: {
+        ref: "definition_ref01"
+      }
+
+      match: {
+        app_id: "app01",
+        definition_id: "definition01"
+      }
+
+      op: "create"
+    }
+
+    {
+      input: {
+        ref: "definition_ref01",
+        suffix: "_rm0"
+      }
+
+      match: {
+        app_id: "app01",
+        id: "definition01"
+      }
+
+      op: "remove"
+    }
+  ],
+  "key$": "BasicDefinitionFlow"
+}

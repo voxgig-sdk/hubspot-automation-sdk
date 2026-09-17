@@ -1,0 +1,18 @@
+# BasicCallbackFlow
+
+main: kit: flow: BasicCallbackFlow:
+{
+  entity: "callback",
+  kind: "basic",
+  name: "BasicCallbackFlow",
+  step: [
+    {
+      input: {
+        ref: "callback_ref01"
+      }
+
+      op: "create"
+    }
+  ],
+  "key$": "BasicCallbackFlow"
+}

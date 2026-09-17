@@ -1,0 +1,32 @@
+# BasicActionsV4CollectionResponsePublicActionDefinitionForwardFlow
+
+main: kit: flow: BasicActionsV4CollectionResponsePublicActionDefinitionForwardFlow:
+{
+  entity: "actions_v4_collection_response_public_action_definition_forward",
+  kind: "basic",
+  name: "BasicActionsV4CollectionResponsePublicActionDefinitionForwardFlow",
+  step: [
+    {
+      input: {
+        ref: "actions_v4_collection_response_public_action_definition_forward_ref01",
+        srcdatavar: "actions_v4_collection_response_public_action_definition_forward_ref01_data",
+        suffix: "_dt0"
+      }
+
+      match: {
+        id: "actions_v4_collection_response_public_action_definition_forward01"
+      }
+
+      op: "load",
+      valid: [
+        {
+          apply: "TextFieldMark",
+          def: {
+            mark: "Mark01-actions_v4_collection_response_public_action_definition_forward_ref01"
+          }
+        }
+      ]
+    }
+  ],
+  "key$": "BasicActionsV4CollectionResponsePublicActionDefinitionForwardFlow"
+}

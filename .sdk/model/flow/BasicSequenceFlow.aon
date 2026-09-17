@@ -1,0 +1,71 @@
+# BasicSequenceFlow
+
+main: kit: flow: BasicSequenceFlow:
+{
+  entity: "sequence",
+  kind: "basic",
+  name: "BasicSequenceFlow",
+  step: [
+    {
+      input: {
+        ref: "sequence_ref01"
+      }
+
+      op: "create"
+    }
+
+    {
+      op: "list",
+      valid: [
+        {
+          apply: "ItemExists",
+          def: {
+            ref: "sequence_ref01"
+          }
+        }
+      ]
+    }
+
+    {
+      input: {
+        ref: "sequence_ref01",
+        srcdatavar: "sequence_ref01_data",
+        suffix: "_up0",
+        textfield: "createdAt"
+      }
+
+      op: "update",
+      spec: [
+        {
+          apply: "TextFieldMark",
+          def: {
+            mark: "Mark01-sequence_ref01"
+          }
+        }
+      ]
+    }
+
+    {
+      input: {
+        ref: "sequence_ref01",
+        srcdatavar: "sequence_ref01_data",
+        suffix: "_dt0"
+      }
+
+      match: {
+        id: "sequence01"
+      }
+
+      op: "load",
+      valid: [
+        {
+          apply: "TextFieldMark",
+          def: {
+            mark: "Mark01-sequence_ref01"
+          }
+        }
+      ]
+    }
+  ],
+  "key$": "BasicSequenceFlow"
+}

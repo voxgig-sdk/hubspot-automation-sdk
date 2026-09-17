@@ -1,0 +1,58 @@
+# BasicAutomationV4ApiFlowFlow
+
+main: kit: flow: BasicAutomationV4ApiFlowFlow:
+{
+  entity: "automation_v4_api_flow",
+  kind: "basic",
+  name: "BasicAutomationV4ApiFlowFlow",
+  step: [
+    {
+      input: {
+        ref: "automation_v4_api_flow_ref01"
+      }
+
+      op: "create"
+    }
+
+    {
+      input: {
+        ref: "automation_v4_api_flow_ref01",
+        srcdatavar: "automation_v4_api_flow_ref01_data",
+        suffix: "_up0"
+      }
+
+      op: "update",
+      spec: [
+        {
+          apply: "TextFieldMark",
+          def: {
+            mark: "Mark01-automation_v4_api_flow_ref01"
+          }
+        }
+      ]
+    }
+
+    {
+      input: {
+        ref: "automation_v4_api_flow_ref01",
+        srcdatavar: "automation_v4_api_flow_ref01_data",
+        suffix: "_dt0"
+      }
+
+      match: {
+        id: "automation_v4_api_flow01"
+      }
+
+      op: "load",
+      valid: [
+        {
+          apply: "TextFieldMark",
+          def: {
+            mark: "Mark01-automation_v4_api_flow_ref01"
+          }
+        }
+      ]
+    }
+  ],
+  "key$": "BasicAutomationV4ApiFlowFlow"
+}

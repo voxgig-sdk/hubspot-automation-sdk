@@ -1,0 +1,2289 @@
+<!doctype html>
+<html lang="en">
+<head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><title>Sequence | HubSpot Automation API</title><link rel="stylesheet" href="../assets/style.css"></head>
+<body><a class="skip" href="#content">Skip to content</a>
+<header class="site-header"><a class="site-title" href="../index.html">HubSpot Automation API<span>SDK documentation</span></a><div class="site-links"><a class="repo-link" href="https://github.com/voxgig-sdk/hubspot-automation-sdk">voxgig-sdk/hubspot-automation-sdk</a></div></header>
+<div class="site-notice" role="note"></div>
+<div class="shell"><nav class="site-nav" aria-label="Documentation"><div class="search"><label for="search">Search documentation</label><input id="search" type="search" data-base="../" placeholder="Find a guide or reference"><div id="results" aria-live="polite"></div></div><details><summary>Overview</summary><a href="../index.html">HubSpot Automation API</a></details>
+<details open><summary>API</summary><a href="../api/index.html">API overview</a>
+<a href="../api/actions_v4_collection_response_public_action_definition_forward.html">ActionsV4CollectionResponsePublicActionDefinitionForward</a>
+<a href="../api/actions_v4_collection_response_public_action_function_identifier_no.html">ActionsV4CollectionResponsePublicActionFunctionIdentifierNo</a>
+<a href="../api/actions_v4_collection_response_public_action_revision_forward.html">ActionsV4CollectionResponsePublicActionRevisionForward</a>
+<a href="../api/actions_v4_public_action_definition.html">ActionsV4PublicActionDefinition</a>
+<a href="../api/actions_v4_public_action_definition_requires_object.html">ActionsV4PublicActionDefinitionRequiresObject</a>
+<a href="../api/actions_v4_public_action_function.html">ActionsV4PublicActionFunction</a>
+<a href="../api/actions_v4_public_action_function_identifier.html">ActionsV4PublicActionFunctionIdentifier</a>
+<a href="../api/actions_v4_public_action_revision.html">ActionsV4PublicActionRevision</a>
+<a href="../api/automation_v4_api_flow.html">AutomationV4ApiFlow</a>
+<a href="../api/automation_v4_batch_response_api_flow.html">AutomationV4BatchResponseApiFlow</a>
+<a href="../api/automation_v4_batch_response_flow_id_workflow_id_mapping.html">AutomationV4BatchResponseFlowIdWorkflowIdMapping</a>
+<a href="../api/automation_v4_collection_response_api_flow_email_campaign.html">AutomationV4CollectionResponseApiFlowEmailCampaign</a>
+<a href="../api/automation_v4_collection_response_api_flow_listing_forward_paging.html">AutomationV4CollectionResponseApiFlowListingForwardPaging</a>
+<a href="../api/automation_v4_collection_response_api_histogram_data_point_no.html">AutomationV4CollectionResponseApiHistogramDataPointNo</a>
+<a href="../api/basic.html">Basic</a>
+<a href="../api/callback.html">Callback</a>
+<a href="../api/definition.html">Definition</a>
+<a href="../api/email_templates_collection_response_public_folder_forward_paging.html">EmailTemplatesCollectionResponsePublicFolderForwardPaging</a>
+<a href="../api/email_templates_collection_response_public_template_forward_paging.html">EmailTemplatesCollectionResponsePublicTemplateForwardPaging</a>
+<a href="../api/email_templates_public_template.html">EmailTemplatesPublicTemplate</a>
+<a href="../api/function.html">Function</a>
+<a aria-current="page" href="../api/sequence.html">Sequence</a><div class="nav-sections"><a class="nav-section" href="#post-automationsequences2026-09serviceaccountssequences">POST /automation/sequences/2026-09/serviceaccounts/sequences</a>
+<a class="nav-section" href="#get-automationsequences2026-09serviceaccountssequences">GET /automation/sequences/2026-09/serviceaccounts/sequences</a>
+<a class="nav-section" href="#get-automationsequences2026-09serviceaccountssequencessequenceid">GET /automation/sequences/2026-09/serviceaccounts/sequences/{sequenceId}</a>
+<a class="nav-section" href="#put-automationsequences2026-09serviceaccountssequencessequenceid">PUT /automation/sequences/2026-09/serviceaccounts/sequences/{sequenceId}</a></div>
+<a href="../api/sequences_collection_response_with_total_public_sequence_lite.html">SequencesCollectionResponseWithTotalPublicSequenceLite</a>
+<a href="../api/sequences_public_sequence.html">SequencesPublicSequence</a>
+<a href="../api/sequences_public_sequence_enrollment.html">SequencesPublicSequenceEnrollment</a>
+<a href="../api/sequences_public_sequence_enrollment_lite.html">SequencesPublicSequenceEnrollmentLite</a>
+<a href="../api/sequences_public_sequence_performance.html">SequencesPublicSequencePerformance</a></details>
+<details><summary>Guides</summary><a href="../guides/authentication.html">Authentication</a>
+<a href="../guides/first-call.html">Make your first API call</a>
+<a href="../guides/errors.html">Handle errors</a>
+<a href="../guides/concepts.html">Entities, SDKs, and tools</a></details>
+<details><summary>SDKs</summary><a href="../sdks/go.html">Golang</a>
+<a href="../sdks/js.html">JavaScript</a>
+<a href="../sdks/lua.html">Lua</a>
+<a href="../sdks/php.html">PHP</a>
+<a href="../sdks/py.html">Python</a>
+<a href="../sdks/ts.html">TypeScript</a></details>
+<details><summary>Tools</summary><a href="../tools/go-cli.html">Go CLI</a>
+<a href="../tools/go-mcp.html">Go MCP server</a></details>
+<details><summary>Features</summary><a href="../features/debug.html">Request/response capture ring buffer for debugging</a>
+<a href="../features/idempotency.html">Idempotency keys for safe retries of mutating operations</a>
+<a href="../features/metrics.html">Statistics capture: per-operation counters and latency</a>
+<a href="../features/paging.html">Pagination signals for list operations</a>
+<a href="../features/ratelimit.html">Client-side rate limiting via a token bucket</a>
+<a href="../features/retry.html">Automatic retry of transient failures with exponential backoff</a>
+<a href="../features/test.html">In-memory mock transport for testing without a live server</a>
+<a href="../features/timeout.html">Per-request timeout with transport abort</a></details></nav><main id="content"><div class="page-context"><span class="section-dot" aria-hidden="true"></span>API</div><h1 id="sequence">Sequence</h1>
+<h2 id="operations">Operations</h2>
+<p>Every route this entity exposes. Each route links to its own reference on this page.</p>
+<table>
+<thead>
+<tr>
+<th>Method</th>
+<th>Route</th>
+<th>SDK operation</th>
+<th>Returns</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>POST</code></td>
+<td><a href="#post-automationsequences2026-09serviceaccountssequences"><code>/automation/sequences/2026-09/serviceaccounts/sequences</code></a></td>
+<td><code>create</code></td>
+<td>successful operation</td>
+</tr>
+<tr>
+<td><code>GET</code></td>
+<td><a href="#get-automationsequences2026-09serviceaccountssequences"><code>/automation/sequences/2026-09/serviceaccounts/sequences</code></a></td>
+<td><code>list</code></td>
+<td>successful operation</td>
+</tr>
+<tr>
+<td><code>GET</code></td>
+<td><a href="#get-automationsequences2026-09serviceaccountssequencessequenceid"><code>/automation/sequences/2026-09/serviceaccounts/sequences/{sequenceId}</code></a></td>
+<td><code>load</code></td>
+<td>successful operation</td>
+</tr>
+<tr>
+<td><code>PUT</code></td>
+<td><a href="#put-automationsequences2026-09serviceaccountssequencessequenceid"><code>/automation/sequences/2026-09/serviceaccounts/sequences/{sequenceId}</code></a></td>
+<td><code>update</code></td>
+<td>successful operation</td>
+</tr>
+</tbody>
+</table>
+<h2 id="fields">Fields</h2>
+<table>
+<thead>
+<tr>
+<th>Field</th>
+<th>Type</th>
+<th>Required</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>createdAt</code></td>
+<td><code>string</code></td>
+<td>Yes</td>
+<td>The date and time when the sequence was created, in ISO 8601 format.</td>
+</tr>
+<tr>
+<td><code>dependencies</code></td>
+<td><code>array</code></td>
+<td>Yes</td>
+<td>An array of dependencies between steps in the sequence, each represented by a PublicSequenceStepDependencyResponse object.</td>
+</tr>
+<tr>
+<td><code>dynamic</code></td>
+<td><code>boolean</code></td>
+<td>Yes</td>
+<td>A boolean indicating whether the sequence is dynamic.</td>
+</tr>
+<tr>
+<td><code>engagementTriggers</code></td>
+<td><code>object</code></td>
+<td>No</td>
+<td></td>
+</tr>
+<tr>
+<td><code>folderId</code></td>
+<td><code>string</code></td>
+<td>No</td>
+<td>The identifier for the folder containing the sequence.</td>
+</tr>
+<tr>
+<td><code>id</code></td>
+<td><code>string</code></td>
+<td>Yes</td>
+<td>The unique identifier for the sequence.</td>
+</tr>
+<tr>
+<td><code>name</code></td>
+<td><code>string</code></td>
+<td>Yes</td>
+<td>The name of the sequence.</td>
+</tr>
+<tr>
+<td><code>sequence</code></td>
+<td><code>object</code></td>
+<td>Yes</td>
+<td></td>
+</tr>
+<tr>
+<td><code>settings</code></td>
+<td><code>object</code></td>
+<td>Yes</td>
+<td></td>
+</tr>
+<tr>
+<td><code>steps</code></td>
+<td><code>array</code></td>
+<td>Yes</td>
+<td>An array of steps included in the sequence, each represented by a PublicSequenceStepResponseV2 object.</td>
+</tr>
+<tr>
+<td><code>updatedAt</code></td>
+<td><code>string</code></td>
+<td>Yes</td>
+<td>The date and time when the sequence was last updated, in ISO 8601 format.</td>
+</tr>
+<tr>
+<td><code>userId</code></td>
+<td><code>string</code></td>
+<td>Yes</td>
+<td>The unique identifier of the user who owns the sequence.</td>
+</tr>
+<tr>
+<td><code>userView</code></td>
+<td><code>object</code></td>
+<td>No</td>
+<td></td>
+</tr>
+</tbody>
+</table>
+<h2 id="create">create</h2>
+<h3 id="post-automationsequences2026-09serviceaccountssequences" class="operation" data-method="post"><code>POST</code> /automation/sequences/2026-09/serviceaccounts/sequences</h3>
+<p>Operation ID: <code>post-/automation/sequences/2026-09/serviceaccounts/sequences</code>.</p>
+<p>Authentication: oauth2 (<code>oauth2</code>).</p>
+<h4 id="request-body">Request body</h4>
+<p><code>application/json</code></p>
+<table>
+<thead>
+<tr>
+<th>Property</th>
+<th>Type</th>
+<th>Required</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>dependencies</code></td>
+<td><code>array of object</code></td>
+<td>Yes</td>
+<td>An array of dependencies between sequence steps, each defined by the PublicSequenceStepDependencyRequest schema.</td>
+</tr>
+<tr>
+<td><code>dependencies[].branchNumber</code></td>
+<td><code>integer (int32)</code></td>
+<td>Yes</td>
+<td>An integer indicating the branch number associated with the dependency.</td>
+</tr>
+<tr>
+<td><code>dependencies[].dependencyType</code></td>
+<td><code>enum: ADAPTIVE_COMPLETION, MANUAL_PAUSE, TASK_COMPLETION</code></td>
+<td>Yes</td>
+<td>A string indicating the type of dependency. Valid values include 'TASK_COMPLETION' and 'MANUAL_PAUSE'.</td>
+</tr>
+<tr>
+<td><code>dependencies[].reliesOnStepOrder</code></td>
+<td><code>integer (int32)</code></td>
+<td>Yes</td>
+<td>An integer representing the order of the step that is relied upon by another step.</td>
+</tr>
+<tr>
+<td><code>dependencies[].requiredByStepOrder</code></td>
+<td><code>integer (int32)</code></td>
+<td>Yes</td>
+<td>An integer representing the order of the step that requires the dependency.</td>
+</tr>
+<tr>
+<td><code>dynamic</code></td>
+<td><code>boolean</code></td>
+<td>Yes</td>
+<td>A boolean indicating whether the sequence is dynamic.</td>
+</tr>
+<tr>
+<td><code>engagementTriggers</code></td>
+<td><code>object</code></td>
+<td>No</td>
+<td></td>
+</tr>
+<tr>
+<td><code>engagementTriggers.numberOfClicks</code></td>
+<td><code>integer (int32)</code></td>
+<td>No</td>
+<td>An integer representing the number of times links within an email must be clicked to trigger an engagement action.</td>
+</tr>
+<tr>
+<td><code>engagementTriggers.numberOfOpens</code></td>
+<td><code>integer (int32)</code></td>
+<td>No</td>
+<td>An integer representing the number of times an email must be opened to trigger an engagement action.</td>
+</tr>
+<tr>
+<td><code>folderId</code></td>
+<td><code>string</code></td>
+<td>No</td>
+<td>The identifier of the folder where the sequence is stored. It is a string.</td>
+</tr>
+<tr>
+<td><code>name</code></td>
+<td><code>string</code></td>
+<td>Yes</td>
+<td>The name of the sequence. It is a string.</td>
+</tr>
+<tr>
+<td><code>settings</code></td>
+<td><code>object</code></td>
+<td>Yes</td>
+<td></td>
+</tr>
+<tr>
+<td><code>settings.eligibleFollowUpDays</code></td>
+<td><code>enum: BUSINESS_DAYS, EVERYDAY, WEEKDAYS_ONLY</code></td>
+<td>Yes</td>
+<td>Specifies the days on which follow-ups are eligible to be sent. Valid values include 'EVERYDAY', 'BUSINESS_DAYS', and 'WEEKDAYS_ONLY'.</td>
+</tr>
+<tr>
+<td><code>settings.individualTaskRemindersEnabled</code></td>
+<td><code>boolean</code></td>
+<td>Yes</td>
+<td>A boolean indicating whether individual task reminders are enabled.</td>
+</tr>
+<tr>
+<td><code>settings.sellingStrategy</code></td>
+<td><code>enum: ACCOUNT_BASED, LEAD_BASED</code></td>
+<td>Yes</td>
+<td>Defines the selling strategy to be used. Valid values include 'LEAD_BASED' and 'ACCOUNT_BASED'.</td>
+</tr>
+<tr>
+<td><code>settings.sendWindowEndMinute</code></td>
+<td><code>integer (int32)</code></td>
+<td>Yes</td>
+<td>An integer representing the end minute of the window during which emails can be sent.</td>
+</tr>
+<tr>
+<td><code>settings.sendWindowStartMinute</code></td>
+<td><code>integer (int32)</code></td>
+<td>Yes</td>
+<td>An integer representing the start minute of the window during which emails can be sent.</td>
+</tr>
+<tr>
+<td><code>settings.taskCreationMinute</code></td>
+<td><code>integer (int32)</code></td>
+<td>Yes</td>
+<td>An integer indicating the minute at which tasks should be created.</td>
+</tr>
+<tr>
+<td><code>settings.taskReminderMinute</code></td>
+<td><code>integer (int32)</code></td>
+<td>Yes</td>
+<td>An integer indicating the minute at which task reminders should be sent.</td>
+</tr>
+<tr>
+<td><code>settings.unenrollmentSettings</code></td>
+<td><code>object</code></td>
+<td>Yes</td>
+<td></td>
+</tr>
+<tr>
+<td><code>settings.unenrollmentSettings.emailSettings</code></td>
+<td><code>object</code></td>
+<td>Yes</td>
+<td></td>
+</tr>
+<tr>
+<td><code>settings.unenrollmentSettings.emailSettings.criteria</code></td>
+<td><code>enum: ALL, NONE</code></td>
+<td>Yes</td>
+<td>A string representing the criteria for email settings. Valid values include 'ALL' and 'NONE'.</td>
+</tr>
+<tr>
+<td><code>settings.unenrollmentSettings.emailSettings.sellingStrategy</code></td>
+<td><code>enum: ACCOUNT_BASED, LEAD_BASED</code></td>
+<td>Yes</td>
+<td>A string indicating the selling strategy for email settings. Valid values are 'LEAD_BASED' and 'ACCOUNT_BASED'.</td>
+</tr>
+<tr>
+<td><code>settings.unenrollmentSettings.meetingSettings</code></td>
+<td><code>object</code></td>
+<td>Yes</td>
+<td></td>
+</tr>
+<tr>
+<td><code>settings.unenrollmentSettings.meetingSettings.criteria</code></td>
+<td><code>enum: ALL, NONE</code></td>
+<td>Yes</td>
+<td>Specifies the criteria for meetings, with valid values being 'ALL' or 'NONE'.</td>
+</tr>
+<tr>
+<td><code>settings.unenrollmentSettings.meetingSettings.sellingStrategy</code></td>
+<td><code>enum: ACCOUNT_BASED, LEAD_BASED</code></td>
+<td>Yes</td>
+<td>Indicates the selling strategy employed, which can be either 'LEAD_BASED' or 'ACCOUNT_BASED'.</td>
+</tr>
+<tr>
+<td><code>settings.useThreadedFollowUps</code></td>
+<td><code>boolean</code></td>
+<td>Yes</td>
+<td>A boolean indicating whether follow-ups should be threaded.</td>
+</tr>
+<tr>
+<td><code>steps</code></td>
+<td><code>array of object</code></td>
+<td>Yes</td>
+<td>An array of steps in the sequence, each defined by the PublicSequenceStepRequest schema.</td>
+</tr>
+<tr>
+<td><code>steps[].actionType</code></td>
+<td><code>enum: ADAPTIVE_CONTAINER, EMAIL, FINISH_ENROLLMENT, TASK</code></td>
+<td>Yes</td>
+<td>A string indicating the type of action to be performed in this step. Valid values include 'EMAIL', 'TASK', and 'FINISH_ENROLLMENT'.</td>
+</tr>
+<tr>
+<td><code>steps[].branchNumber</code></td>
+<td><code>integer (int32)</code></td>
+<td>Yes</td>
+<td>An integer representing the branch number of this step, used for branching logic in sequences.</td>
+</tr>
+<tr>
+<td><code>steps[].delayMillis</code></td>
+<td><code>integer (int64)</code></td>
+<td>Yes</td>
+<td>An integer representing the delay in milliseconds before this step is executed.</td>
+</tr>
+<tr>
+<td><code>steps[].delayMillisMax</code></td>
+<td><code>integer (int64)</code></td>
+<td>No</td>
+<td>An integer specifying the maximum delay in milliseconds for this step.</td>
+</tr>
+<tr>
+<td><code>steps[].delayMillisMin</code></td>
+<td><code>integer (int64)</code></td>
+<td>No</td>
+<td>An integer specifying the minimum delay in milliseconds for this step.</td>
+</tr>
+<tr>
+<td><code>steps[].dynamic</code></td>
+<td><code>boolean</code></td>
+<td>Yes</td>
+<td>A boolean indicating whether the step is dynamic, allowing for conditional execution based on certain criteria.</td>
+</tr>
+<tr>
+<td><code>steps[].emailPattern</code></td>
+<td><code>object</code></td>
+<td>No</td>
+<td></td>
+</tr>
+<tr>
+<td><code>steps[].emailPattern.templateId</code></td>
+<td><code>string</code></td>
+<td>Yes</td>
+<td>The unique identifier for the email template to be used. It is a string and is required.</td>
+</tr>
+<tr>
+<td><code>steps[].emailPattern.threadEmailToStepOrder</code></td>
+<td><code>integer (int32)</code></td>
+<td>No</td>
+<td>An integer indicating the step order to which the email should be threaded. This property is optional.</td>
+</tr>
+<tr>
+<td><code>steps[].stepOrder</code></td>
+<td><code>integer (int32)</code></td>
+<td>Yes</td>
+<td>An integer indicating the order of the step within the sequence.</td>
+</tr>
+<tr>
+<td><code>steps[].taskPattern</code></td>
+<td><code>object</code></td>
+<td>No</td>
+<td></td>
+</tr>
+<tr>
+<td><code>steps[].taskPattern.notes</code></td>
+<td><code>string</code></td>
+<td>No</td>
+<td>A string containing additional notes or details about the task.</td>
+</tr>
+<tr>
+<td><code>steps[].taskPattern.queueId</code></td>
+<td><code>string</code></td>
+<td>No</td>
+<td>A string identifier for the queue to which the task belongs.</td>
+</tr>
+<tr>
+<td><code>steps[].taskPattern.subject</code></td>
+<td><code>string</code></td>
+<td>No</td>
+<td>A string representing the subject of the task.</td>
+</tr>
+<tr>
+<td><code>steps[].taskPattern.taskPriority</code></td>
+<td><code>enum: HIGH, LOW, MEDIUM, NONE</code></td>
+<td>Yes</td>
+<td>The priority level of the task. Valid values include 'NONE', 'HIGH', 'MEDIUM', and 'LOW'.</td>
+</tr>
+<tr>
+<td><code>steps[].taskPattern.taskType</code></td>
+<td><code>enum: CALL, EMAIL, LINKED_IN_CONNECT, LINKED_IN_MESSAGE, MEETING, TODO</code></td>
+<td>Yes</td>
+<td>The type of task to be performed. Valid values include 'CALL', 'MEETING', 'EMAIL', 'TODO', 'LINKED_IN_CONNECT', and 'LINKED_IN_MESSAGE'.</td>
+</tr>
+<tr>
+<td><code>steps[].taskPattern.templateId</code></td>
+<td><code>string</code></td>
+<td>No</td>
+<td>A string identifier for the template associated with the task.</td>
+</tr>
+<tr>
+<td><code>steps[].taskPattern.threadEmailToStepOrder</code></td>
+<td><code>integer (int32)</code></td>
+<td>No</td>
+<td>An integer representing the order of the step to which the email should be threaded.</td>
+</tr>
+<tr>
+<td><code>steps[].variants</code></td>
+<td><code>array of object</code></td>
+<td>Yes</td>
+<td>An array of PublicSequenceStepVariantRequest objects, each representing a variant of this step.</td>
+</tr>
+<tr>
+<td><code>steps[].variants[].activated</code></td>
+<td><code>boolean</code></td>
+<td>Yes</td>
+<td>A boolean indicating whether this variant is active.</td>
+</tr>
+<tr>
+<td><code>steps[].variants[].emailPattern</code></td>
+<td><code>object</code></td>
+<td>No</td>
+<td></td>
+</tr>
+<tr>
+<td><code>steps[].variants[].emailPattern.$ref</code></td>
+<td><code>any</code></td>
+<td>No</td>
+<td></td>
+</tr>
+<tr>
+<td><code>steps[].variants[].taskPattern</code></td>
+<td><code>object</code></td>
+<td>No</td>
+<td></td>
+</tr>
+<tr>
+<td><code>steps[].variants[].taskPattern.$ref</code></td>
+<td><code>any</code></td>
+<td>No</td>
+<td></td>
+</tr>
+<tr>
+<td><code>steps[].variants[].variantOrdinal</code></td>
+<td><code>integer (int32)</code></td>
+<td>Yes</td>
+<td>An integer indicating the order of this variant among other variants of the same step.</td>
+</tr>
+</tbody>
+</table>
+<h4 id="responses">Responses</h4>
+<h5 id="200-successful-operation" class="status" data-status="2xx">200: successful operation</h5>
+<p><code>application/json</code></p>
+<table>
+<thead>
+<tr>
+<th>Property</th>
+<th>Type</th>
+<th>Required</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>sequence</code></td>
+<td><code>object</code></td>
+<td>Yes</td>
+<td></td>
+</tr>
+<tr>
+<td><code>sequence.createdAt</code></td>
+<td><code>string (date-time)</code></td>
+<td>Yes</td>
+<td>The date and time when the sequence was created, in ISO 8601 format.</td>
+</tr>
+<tr>
+<td><code>sequence.dependencies</code></td>
+<td><code>array of object</code></td>
+<td>Yes</td>
+<td>An array of dependencies between steps in the sequence, each represented by a PublicSequenceStepDependencyResponse object.</td>
+</tr>
+<tr>
+<td><code>sequence.dependencies[].createdAt</code></td>
+<td><code>string (date-time)</code></td>
+<td>Yes</td>
+<td>The date and time when this dependency was created, in ISO 8601 format.</td>
+</tr>
+<tr>
+<td><code>sequence.dependencies[].dependencyType</code></td>
+<td><code>enum: ADAPTIVE_COMPLETION, MANUAL_PAUSE, TASK_COMPLETION</code></td>
+<td>Yes</td>
+<td>The type of dependency, which can be either 'TASK_COMPLETION' or 'MANUAL_PAUSE'.</td>
+</tr>
+<tr>
+<td><code>sequence.dependencies[].id</code></td>
+<td><code>string</code></td>
+<td>Yes</td>
+<td>The unique identifier for this dependency.</td>
+</tr>
+<tr>
+<td><code>sequence.dependencies[].reliesOnSequenceStepId</code></td>
+<td><code>string</code></td>
+<td>Yes</td>
+<td>The unique identifier of the sequence step that this dependency relies on.</td>
+</tr>
+<tr>
+<td><code>sequence.dependencies[].reliesOnStepOrder</code></td>
+<td><code>integer (int32)</code></td>
+<td>Yes</td>
+<td>The order number of the step that this dependency relies on.</td>
+</tr>
+<tr>
+<td><code>sequence.dependencies[].requiredBySequenceStepId</code></td>
+<td><code>string</code></td>
+<td>Yes</td>
+<td>The unique identifier of the sequence step that requires this dependency.</td>
+</tr>
+<tr>
+<td><code>sequence.dependencies[].requiredByStepOrder</code></td>
+<td><code>integer (int32)</code></td>
+<td>Yes</td>
+<td>The order number of the step that requires this dependency.</td>
+</tr>
+<tr>
+<td><code>sequence.dependencies[].updatedAt</code></td>
+<td><code>string (date-time)</code></td>
+<td>Yes</td>
+<td>The date and time when this dependency was last updated, in ISO 8601 format.</td>
+</tr>
+<tr>
+<td><code>sequence.folderId</code></td>
+<td><code>string</code></td>
+<td>No</td>
+<td>The identifier for the folder containing the sequence.</td>
+</tr>
+<tr>
+<td><code>sequence.id</code></td>
+<td><code>string</code></td>
+<td>Yes</td>
+<td>The unique identifier for the sequence.</td>
+</tr>
+<tr>
+<td><code>sequence.name</code></td>
+<td><code>string</code></td>
+<td>Yes</td>
+<td>The name of the sequence.</td>
+</tr>
+<tr>
+<td><code>sequence.settings</code></td>
+<td><code>object</code></td>
+<td>No</td>
+<td></td>
+</tr>
+<tr>
+<td><code>sequence.settings.createdAt</code></td>
+<td><code>string (date-time)</code></td>
+<td>Yes</td>
+<td>The date and time when the sequence settings were created, in ISO 8601 format.</td>
+</tr>
+<tr>
+<td><code>sequence.settings.eligibleFollowUpDays</code></td>
+<td><code>enum: BUSINESS_DAYS, EVERYDAY, WEEKDAYS_ONLY</code></td>
+<td>Yes</td>
+<td>Specifies the days eligible for follow-ups. Valid values include 'EVERYDAY', 'BUSINESS_DAYS', and 'WEEKDAYS_ONLY'.</td>
+</tr>
+<tr>
+<td><code>sequence.settings.id</code></td>
+<td><code>string</code></td>
+<td>Yes</td>
+<td>The unique identifier for the sequence settings.</td>
+</tr>
+<tr>
+<td><code>sequence.settings.individualTaskRemindersEnabled</code></td>
+<td><code>boolean</code></td>
+<td>Yes</td>
+<td>A boolean indicating whether individual task reminders are enabled.</td>
+</tr>
+<tr>
+<td><code>sequence.settings.sellingStrategy</code></td>
+<td><code>enum: ACCOUNT_BASED, LEAD_BASED</code></td>
+<td>Yes</td>
+<td>The strategy used for selling, which can be either 'LEAD_BASED' or 'ACCOUNT_BASED'.</td>
+</tr>
+<tr>
+<td><code>sequence.settings.sendWindowEndMinute</code></td>
+<td><code>integer (int32)</code></td>
+<td>Yes</td>
+<td>The ending minute of the window during which emails can be sent, represented as an integer.</td>
+</tr>
+<tr>
+<td><code>sequence.settings.sendWindowStartMinute</code></td>
+<td><code>integer (int32)</code></td>
+<td>Yes</td>
+<td>The starting minute of the window during which emails can be sent, represented as an integer.</td>
+</tr>
+<tr>
+<td><code>sequence.settings.taskReminderMinute</code></td>
+<td><code>integer (int32)</code></td>
+<td>Yes</td>
+<td>The minute at which task reminders are sent, represented as an integer.</td>
+</tr>
+<tr>
+<td><code>sequence.settings.updatedAt</code></td>
+<td><code>string (date-time)</code></td>
+<td>Yes</td>
+<td>The date and time when the sequence settings were last updated, in ISO 8601 format.</td>
+</tr>
+<tr>
+<td><code>sequence.steps</code></td>
+<td><code>array of object</code></td>
+<td>Yes</td>
+<td>An array of steps included in the sequence, each represented by a PublicSequenceStepResponseV2 object.</td>
+</tr>
+<tr>
+<td><code>sequence.steps[].actionType</code></td>
+<td><code>enum: ADAPTIVE_CONTAINER, EMAIL, FINISH_ENROLLMENT, TASK</code></td>
+<td>Yes</td>
+<td>The type of action to be performed in this step. Valid values include 'EMAIL', 'TASK', and 'FINISH_ENROLLMENT'.</td>
+</tr>
+<tr>
+<td><code>sequence.steps[].createdAt</code></td>
+<td><code>string (date-time)</code></td>
+<td>Yes</td>
+<td>The date and time when this step was created, in ISO 8601 format.</td>
+</tr>
+<tr>
+<td><code>sequence.steps[].delayMillis</code></td>
+<td><code>integer (int64)</code></td>
+<td>Yes</td>
+<td>The delay before this step is executed, specified in milliseconds.</td>
+</tr>
+<tr>
+<td><code>sequence.steps[].emailPattern</code></td>
+<td><code>object</code></td>
+<td>No</td>
+<td></td>
+</tr>
+<tr>
+<td><code>sequence.steps[].emailPattern.createdAt</code></td>
+<td><code>string (date-time)</code></td>
+<td>Yes</td>
+<td>The date and time when this email pattern was created, in ISO 8601 format.</td>
+</tr>
+<tr>
+<td><code>sequence.steps[].emailPattern.id</code></td>
+<td><code>string</code></td>
+<td>Yes</td>
+<td>The unique identifier for this email pattern. It is a string.</td>
+</tr>
+<tr>
+<td><code>sequence.steps[].emailPattern.templateId</code></td>
+<td><code>string</code></td>
+<td>Yes</td>
+<td>The identifier of the email template associated with this pattern. It is a string.</td>
+</tr>
+<tr>
+<td><code>sequence.steps[].emailPattern.threadEmailToStepOrder</code></td>
+<td><code>integer (int32)</code></td>
+<td>No</td>
+<td>An integer representing the order of the step to which this email pattern is threaded.</td>
+</tr>
+<tr>
+<td><code>sequence.steps[].emailPattern.updatedAt</code></td>
+<td><code>string (date-time)</code></td>
+<td>Yes</td>
+<td>The date and time when this email pattern was last updated, in ISO 8601 format.</td>
+</tr>
+<tr>
+<td><code>sequence.steps[].id</code></td>
+<td><code>string</code></td>
+<td>Yes</td>
+<td>The unique identifier for this sequence step.</td>
+</tr>
+<tr>
+<td><code>sequence.steps[].stepOrder</code></td>
+<td><code>integer (int32)</code></td>
+<td>Yes</td>
+<td>An integer indicating the order of this step within the sequence.</td>
+</tr>
+<tr>
+<td><code>sequence.steps[].taskPattern</code></td>
+<td><code>object</code></td>
+<td>No</td>
+<td></td>
+</tr>
+<tr>
+<td><code>sequence.steps[].taskPattern.createdAt</code></td>
+<td><code>string (date-time)</code></td>
+<td>Yes</td>
+<td>The date and time when this task pattern was created, in ISO 8601 format.</td>
+</tr>
+<tr>
+<td><code>sequence.steps[].taskPattern.id</code></td>
+<td><code>string</code></td>
+<td>Yes</td>
+<td>The unique identifier for this task pattern.</td>
+</tr>
+<tr>
+<td><code>sequence.steps[].taskPattern.notes</code></td>
+<td><code>string</code></td>
+<td>No</td>
+<td>Additional notes or description associated with the task.</td>
+</tr>
+<tr>
+<td><code>sequence.steps[].taskPattern.queueId</code></td>
+<td><code>string</code></td>
+<td>No</td>
+<td>The identifier for the queue to which this task belongs.</td>
+</tr>
+<tr>
+<td><code>sequence.steps[].taskPattern.subject</code></td>
+<td><code>string</code></td>
+<td>No</td>
+<td>The subject or title of the task.</td>
+</tr>
+<tr>
+<td><code>sequence.steps[].taskPattern.taskPriority</code></td>
+<td><code>enum: HIGH, LOW, MEDIUM, NONE</code></td>
+<td>Yes</td>
+<td>The priority level of the task, with valid values being 'NONE', 'HIGH', 'MEDIUM', or 'LOW'.</td>
+</tr>
+<tr>
+<td><code>sequence.steps[].taskPattern.taskType</code></td>
+<td><code>enum: CALL, EMAIL, LINKED_IN_CONNECT, LINKED_IN_MESSAGE, MEETING, TODO</code></td>
+<td>Yes</td>
+<td>The type of task, which can be one of the following: 'CALL', 'MEETING', 'EMAIL', 'TODO', 'LINKED_IN_CONNECT', or 'LINKED_IN_MESSAGE'.</td>
+</tr>
+<tr>
+<td><code>sequence.steps[].taskPattern.templateId</code></td>
+<td><code>string</code></td>
+<td>No</td>
+<td>The identifier for the template used in this task.</td>
+</tr>
+<tr>
+<td><code>sequence.steps[].taskPattern.threadEmailToStepOrder</code></td>
+<td><code>integer (int32)</code></td>
+<td>No</td>
+<td>An integer representing the order of the step to which this email thread relates.</td>
+</tr>
+<tr>
+<td><code>sequence.steps[].taskPattern.updatedAt</code></td>
+<td><code>string (date-time)</code></td>
+<td>Yes</td>
+<td>The date and time when this task pattern was last updated, in ISO 8601 format.</td>
+</tr>
+<tr>
+<td><code>sequence.steps[].updatedAt</code></td>
+<td><code>string (date-time)</code></td>
+<td>Yes</td>
+<td>The date and time when this step was last updated, in ISO 8601 format.</td>
+</tr>
+<tr>
+<td><code>sequence.updatedAt</code></td>
+<td><code>string (date-time)</code></td>
+<td>Yes</td>
+<td>The date and time when the sequence was last updated, in ISO 8601 format.</td>
+</tr>
+<tr>
+<td><code>sequence.userId</code></td>
+<td><code>string</code></td>
+<td>Yes</td>
+<td>The unique identifier of the user who owns the sequence.</td>
+</tr>
+<tr>
+<td><code>userView</code></td>
+<td><code>object</code></td>
+<td>No</td>
+<td></td>
+</tr>
+<tr>
+<td><code>userView.email</code></td>
+<td><code>string</code></td>
+<td>No</td>
+<td>The email address of the user. It is a string.</td>
+</tr>
+<tr>
+<td><code>userView.firstName</code></td>
+<td><code>string</code></td>
+<td>No</td>
+<td>The first name of the user. It is a string.</td>
+</tr>
+<tr>
+<td><code>userView.lastName</code></td>
+<td><code>string</code></td>
+<td>No</td>
+<td>The last name of the user. It is a string.</td>
+</tr>
+</tbody>
+</table>
+<h5 id="default">default</h5>
+<p><code>*/*</code></p>
+<table>
+<thead>
+<tr>
+<th>Property</th>
+<th>Type</th>
+<th>Required</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>category</code></td>
+<td><code>string</code></td>
+<td>Yes</td>
+<td>The error category, indicating the general type of error that occurred.</td>
+</tr>
+<tr>
+<td><code>context</code></td>
+<td><code>object</code></td>
+<td>No</td>
+<td>Context about the error condition, represented as an object with additional properties that are arrays of strings.</td>
+</tr>
+<tr>
+<td><code>correlationId</code></td>
+<td><code>string (uuid)</code></td>
+<td>Yes</td>
+<td>A unique identifier for the request. Include this value with any error reports or support tickets. It is formatted as a UUID.</td>
+</tr>
+<tr>
+<td><code>errors</code></td>
+<td><code>array of object</code></td>
+<td>No</td>
+<td>Further information about the error, represented as an array of ErrorDetail objects.</td>
+</tr>
+<tr>
+<td><code>errors[].code</code></td>
+<td><code>string</code></td>
+<td>No</td>
+<td>The status code associated with the error detail, indicating the type of error encountered.</td>
+</tr>
+<tr>
+<td><code>errors[].context</code></td>
+<td><code>object</code></td>
+<td>No</td>
+<td>Context about the error condition, provided as an object with additional properties. This can include specific details such as missing scopes.</td>
+</tr>
+<tr>
+<td><code>errors[].in</code></td>
+<td><code>string</code></td>
+<td>No</td>
+<td>The name of the field or parameter in which the error was found. This provides context about where the error occurred.</td>
+</tr>
+<tr>
+<td><code>errors[].message</code></td>
+<td><code>string</code></td>
+<td>Yes</td>
+<td>A human readable message describing the error along with remediation steps where appropriate. This is a required field.</td>
+</tr>
+<tr>
+<td><code>errors[].subCategory</code></td>
+<td><code>string</code></td>
+<td>No</td>
+<td>A specific category that contains more specific detail about the error, helping to further classify the error.</td>
+</tr>
+<tr>
+<td><code>links</code></td>
+<td><code>object</code></td>
+<td>No</td>
+<td>A map of link names to associated URIs containing documentation about the error or recommended remediation steps.</td>
+</tr>
+<tr>
+<td><code>message</code></td>
+<td><code>string</code></td>
+<td>Yes</td>
+<td>A human readable message describing the error along with remediation steps where appropriate.</td>
+</tr>
+<tr>
+<td><code>subCategory</code></td>
+<td><code>string</code></td>
+<td>No</td>
+<td>A specific category that contains more specific detail about the error.</td>
+</tr>
+</tbody>
+</table>
+<h2 id="list">list</h2>
+<h3 id="get-automationsequences2026-09serviceaccountssequences" class="operation" data-method="get"><code>GET</code> /automation/sequences/2026-09/serviceaccounts/sequences</h3>
+<p>Operation ID: <code>get-/automation/sequences/2026-09/serviceaccounts/sequences</code>.</p>
+<p>Authentication: oauth2 (<code>oauth2</code>).</p>
+<h4 id="parameters">Parameters</h4>
+<p>| Parameter | In | Type | Required | Description |
+| --- | --- | --- | --- |
+| <code>after</code> | <code>query</code> | <code>string</code> | No | The paging cursor token of the last successfully read resource will be returned as the <code>paging.next.after</code> JSON property of a paged response containing more results. |
+| <code>limit</code> | <code>query</code> | <code>integer (int32)</code> | No | The maximum number of results to display per page. |
+| <code>name</code> | <code>query</code> | <code>string</code> | No | Filter sequences by their name. |</p>
+<h4 id="responses-1">Responses</h4>
+<h5 id="200-successful-operation-1" class="status" data-status="2xx">200: successful operation</h5>
+<p><code>application/json</code></p>
+<table>
+<thead>
+<tr>
+<th>Property</th>
+<th>Type</th>
+<th>Required</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>paging</code></td>
+<td><code>object</code></td>
+<td>No</td>
+<td>Represents the pagination information for navigating through a list of results in the API. It provides details on how to access the previous or next set of results.</td>
+</tr>
+<tr>
+<td><code>paging.next</code></td>
+<td><code>object</code></td>
+<td>No</td>
+<td>Specifies the paging information needed to retrieve the next set of results in a paginated API response</td>
+</tr>
+<tr>
+<td><code>paging.next.after</code></td>
+<td><code>string</code></td>
+<td>Yes</td>
+<td>A string token used as a cursor to fetch the next page of results.</td>
+</tr>
+<tr>
+<td><code>paging.next.link</code></td>
+<td><code>string</code></td>
+<td>No</td>
+<td>A string URL that provides a direct link to the next page of results.</td>
+</tr>
+<tr>
+<td><code>paging.prev</code></td>
+<td><code>object</code></td>
+<td>No</td>
+<td>specifies the paging information needed to retrieve the previous set of results in a paginated API response</td>
+</tr>
+<tr>
+<td><code>paging.prev.before</code></td>
+<td><code>string</code></td>
+<td>Yes</td>
+<td>A string token used to retrieve the previous page of results.</td>
+</tr>
+<tr>
+<td><code>paging.prev.link</code></td>
+<td><code>string</code></td>
+<td>No</td>
+<td>A string URL that points to the previous page of results.</td>
+</tr>
+<tr>
+<td><code>results</code></td>
+<td><code>array of object</code></td>
+<td>Yes</td>
+<td>An array of sequence objects, each represented by a PublicSequenceLiteResponse.</td>
+</tr>
+<tr>
+<td><code>results[].createdAt</code></td>
+<td><code>string (date-time)</code></td>
+<td>Yes</td>
+<td>The date and time when the sequence was created, in ISO 8601 format.</td>
+</tr>
+<tr>
+<td><code>results[].folderId</code></td>
+<td><code>string</code></td>
+<td>No</td>
+<td>The identifier of the folder containing the sequence, represented as a string.</td>
+</tr>
+<tr>
+<td><code>results[].id</code></td>
+<td><code>string</code></td>
+<td>Yes</td>
+<td>The unique identifier for the sequence, represented as a string.</td>
+</tr>
+<tr>
+<td><code>results[].name</code></td>
+<td><code>string</code></td>
+<td>Yes</td>
+<td>The name of the sequence, represented as a string.</td>
+</tr>
+<tr>
+<td><code>results[].updatedAt</code></td>
+<td><code>string (date-time)</code></td>
+<td>Yes</td>
+<td>The date and time when the sequence was last updated, in ISO 8601 format.</td>
+</tr>
+<tr>
+<td><code>results[].userId</code></td>
+<td><code>string</code></td>
+<td>Yes</td>
+<td>The unique identifier of the user associated with the sequence, represented as a string.</td>
+</tr>
+<tr>
+<td><code>total</code></td>
+<td><code>integer (int32)</code></td>
+<td>Yes</td>
+<td>The total number of sequences available. It is an integer value.</td>
+</tr>
+</tbody>
+</table>
+<h5 id="default-1">default</h5>
+<p><code>*/*</code></p>
+<table>
+<thead>
+<tr>
+<th>Property</th>
+<th>Type</th>
+<th>Required</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>category</code></td>
+<td><code>string</code></td>
+<td>Yes</td>
+<td>The error category, indicating the general type of error that occurred.</td>
+</tr>
+<tr>
+<td><code>context</code></td>
+<td><code>object</code></td>
+<td>No</td>
+<td>Context about the error condition, represented as an object with additional properties that are arrays of strings.</td>
+</tr>
+<tr>
+<td><code>correlationId</code></td>
+<td><code>string (uuid)</code></td>
+<td>Yes</td>
+<td>A unique identifier for the request. Include this value with any error reports or support tickets. It is formatted as a UUID.</td>
+</tr>
+<tr>
+<td><code>errors</code></td>
+<td><code>array of object</code></td>
+<td>No</td>
+<td>Further information about the error, represented as an array of ErrorDetail objects.</td>
+</tr>
+<tr>
+<td><code>errors[].code</code></td>
+<td><code>string</code></td>
+<td>No</td>
+<td>The status code associated with the error detail, indicating the type of error encountered.</td>
+</tr>
+<tr>
+<td><code>errors[].context</code></td>
+<td><code>object</code></td>
+<td>No</td>
+<td>Context about the error condition, provided as an object with additional properties. This can include specific details such as missing scopes.</td>
+</tr>
+<tr>
+<td><code>errors[].in</code></td>
+<td><code>string</code></td>
+<td>No</td>
+<td>The name of the field or parameter in which the error was found. This provides context about where the error occurred.</td>
+</tr>
+<tr>
+<td><code>errors[].message</code></td>
+<td><code>string</code></td>
+<td>Yes</td>
+<td>A human readable message describing the error along with remediation steps where appropriate. This is a required field.</td>
+</tr>
+<tr>
+<td><code>errors[].subCategory</code></td>
+<td><code>string</code></td>
+<td>No</td>
+<td>A specific category that contains more specific detail about the error, helping to further classify the error.</td>
+</tr>
+<tr>
+<td><code>links</code></td>
+<td><code>object</code></td>
+<td>No</td>
+<td>A map of link names to associated URIs containing documentation about the error or recommended remediation steps.</td>
+</tr>
+<tr>
+<td><code>message</code></td>
+<td><code>string</code></td>
+<td>Yes</td>
+<td>A human readable message describing the error along with remediation steps where appropriate.</td>
+</tr>
+<tr>
+<td><code>subCategory</code></td>
+<td><code>string</code></td>
+<td>No</td>
+<td>A specific category that contains more specific detail about the error.</td>
+</tr>
+</tbody>
+</table>
+<h2 id="load">load</h2>
+<h3 id="get-automationsequences2026-09serviceaccountssequencessequenceid" class="operation" data-method="get"><code>GET</code> /automation/sequences/2026-09/serviceaccounts/sequences/{sequenceId}</h3>
+<p>Operation ID: <code>get-/automation/sequences/2026-09/serviceaccounts/sequences/{sequenceId}</code>.</p>
+<p>Authentication: oauth2 (<code>oauth2</code>).</p>
+<h4 id="parameters-1">Parameters</h4>
+<p>| Parameter | In | Type | Required | Description |
+| --- | --- | --- | --- |
+| <code>sequenceId</code> | <code>path</code> | <code>string</code> | Yes | The unique identifier of the sequence to retrieve. |</p>
+<h4 id="responses-2">Responses</h4>
+<h5 id="200-successful-operation-2" class="status" data-status="2xx">200: successful operation</h5>
+<p><code>application/json</code></p>
+<table>
+<thead>
+<tr>
+<th>Property</th>
+<th>Type</th>
+<th>Required</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>createdAt</code></td>
+<td><code>string (date-time)</code></td>
+<td>Yes</td>
+<td>The date and time when the sequence was created, in ISO 8601 format.</td>
+</tr>
+<tr>
+<td><code>dependencies</code></td>
+<td><code>array of object</code></td>
+<td>Yes</td>
+<td>An array of dependencies between steps in the sequence, each represented by a PublicSequenceStepDependencyResponse object.</td>
+</tr>
+<tr>
+<td><code>dependencies[].createdAt</code></td>
+<td><code>string (date-time)</code></td>
+<td>Yes</td>
+<td>The date and time when this dependency was created, in ISO 8601 format.</td>
+</tr>
+<tr>
+<td><code>dependencies[].dependencyType</code></td>
+<td><code>enum: ADAPTIVE_COMPLETION, MANUAL_PAUSE, TASK_COMPLETION</code></td>
+<td>Yes</td>
+<td>The type of dependency, which can be either 'TASK_COMPLETION' or 'MANUAL_PAUSE'.</td>
+</tr>
+<tr>
+<td><code>dependencies[].id</code></td>
+<td><code>string</code></td>
+<td>Yes</td>
+<td>The unique identifier for this dependency.</td>
+</tr>
+<tr>
+<td><code>dependencies[].reliesOnSequenceStepId</code></td>
+<td><code>string</code></td>
+<td>Yes</td>
+<td>The unique identifier of the sequence step that this dependency relies on.</td>
+</tr>
+<tr>
+<td><code>dependencies[].reliesOnStepOrder</code></td>
+<td><code>integer (int32)</code></td>
+<td>Yes</td>
+<td>The order number of the step that this dependency relies on.</td>
+</tr>
+<tr>
+<td><code>dependencies[].requiredBySequenceStepId</code></td>
+<td><code>string</code></td>
+<td>Yes</td>
+<td>The unique identifier of the sequence step that requires this dependency.</td>
+</tr>
+<tr>
+<td><code>dependencies[].requiredByStepOrder</code></td>
+<td><code>integer (int32)</code></td>
+<td>Yes</td>
+<td>The order number of the step that requires this dependency.</td>
+</tr>
+<tr>
+<td><code>dependencies[].updatedAt</code></td>
+<td><code>string (date-time)</code></td>
+<td>Yes</td>
+<td>The date and time when this dependency was last updated, in ISO 8601 format.</td>
+</tr>
+<tr>
+<td><code>folderId</code></td>
+<td><code>string</code></td>
+<td>No</td>
+<td>The identifier for the folder containing the sequence.</td>
+</tr>
+<tr>
+<td><code>id</code></td>
+<td><code>string</code></td>
+<td>Yes</td>
+<td>The unique identifier for the sequence.</td>
+</tr>
+<tr>
+<td><code>name</code></td>
+<td><code>string</code></td>
+<td>Yes</td>
+<td>The name of the sequence.</td>
+</tr>
+<tr>
+<td><code>settings</code></td>
+<td><code>object</code></td>
+<td>No</td>
+<td></td>
+</tr>
+<tr>
+<td><code>settings.createdAt</code></td>
+<td><code>string (date-time)</code></td>
+<td>Yes</td>
+<td>The date and time when the sequence settings were created, in ISO 8601 format.</td>
+</tr>
+<tr>
+<td><code>settings.eligibleFollowUpDays</code></td>
+<td><code>enum: BUSINESS_DAYS, EVERYDAY, WEEKDAYS_ONLY</code></td>
+<td>Yes</td>
+<td>Specifies the days eligible for follow-ups. Valid values include 'EVERYDAY', 'BUSINESS_DAYS', and 'WEEKDAYS_ONLY'.</td>
+</tr>
+<tr>
+<td><code>settings.id</code></td>
+<td><code>string</code></td>
+<td>Yes</td>
+<td>The unique identifier for the sequence settings.</td>
+</tr>
+<tr>
+<td><code>settings.individualTaskRemindersEnabled</code></td>
+<td><code>boolean</code></td>
+<td>Yes</td>
+<td>A boolean indicating whether individual task reminders are enabled.</td>
+</tr>
+<tr>
+<td><code>settings.sellingStrategy</code></td>
+<td><code>enum: ACCOUNT_BASED, LEAD_BASED</code></td>
+<td>Yes</td>
+<td>The strategy used for selling, which can be either 'LEAD_BASED' or 'ACCOUNT_BASED'.</td>
+</tr>
+<tr>
+<td><code>settings.sendWindowEndMinute</code></td>
+<td><code>integer (int32)</code></td>
+<td>Yes</td>
+<td>The ending minute of the window during which emails can be sent, represented as an integer.</td>
+</tr>
+<tr>
+<td><code>settings.sendWindowStartMinute</code></td>
+<td><code>integer (int32)</code></td>
+<td>Yes</td>
+<td>The starting minute of the window during which emails can be sent, represented as an integer.</td>
+</tr>
+<tr>
+<td><code>settings.taskReminderMinute</code></td>
+<td><code>integer (int32)</code></td>
+<td>Yes</td>
+<td>The minute at which task reminders are sent, represented as an integer.</td>
+</tr>
+<tr>
+<td><code>settings.updatedAt</code></td>
+<td><code>string (date-time)</code></td>
+<td>Yes</td>
+<td>The date and time when the sequence settings were last updated, in ISO 8601 format.</td>
+</tr>
+<tr>
+<td><code>steps</code></td>
+<td><code>array of object</code></td>
+<td>Yes</td>
+<td>An array of steps included in the sequence, each represented by a PublicSequenceStepResponseV2 object.</td>
+</tr>
+<tr>
+<td><code>steps[].actionType</code></td>
+<td><code>enum: ADAPTIVE_CONTAINER, EMAIL, FINISH_ENROLLMENT, TASK</code></td>
+<td>Yes</td>
+<td>The type of action to be performed in this step. Valid values include 'EMAIL', 'TASK', and 'FINISH_ENROLLMENT'.</td>
+</tr>
+<tr>
+<td><code>steps[].createdAt</code></td>
+<td><code>string (date-time)</code></td>
+<td>Yes</td>
+<td>The date and time when this step was created, in ISO 8601 format.</td>
+</tr>
+<tr>
+<td><code>steps[].delayMillis</code></td>
+<td><code>integer (int64)</code></td>
+<td>Yes</td>
+<td>The delay before this step is executed, specified in milliseconds.</td>
+</tr>
+<tr>
+<td><code>steps[].emailPattern</code></td>
+<td><code>object</code></td>
+<td>No</td>
+<td></td>
+</tr>
+<tr>
+<td><code>steps[].emailPattern.createdAt</code></td>
+<td><code>string (date-time)</code></td>
+<td>Yes</td>
+<td>The date and time when this email pattern was created, in ISO 8601 format.</td>
+</tr>
+<tr>
+<td><code>steps[].emailPattern.id</code></td>
+<td><code>string</code></td>
+<td>Yes</td>
+<td>The unique identifier for this email pattern. It is a string.</td>
+</tr>
+<tr>
+<td><code>steps[].emailPattern.templateId</code></td>
+<td><code>string</code></td>
+<td>Yes</td>
+<td>The identifier of the email template associated with this pattern. It is a string.</td>
+</tr>
+<tr>
+<td><code>steps[].emailPattern.threadEmailToStepOrder</code></td>
+<td><code>integer (int32)</code></td>
+<td>No</td>
+<td>An integer representing the order of the step to which this email pattern is threaded.</td>
+</tr>
+<tr>
+<td><code>steps[].emailPattern.updatedAt</code></td>
+<td><code>string (date-time)</code></td>
+<td>Yes</td>
+<td>The date and time when this email pattern was last updated, in ISO 8601 format.</td>
+</tr>
+<tr>
+<td><code>steps[].id</code></td>
+<td><code>string</code></td>
+<td>Yes</td>
+<td>The unique identifier for this sequence step.</td>
+</tr>
+<tr>
+<td><code>steps[].stepOrder</code></td>
+<td><code>integer (int32)</code></td>
+<td>Yes</td>
+<td>An integer indicating the order of this step within the sequence.</td>
+</tr>
+<tr>
+<td><code>steps[].taskPattern</code></td>
+<td><code>object</code></td>
+<td>No</td>
+<td></td>
+</tr>
+<tr>
+<td><code>steps[].taskPattern.createdAt</code></td>
+<td><code>string (date-time)</code></td>
+<td>Yes</td>
+<td>The date and time when this task pattern was created, in ISO 8601 format.</td>
+</tr>
+<tr>
+<td><code>steps[].taskPattern.id</code></td>
+<td><code>string</code></td>
+<td>Yes</td>
+<td>The unique identifier for this task pattern.</td>
+</tr>
+<tr>
+<td><code>steps[].taskPattern.notes</code></td>
+<td><code>string</code></td>
+<td>No</td>
+<td>Additional notes or description associated with the task.</td>
+</tr>
+<tr>
+<td><code>steps[].taskPattern.queueId</code></td>
+<td><code>string</code></td>
+<td>No</td>
+<td>The identifier for the queue to which this task belongs.</td>
+</tr>
+<tr>
+<td><code>steps[].taskPattern.subject</code></td>
+<td><code>string</code></td>
+<td>No</td>
+<td>The subject or title of the task.</td>
+</tr>
+<tr>
+<td><code>steps[].taskPattern.taskPriority</code></td>
+<td><code>enum: HIGH, LOW, MEDIUM, NONE</code></td>
+<td>Yes</td>
+<td>The priority level of the task, with valid values being 'NONE', 'HIGH', 'MEDIUM', or 'LOW'.</td>
+</tr>
+<tr>
+<td><code>steps[].taskPattern.taskType</code></td>
+<td><code>enum: CALL, EMAIL, LINKED_IN_CONNECT, LINKED_IN_MESSAGE, MEETING, TODO</code></td>
+<td>Yes</td>
+<td>The type of task, which can be one of the following: 'CALL', 'MEETING', 'EMAIL', 'TODO', 'LINKED_IN_CONNECT', or 'LINKED_IN_MESSAGE'.</td>
+</tr>
+<tr>
+<td><code>steps[].taskPattern.templateId</code></td>
+<td><code>string</code></td>
+<td>No</td>
+<td>The identifier for the template used in this task.</td>
+</tr>
+<tr>
+<td><code>steps[].taskPattern.threadEmailToStepOrder</code></td>
+<td><code>integer (int32)</code></td>
+<td>No</td>
+<td>An integer representing the order of the step to which this email thread relates.</td>
+</tr>
+<tr>
+<td><code>steps[].taskPattern.updatedAt</code></td>
+<td><code>string (date-time)</code></td>
+<td>Yes</td>
+<td>The date and time when this task pattern was last updated, in ISO 8601 format.</td>
+</tr>
+<tr>
+<td><code>steps[].updatedAt</code></td>
+<td><code>string (date-time)</code></td>
+<td>Yes</td>
+<td>The date and time when this step was last updated, in ISO 8601 format.</td>
+</tr>
+<tr>
+<td><code>updatedAt</code></td>
+<td><code>string (date-time)</code></td>
+<td>Yes</td>
+<td>The date and time when the sequence was last updated, in ISO 8601 format.</td>
+</tr>
+<tr>
+<td><code>userId</code></td>
+<td><code>string</code></td>
+<td>Yes</td>
+<td>The unique identifier of the user who owns the sequence.</td>
+</tr>
+</tbody>
+</table>
+<h5 id="default-2">default</h5>
+<p><code>*/*</code></p>
+<table>
+<thead>
+<tr>
+<th>Property</th>
+<th>Type</th>
+<th>Required</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>category</code></td>
+<td><code>string</code></td>
+<td>Yes</td>
+<td>The error category, indicating the general type of error that occurred.</td>
+</tr>
+<tr>
+<td><code>context</code></td>
+<td><code>object</code></td>
+<td>No</td>
+<td>Context about the error condition, represented as an object with additional properties that are arrays of strings.</td>
+</tr>
+<tr>
+<td><code>correlationId</code></td>
+<td><code>string (uuid)</code></td>
+<td>Yes</td>
+<td>A unique identifier for the request. Include this value with any error reports or support tickets. It is formatted as a UUID.</td>
+</tr>
+<tr>
+<td><code>errors</code></td>
+<td><code>array of object</code></td>
+<td>No</td>
+<td>Further information about the error, represented as an array of ErrorDetail objects.</td>
+</tr>
+<tr>
+<td><code>errors[].code</code></td>
+<td><code>string</code></td>
+<td>No</td>
+<td>The status code associated with the error detail, indicating the type of error encountered.</td>
+</tr>
+<tr>
+<td><code>errors[].context</code></td>
+<td><code>object</code></td>
+<td>No</td>
+<td>Context about the error condition, provided as an object with additional properties. This can include specific details such as missing scopes.</td>
+</tr>
+<tr>
+<td><code>errors[].in</code></td>
+<td><code>string</code></td>
+<td>No</td>
+<td>The name of the field or parameter in which the error was found. This provides context about where the error occurred.</td>
+</tr>
+<tr>
+<td><code>errors[].message</code></td>
+<td><code>string</code></td>
+<td>Yes</td>
+<td>A human readable message describing the error along with remediation steps where appropriate. This is a required field.</td>
+</tr>
+<tr>
+<td><code>errors[].subCategory</code></td>
+<td><code>string</code></td>
+<td>No</td>
+<td>A specific category that contains more specific detail about the error, helping to further classify the error.</td>
+</tr>
+<tr>
+<td><code>links</code></td>
+<td><code>object</code></td>
+<td>No</td>
+<td>A map of link names to associated URIs containing documentation about the error or recommended remediation steps.</td>
+</tr>
+<tr>
+<td><code>message</code></td>
+<td><code>string</code></td>
+<td>Yes</td>
+<td>A human readable message describing the error along with remediation steps where appropriate.</td>
+</tr>
+<tr>
+<td><code>subCategory</code></td>
+<td><code>string</code></td>
+<td>No</td>
+<td>A specific category that contains more specific detail about the error.</td>
+</tr>
+</tbody>
+</table>
+<h2 id="update">update</h2>
+<h3 id="put-automationsequences2026-09serviceaccountssequencessequenceid" class="operation" data-method="put"><code>PUT</code> /automation/sequences/2026-09/serviceaccounts/sequences/{sequenceId}</h3>
+<p>Operation ID: <code>put-/automation/sequences/2026-09/serviceaccounts/sequences/{sequenceId}</code>.</p>
+<p>Authentication: oauth2 (<code>oauth2</code>).</p>
+<h4 id="parameters-2">Parameters</h4>
+<p>| Parameter | In | Type | Required | Description |
+| --- | --- | --- | --- |
+| <code>sequenceId</code> | <code>path</code> | <code>string</code> | Yes | The unique identifier of the sequence to update. |</p>
+<h4 id="request-body-1">Request body</h4>
+<p><code>application/json</code></p>
+<table>
+<thead>
+<tr>
+<th>Property</th>
+<th>Type</th>
+<th>Required</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>dependencies</code></td>
+<td><code>array of object</code></td>
+<td>Yes</td>
+<td>An array of dependencies between sequence steps, each defined by the PublicSequenceStepDependencyRequest schema.</td>
+</tr>
+<tr>
+<td><code>dependencies[].branchNumber</code></td>
+<td><code>integer (int32)</code></td>
+<td>Yes</td>
+<td>An integer indicating the branch number associated with the dependency.</td>
+</tr>
+<tr>
+<td><code>dependencies[].dependencyType</code></td>
+<td><code>enum: ADAPTIVE_COMPLETION, MANUAL_PAUSE, TASK_COMPLETION</code></td>
+<td>Yes</td>
+<td>A string indicating the type of dependency. Valid values include 'TASK_COMPLETION' and 'MANUAL_PAUSE'.</td>
+</tr>
+<tr>
+<td><code>dependencies[].reliesOnStepOrder</code></td>
+<td><code>integer (int32)</code></td>
+<td>Yes</td>
+<td>An integer representing the order of the step that is relied upon by another step.</td>
+</tr>
+<tr>
+<td><code>dependencies[].requiredByStepOrder</code></td>
+<td><code>integer (int32)</code></td>
+<td>Yes</td>
+<td>An integer representing the order of the step that requires the dependency.</td>
+</tr>
+<tr>
+<td><code>dynamic</code></td>
+<td><code>boolean</code></td>
+<td>Yes</td>
+<td>A boolean indicating whether the sequence is dynamic.</td>
+</tr>
+<tr>
+<td><code>engagementTriggers</code></td>
+<td><code>object</code></td>
+<td>No</td>
+<td></td>
+</tr>
+<tr>
+<td><code>engagementTriggers.numberOfClicks</code></td>
+<td><code>integer (int32)</code></td>
+<td>No</td>
+<td>An integer representing the number of times links within an email must be clicked to trigger an engagement action.</td>
+</tr>
+<tr>
+<td><code>engagementTriggers.numberOfOpens</code></td>
+<td><code>integer (int32)</code></td>
+<td>No</td>
+<td>An integer representing the number of times an email must be opened to trigger an engagement action.</td>
+</tr>
+<tr>
+<td><code>folderId</code></td>
+<td><code>string</code></td>
+<td>No</td>
+<td>The identifier of the folder where the sequence is stored. It is a string.</td>
+</tr>
+<tr>
+<td><code>name</code></td>
+<td><code>string</code></td>
+<td>Yes</td>
+<td>The name of the sequence. It is a string.</td>
+</tr>
+<tr>
+<td><code>settings</code></td>
+<td><code>object</code></td>
+<td>Yes</td>
+<td></td>
+</tr>
+<tr>
+<td><code>settings.eligibleFollowUpDays</code></td>
+<td><code>enum: BUSINESS_DAYS, EVERYDAY, WEEKDAYS_ONLY</code></td>
+<td>Yes</td>
+<td>Specifies the days on which follow-ups are eligible to be sent. Valid values include 'EVERYDAY', 'BUSINESS_DAYS', and 'WEEKDAYS_ONLY'.</td>
+</tr>
+<tr>
+<td><code>settings.individualTaskRemindersEnabled</code></td>
+<td><code>boolean</code></td>
+<td>Yes</td>
+<td>A boolean indicating whether individual task reminders are enabled.</td>
+</tr>
+<tr>
+<td><code>settings.sellingStrategy</code></td>
+<td><code>enum: ACCOUNT_BASED, LEAD_BASED</code></td>
+<td>Yes</td>
+<td>Defines the selling strategy to be used. Valid values include 'LEAD_BASED' and 'ACCOUNT_BASED'.</td>
+</tr>
+<tr>
+<td><code>settings.sendWindowEndMinute</code></td>
+<td><code>integer (int32)</code></td>
+<td>Yes</td>
+<td>An integer representing the end minute of the window during which emails can be sent.</td>
+</tr>
+<tr>
+<td><code>settings.sendWindowStartMinute</code></td>
+<td><code>integer (int32)</code></td>
+<td>Yes</td>
+<td>An integer representing the start minute of the window during which emails can be sent.</td>
+</tr>
+<tr>
+<td><code>settings.taskCreationMinute</code></td>
+<td><code>integer (int32)</code></td>
+<td>Yes</td>
+<td>An integer indicating the minute at which tasks should be created.</td>
+</tr>
+<tr>
+<td><code>settings.taskReminderMinute</code></td>
+<td><code>integer (int32)</code></td>
+<td>Yes</td>
+<td>An integer indicating the minute at which task reminders should be sent.</td>
+</tr>
+<tr>
+<td><code>settings.unenrollmentSettings</code></td>
+<td><code>object</code></td>
+<td>Yes</td>
+<td></td>
+</tr>
+<tr>
+<td><code>settings.unenrollmentSettings.emailSettings</code></td>
+<td><code>object</code></td>
+<td>Yes</td>
+<td></td>
+</tr>
+<tr>
+<td><code>settings.unenrollmentSettings.emailSettings.criteria</code></td>
+<td><code>enum: ALL, NONE</code></td>
+<td>Yes</td>
+<td>A string representing the criteria for email settings. Valid values include 'ALL' and 'NONE'.</td>
+</tr>
+<tr>
+<td><code>settings.unenrollmentSettings.emailSettings.sellingStrategy</code></td>
+<td><code>enum: ACCOUNT_BASED, LEAD_BASED</code></td>
+<td>Yes</td>
+<td>A string indicating the selling strategy for email settings. Valid values are 'LEAD_BASED' and 'ACCOUNT_BASED'.</td>
+</tr>
+<tr>
+<td><code>settings.unenrollmentSettings.meetingSettings</code></td>
+<td><code>object</code></td>
+<td>Yes</td>
+<td></td>
+</tr>
+<tr>
+<td><code>settings.unenrollmentSettings.meetingSettings.criteria</code></td>
+<td><code>enum: ALL, NONE</code></td>
+<td>Yes</td>
+<td>Specifies the criteria for meetings, with valid values being 'ALL' or 'NONE'.</td>
+</tr>
+<tr>
+<td><code>settings.unenrollmentSettings.meetingSettings.sellingStrategy</code></td>
+<td><code>enum: ACCOUNT_BASED, LEAD_BASED</code></td>
+<td>Yes</td>
+<td>Indicates the selling strategy employed, which can be either 'LEAD_BASED' or 'ACCOUNT_BASED'.</td>
+</tr>
+<tr>
+<td><code>settings.useThreadedFollowUps</code></td>
+<td><code>boolean</code></td>
+<td>Yes</td>
+<td>A boolean indicating whether follow-ups should be threaded.</td>
+</tr>
+<tr>
+<td><code>steps</code></td>
+<td><code>array of object</code></td>
+<td>Yes</td>
+<td>An array of steps in the sequence, each defined by the PublicSequenceStepRequest schema.</td>
+</tr>
+<tr>
+<td><code>steps[].actionType</code></td>
+<td><code>enum: ADAPTIVE_CONTAINER, EMAIL, FINISH_ENROLLMENT, TASK</code></td>
+<td>Yes</td>
+<td>A string indicating the type of action to be performed in this step. Valid values include 'EMAIL', 'TASK', and 'FINISH_ENROLLMENT'.</td>
+</tr>
+<tr>
+<td><code>steps[].branchNumber</code></td>
+<td><code>integer (int32)</code></td>
+<td>Yes</td>
+<td>An integer representing the branch number of this step, used for branching logic in sequences.</td>
+</tr>
+<tr>
+<td><code>steps[].delayMillis</code></td>
+<td><code>integer (int64)</code></td>
+<td>Yes</td>
+<td>An integer representing the delay in milliseconds before this step is executed.</td>
+</tr>
+<tr>
+<td><code>steps[].delayMillisMax</code></td>
+<td><code>integer (int64)</code></td>
+<td>No</td>
+<td>An integer specifying the maximum delay in milliseconds for this step.</td>
+</tr>
+<tr>
+<td><code>steps[].delayMillisMin</code></td>
+<td><code>integer (int64)</code></td>
+<td>No</td>
+<td>An integer specifying the minimum delay in milliseconds for this step.</td>
+</tr>
+<tr>
+<td><code>steps[].dynamic</code></td>
+<td><code>boolean</code></td>
+<td>Yes</td>
+<td>A boolean indicating whether the step is dynamic, allowing for conditional execution based on certain criteria.</td>
+</tr>
+<tr>
+<td><code>steps[].emailPattern</code></td>
+<td><code>object</code></td>
+<td>No</td>
+<td></td>
+</tr>
+<tr>
+<td><code>steps[].emailPattern.templateId</code></td>
+<td><code>string</code></td>
+<td>Yes</td>
+<td>The unique identifier for the email template to be used. It is a string and is required.</td>
+</tr>
+<tr>
+<td><code>steps[].emailPattern.threadEmailToStepOrder</code></td>
+<td><code>integer (int32)</code></td>
+<td>No</td>
+<td>An integer indicating the step order to which the email should be threaded. This property is optional.</td>
+</tr>
+<tr>
+<td><code>steps[].stepOrder</code></td>
+<td><code>integer (int32)</code></td>
+<td>Yes</td>
+<td>An integer indicating the order of the step within the sequence.</td>
+</tr>
+<tr>
+<td><code>steps[].taskPattern</code></td>
+<td><code>object</code></td>
+<td>No</td>
+<td></td>
+</tr>
+<tr>
+<td><code>steps[].taskPattern.notes</code></td>
+<td><code>string</code></td>
+<td>No</td>
+<td>A string containing additional notes or details about the task.</td>
+</tr>
+<tr>
+<td><code>steps[].taskPattern.queueId</code></td>
+<td><code>string</code></td>
+<td>No</td>
+<td>A string identifier for the queue to which the task belongs.</td>
+</tr>
+<tr>
+<td><code>steps[].taskPattern.subject</code></td>
+<td><code>string</code></td>
+<td>No</td>
+<td>A string representing the subject of the task.</td>
+</tr>
+<tr>
+<td><code>steps[].taskPattern.taskPriority</code></td>
+<td><code>enum: HIGH, LOW, MEDIUM, NONE</code></td>
+<td>Yes</td>
+<td>The priority level of the task. Valid values include 'NONE', 'HIGH', 'MEDIUM', and 'LOW'.</td>
+</tr>
+<tr>
+<td><code>steps[].taskPattern.taskType</code></td>
+<td><code>enum: CALL, EMAIL, LINKED_IN_CONNECT, LINKED_IN_MESSAGE, MEETING, TODO</code></td>
+<td>Yes</td>
+<td>The type of task to be performed. Valid values include 'CALL', 'MEETING', 'EMAIL', 'TODO', 'LINKED_IN_CONNECT', and 'LINKED_IN_MESSAGE'.</td>
+</tr>
+<tr>
+<td><code>steps[].taskPattern.templateId</code></td>
+<td><code>string</code></td>
+<td>No</td>
+<td>A string identifier for the template associated with the task.</td>
+</tr>
+<tr>
+<td><code>steps[].taskPattern.threadEmailToStepOrder</code></td>
+<td><code>integer (int32)</code></td>
+<td>No</td>
+<td>An integer representing the order of the step to which the email should be threaded.</td>
+</tr>
+<tr>
+<td><code>steps[].variants</code></td>
+<td><code>array of object</code></td>
+<td>Yes</td>
+<td>An array of PublicSequenceStepVariantRequest objects, each representing a variant of this step.</td>
+</tr>
+<tr>
+<td><code>steps[].variants[].activated</code></td>
+<td><code>boolean</code></td>
+<td>Yes</td>
+<td>A boolean indicating whether this variant is active.</td>
+</tr>
+<tr>
+<td><code>steps[].variants[].emailPattern</code></td>
+<td><code>object</code></td>
+<td>No</td>
+<td></td>
+</tr>
+<tr>
+<td><code>steps[].variants[].emailPattern.$ref</code></td>
+<td><code>any</code></td>
+<td>No</td>
+<td></td>
+</tr>
+<tr>
+<td><code>steps[].variants[].taskPattern</code></td>
+<td><code>object</code></td>
+<td>No</td>
+<td></td>
+</tr>
+<tr>
+<td><code>steps[].variants[].taskPattern.$ref</code></td>
+<td><code>any</code></td>
+<td>No</td>
+<td></td>
+</tr>
+<tr>
+<td><code>steps[].variants[].variantOrdinal</code></td>
+<td><code>integer (int32)</code></td>
+<td>Yes</td>
+<td>An integer indicating the order of this variant among other variants of the same step.</td>
+</tr>
+</tbody>
+</table>
+<h4 id="responses-3">Responses</h4>
+<h5 id="200-successful-operation-3" class="status" data-status="2xx">200: successful operation</h5>
+<p><code>application/json</code></p>
+<table>
+<thead>
+<tr>
+<th>Property</th>
+<th>Type</th>
+<th>Required</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>createdAt</code></td>
+<td><code>string (date-time)</code></td>
+<td>Yes</td>
+<td>The date and time when the sequence was created, in ISO 8601 format.</td>
+</tr>
+<tr>
+<td><code>dependencies</code></td>
+<td><code>array of object</code></td>
+<td>Yes</td>
+<td>An array of dependencies between steps in the sequence, each represented by a PublicSequenceStepDependencyResponse object.</td>
+</tr>
+<tr>
+<td><code>dependencies[].createdAt</code></td>
+<td><code>string (date-time)</code></td>
+<td>Yes</td>
+<td>The date and time when this dependency was created, in ISO 8601 format.</td>
+</tr>
+<tr>
+<td><code>dependencies[].dependencyType</code></td>
+<td><code>enum: ADAPTIVE_COMPLETION, MANUAL_PAUSE, TASK_COMPLETION</code></td>
+<td>Yes</td>
+<td>The type of dependency, which can be either 'TASK_COMPLETION' or 'MANUAL_PAUSE'.</td>
+</tr>
+<tr>
+<td><code>dependencies[].id</code></td>
+<td><code>string</code></td>
+<td>Yes</td>
+<td>The unique identifier for this dependency.</td>
+</tr>
+<tr>
+<td><code>dependencies[].reliesOnSequenceStepId</code></td>
+<td><code>string</code></td>
+<td>Yes</td>
+<td>The unique identifier of the sequence step that this dependency relies on.</td>
+</tr>
+<tr>
+<td><code>dependencies[].reliesOnStepOrder</code></td>
+<td><code>integer (int32)</code></td>
+<td>Yes</td>
+<td>The order number of the step that this dependency relies on.</td>
+</tr>
+<tr>
+<td><code>dependencies[].requiredBySequenceStepId</code></td>
+<td><code>string</code></td>
+<td>Yes</td>
+<td>The unique identifier of the sequence step that requires this dependency.</td>
+</tr>
+<tr>
+<td><code>dependencies[].requiredByStepOrder</code></td>
+<td><code>integer (int32)</code></td>
+<td>Yes</td>
+<td>The order number of the step that requires this dependency.</td>
+</tr>
+<tr>
+<td><code>dependencies[].updatedAt</code></td>
+<td><code>string (date-time)</code></td>
+<td>Yes</td>
+<td>The date and time when this dependency was last updated, in ISO 8601 format.</td>
+</tr>
+<tr>
+<td><code>folderId</code></td>
+<td><code>string</code></td>
+<td>No</td>
+<td>The identifier for the folder containing the sequence.</td>
+</tr>
+<tr>
+<td><code>id</code></td>
+<td><code>string</code></td>
+<td>Yes</td>
+<td>The unique identifier for the sequence.</td>
+</tr>
+<tr>
+<td><code>name</code></td>
+<td><code>string</code></td>
+<td>Yes</td>
+<td>The name of the sequence.</td>
+</tr>
+<tr>
+<td><code>settings</code></td>
+<td><code>object</code></td>
+<td>No</td>
+<td></td>
+</tr>
+<tr>
+<td><code>settings.createdAt</code></td>
+<td><code>string (date-time)</code></td>
+<td>Yes</td>
+<td>The date and time when the sequence settings were created, in ISO 8601 format.</td>
+</tr>
+<tr>
+<td><code>settings.eligibleFollowUpDays</code></td>
+<td><code>enum: BUSINESS_DAYS, EVERYDAY, WEEKDAYS_ONLY</code></td>
+<td>Yes</td>
+<td>Specifies the days eligible for follow-ups. Valid values include 'EVERYDAY', 'BUSINESS_DAYS', and 'WEEKDAYS_ONLY'.</td>
+</tr>
+<tr>
+<td><code>settings.id</code></td>
+<td><code>string</code></td>
+<td>Yes</td>
+<td>The unique identifier for the sequence settings.</td>
+</tr>
+<tr>
+<td><code>settings.individualTaskRemindersEnabled</code></td>
+<td><code>boolean</code></td>
+<td>Yes</td>
+<td>A boolean indicating whether individual task reminders are enabled.</td>
+</tr>
+<tr>
+<td><code>settings.sellingStrategy</code></td>
+<td><code>enum: ACCOUNT_BASED, LEAD_BASED</code></td>
+<td>Yes</td>
+<td>The strategy used for selling, which can be either 'LEAD_BASED' or 'ACCOUNT_BASED'.</td>
+</tr>
+<tr>
+<td><code>settings.sendWindowEndMinute</code></td>
+<td><code>integer (int32)</code></td>
+<td>Yes</td>
+<td>The ending minute of the window during which emails can be sent, represented as an integer.</td>
+</tr>
+<tr>
+<td><code>settings.sendWindowStartMinute</code></td>
+<td><code>integer (int32)</code></td>
+<td>Yes</td>
+<td>The starting minute of the window during which emails can be sent, represented as an integer.</td>
+</tr>
+<tr>
+<td><code>settings.taskReminderMinute</code></td>
+<td><code>integer (int32)</code></td>
+<td>Yes</td>
+<td>The minute at which task reminders are sent, represented as an integer.</td>
+</tr>
+<tr>
+<td><code>settings.updatedAt</code></td>
+<td><code>string (date-time)</code></td>
+<td>Yes</td>
+<td>The date and time when the sequence settings were last updated, in ISO 8601 format.</td>
+</tr>
+<tr>
+<td><code>steps</code></td>
+<td><code>array of object</code></td>
+<td>Yes</td>
+<td>An array of steps included in the sequence, each represented by a PublicSequenceStepResponseV2 object.</td>
+</tr>
+<tr>
+<td><code>steps[].actionType</code></td>
+<td><code>enum: ADAPTIVE_CONTAINER, EMAIL, FINISH_ENROLLMENT, TASK</code></td>
+<td>Yes</td>
+<td>The type of action to be performed in this step. Valid values include 'EMAIL', 'TASK', and 'FINISH_ENROLLMENT'.</td>
+</tr>
+<tr>
+<td><code>steps[].createdAt</code></td>
+<td><code>string (date-time)</code></td>
+<td>Yes</td>
+<td>The date and time when this step was created, in ISO 8601 format.</td>
+</tr>
+<tr>
+<td><code>steps[].delayMillis</code></td>
+<td><code>integer (int64)</code></td>
+<td>Yes</td>
+<td>The delay before this step is executed, specified in milliseconds.</td>
+</tr>
+<tr>
+<td><code>steps[].emailPattern</code></td>
+<td><code>object</code></td>
+<td>No</td>
+<td></td>
+</tr>
+<tr>
+<td><code>steps[].emailPattern.createdAt</code></td>
+<td><code>string (date-time)</code></td>
+<td>Yes</td>
+<td>The date and time when this email pattern was created, in ISO 8601 format.</td>
+</tr>
+<tr>
+<td><code>steps[].emailPattern.id</code></td>
+<td><code>string</code></td>
+<td>Yes</td>
+<td>The unique identifier for this email pattern. It is a string.</td>
+</tr>
+<tr>
+<td><code>steps[].emailPattern.templateId</code></td>
+<td><code>string</code></td>
+<td>Yes</td>
+<td>The identifier of the email template associated with this pattern. It is a string.</td>
+</tr>
+<tr>
+<td><code>steps[].emailPattern.threadEmailToStepOrder</code></td>
+<td><code>integer (int32)</code></td>
+<td>No</td>
+<td>An integer representing the order of the step to which this email pattern is threaded.</td>
+</tr>
+<tr>
+<td><code>steps[].emailPattern.updatedAt</code></td>
+<td><code>string (date-time)</code></td>
+<td>Yes</td>
+<td>The date and time when this email pattern was last updated, in ISO 8601 format.</td>
+</tr>
+<tr>
+<td><code>steps[].id</code></td>
+<td><code>string</code></td>
+<td>Yes</td>
+<td>The unique identifier for this sequence step.</td>
+</tr>
+<tr>
+<td><code>steps[].stepOrder</code></td>
+<td><code>integer (int32)</code></td>
+<td>Yes</td>
+<td>An integer indicating the order of this step within the sequence.</td>
+</tr>
+<tr>
+<td><code>steps[].taskPattern</code></td>
+<td><code>object</code></td>
+<td>No</td>
+<td></td>
+</tr>
+<tr>
+<td><code>steps[].taskPattern.createdAt</code></td>
+<td><code>string (date-time)</code></td>
+<td>Yes</td>
+<td>The date and time when this task pattern was created, in ISO 8601 format.</td>
+</tr>
+<tr>
+<td><code>steps[].taskPattern.id</code></td>
+<td><code>string</code></td>
+<td>Yes</td>
+<td>The unique identifier for this task pattern.</td>
+</tr>
+<tr>
+<td><code>steps[].taskPattern.notes</code></td>
+<td><code>string</code></td>
+<td>No</td>
+<td>Additional notes or description associated with the task.</td>
+</tr>
+<tr>
+<td><code>steps[].taskPattern.queueId</code></td>
+<td><code>string</code></td>
+<td>No</td>
+<td>The identifier for the queue to which this task belongs.</td>
+</tr>
+<tr>
+<td><code>steps[].taskPattern.subject</code></td>
+<td><code>string</code></td>
+<td>No</td>
+<td>The subject or title of the task.</td>
+</tr>
+<tr>
+<td><code>steps[].taskPattern.taskPriority</code></td>
+<td><code>enum: HIGH, LOW, MEDIUM, NONE</code></td>
+<td>Yes</td>
+<td>The priority level of the task, with valid values being 'NONE', 'HIGH', 'MEDIUM', or 'LOW'.</td>
+</tr>
+<tr>
+<td><code>steps[].taskPattern.taskType</code></td>
+<td><code>enum: CALL, EMAIL, LINKED_IN_CONNECT, LINKED_IN_MESSAGE, MEETING, TODO</code></td>
+<td>Yes</td>
+<td>The type of task, which can be one of the following: 'CALL', 'MEETING', 'EMAIL', 'TODO', 'LINKED_IN_CONNECT', or 'LINKED_IN_MESSAGE'.</td>
+</tr>
+<tr>
+<td><code>steps[].taskPattern.templateId</code></td>
+<td><code>string</code></td>
+<td>No</td>
+<td>The identifier for the template used in this task.</td>
+</tr>
+<tr>
+<td><code>steps[].taskPattern.threadEmailToStepOrder</code></td>
+<td><code>integer (int32)</code></td>
+<td>No</td>
+<td>An integer representing the order of the step to which this email thread relates.</td>
+</tr>
+<tr>
+<td><code>steps[].taskPattern.updatedAt</code></td>
+<td><code>string (date-time)</code></td>
+<td>Yes</td>
+<td>The date and time when this task pattern was last updated, in ISO 8601 format.</td>
+</tr>
+<tr>
+<td><code>steps[].updatedAt</code></td>
+<td><code>string (date-time)</code></td>
+<td>Yes</td>
+<td>The date and time when this step was last updated, in ISO 8601 format.</td>
+</tr>
+<tr>
+<td><code>updatedAt</code></td>
+<td><code>string (date-time)</code></td>
+<td>Yes</td>
+<td>The date and time when the sequence was last updated, in ISO 8601 format.</td>
+</tr>
+<tr>
+<td><code>userId</code></td>
+<td><code>string</code></td>
+<td>Yes</td>
+<td>The unique identifier of the user who owns the sequence.</td>
+</tr>
+</tbody>
+</table>
+<h5 id="default-3">default</h5>
+<p><code>*/*</code></p>
+<table>
+<thead>
+<tr>
+<th>Property</th>
+<th>Type</th>
+<th>Required</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>category</code></td>
+<td><code>string</code></td>
+<td>Yes</td>
+<td>The error category, indicating the general type of error that occurred.</td>
+</tr>
+<tr>
+<td><code>context</code></td>
+<td><code>object</code></td>
+<td>No</td>
+<td>Context about the error condition, represented as an object with additional properties that are arrays of strings.</td>
+</tr>
+<tr>
+<td><code>correlationId</code></td>
+<td><code>string (uuid)</code></td>
+<td>Yes</td>
+<td>A unique identifier for the request. Include this value with any error reports or support tickets. It is formatted as a UUID.</td>
+</tr>
+<tr>
+<td><code>errors</code></td>
+<td><code>array of object</code></td>
+<td>No</td>
+<td>Further information about the error, represented as an array of ErrorDetail objects.</td>
+</tr>
+<tr>
+<td><code>errors[].code</code></td>
+<td><code>string</code></td>
+<td>No</td>
+<td>The status code associated with the error detail, indicating the type of error encountered.</td>
+</tr>
+<tr>
+<td><code>errors[].context</code></td>
+<td><code>object</code></td>
+<td>No</td>
+<td>Context about the error condition, provided as an object with additional properties. This can include specific details such as missing scopes.</td>
+</tr>
+<tr>
+<td><code>errors[].in</code></td>
+<td><code>string</code></td>
+<td>No</td>
+<td>The name of the field or parameter in which the error was found. This provides context about where the error occurred.</td>
+</tr>
+<tr>
+<td><code>errors[].message</code></td>
+<td><code>string</code></td>
+<td>Yes</td>
+<td>A human readable message describing the error along with remediation steps where appropriate. This is a required field.</td>
+</tr>
+<tr>
+<td><code>errors[].subCategory</code></td>
+<td><code>string</code></td>
+<td>No</td>
+<td>A specific category that contains more specific detail about the error, helping to further classify the error.</td>
+</tr>
+<tr>
+<td><code>links</code></td>
+<td><code>object</code></td>
+<td>No</td>
+<td>A map of link names to associated URIs containing documentation about the error or recommended remediation steps.</td>
+</tr>
+<tr>
+<td><code>message</code></td>
+<td><code>string</code></td>
+<td>Yes</td>
+<td>A human readable message describing the error along with remediation steps where appropriate.</td>
+</tr>
+<tr>
+<td><code>subCategory</code></td>
+<td><code>string</code></td>
+<td>No</td>
+<td>A specific category that contains more specific detail about the error.</td>
+</tr>
+</tbody>
+</table>
+</main></div>
+<script src="../assets/search.js" defer></script></body></html>

@@ -1,0 +1,18 @@
+# BasicAutomationV4BatchResponseApiFlowFlow
+
+main: kit: flow: BasicAutomationV4BatchResponseApiFlowFlow:
+{
+  entity: "automation_v4_batch_response_api_flow",
+  kind: "basic",
+  name: "BasicAutomationV4BatchResponseApiFlowFlow",
+  step: [
+    {
+      input: {
+        ref: "automation_v4_batch_response_api_flow_ref01"
+      }
+
+      op: "create"
+    }
+  ],
+  "key$": "BasicAutomationV4BatchResponseApiFlowFlow"
+}

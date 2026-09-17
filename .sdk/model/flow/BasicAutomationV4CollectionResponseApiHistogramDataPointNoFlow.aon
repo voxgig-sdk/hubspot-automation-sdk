@@ -1,0 +1,32 @@
+# BasicAutomationV4CollectionResponseApiHistogramDataPointNoFlow
+
+main: kit: flow: BasicAutomationV4CollectionResponseApiHistogramDataPointNoFlow:
+{
+  entity: "automation_v4_collection_response_api_histogram_data_point_no",
+  kind: "basic",
+  name: "BasicAutomationV4CollectionResponseApiHistogramDataPointNoFlow",
+  step: [
+    {
+      input: {
+        ref: "automation_v4_collection_response_api_histogram_data_point_no_ref01",
+        srcdatavar: "automation_v4_collection_response_api_histogram_data_point_no_ref01_data",
+        suffix: "_dt0"
+      }
+
+      match: {
+        id: "automation_v4_collection_response_api_histogram_data_point_no01"
+      }
+
+      op: "load",
+      valid: [
+        {
+          apply: "TextFieldMark",
+          def: {
+            mark: "Mark01-automation_v4_collection_response_api_histogram_data_point_no_ref01"
+          }
+        }
+      ]
+    }
+  ],
+  "key$": "BasicAutomationV4CollectionResponseApiHistogramDataPointNoFlow"
+}
